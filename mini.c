@@ -6,11 +6,11 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 06:27:29 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/11 07:52:23 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/12 02:09:40 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini.h"
+#include "minishell.h"
 
 t_list	*addnode(void *value)
 {
@@ -66,14 +66,14 @@ void print_list(t_list *list)
 		list = list->next;
 	}
 }
+
 int main (int ac, char *av[])
 {
 	t_list *head = addnode("aya");
 	t_list *second = addnode("heddak");
-	t_list *third = addnode("hgrissen");
 	t_list *new = addnode("new");
 	head->next = second;
-	second->next = third;
+	// second->next = third;
 	print_list(head);
 	printf("\n\n");
 	add_back(&head, new);

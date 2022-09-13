@@ -1,5 +1,5 @@
-#ifndef MINI_H
-#define MINI_H
+#ifndef MINISHELL_H
+#define MINISHELL_H
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct s_list
