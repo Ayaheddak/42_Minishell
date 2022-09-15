@@ -4,19 +4,14 @@ typedef struct token_s
 {
 	enum
 	{
-		// TOKEN_ID,//TOKEN_SINGLE_QUOTE
-		// TOKEN_EQUALS,//TOKEN_IN
-		// TOKEN_STRING,//TOKEN_OUT
-		// TOKEN_SEMI,//semicolon
-		// TOKEN_LPAREN,//TOKEN_HEARD
-		// TOKEN_RPSREN,//TOKEN_DOUBLE_QUOTE
-		//TOKEN_STRING,
 		TOKEN_DOUBLE_QUOTE,
 		TOKEN_SINGLE_QUOTE,
 		TOKEN_STRING,
 		TOKEN_PIPE,
 		TOKEN_IN,
 		TOKEN_OUT,
+		TOKEN_ERR,
+
 	} type;
 
 	char *value;

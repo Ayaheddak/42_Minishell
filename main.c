@@ -2,7 +2,10 @@
 #include "lexer.h"
 int main()
 {
-	lexer_t *lexer = init_lexer("   \'\'\"he\'ll\'o\"\'\'   ");
+	char *inpt;
+
+	inpt = readline("Enter text: ");
+	lexer_t *lexer = init_lexer(inpt);
 	token_t *token = (void *)0;
 
 	while ((token = lexer_get_next_token(lexer)) != (void *)0)

@@ -1,74 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   strjoin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/10 21:43:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/12 02:08:05 by aheddak          ###   ########.fr       */
+/*   Created: 2022/09/15 05:17:29 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/15 05:26:36 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lexer.h"
 
-static	int	ft_check(int n)
+size_t	ft_strlen(const char *s)
 {
-	int				i;
-	unsigned int	nb;
+	size_t	i;
 
 	i = 0;
-	nb = n;
-	if (n < 0)
-	{
-		nb = -n;
+	while (s[i])
 		i++;
-	}
-	while (nb >= 10)
-	{
-		nb = nb / 10;
-		i++;
-	}
-	return (i + 1);
+	return (i);
 }
 
-char	*ft_itoa(int n)
-{
-	char			*str;
-	int				i;
-	unsigned int	nb;
-
-	nb = n;
-	i = ft_check(n);
-	str = malloc(sizeof(char) * (i + 1));
-	if (str == 0)
-		return (NULL);
-	str[i] = '\0';
-	if (n < 0)
-	{
-		str[0] = '-';
-		nb = -n;
-	}
-	i--;
-	while (nb >= 10)
-	{
-		str[i] = nb % 10 + '0';
-		nb = nb / 10;
-		i--;
-	}
-	if (nb <= 9)
-	str[i] = nb + '0';
-	return (str);
-}
-
-char	*ft_strdp(char *s1)
+char	*ft_strdup(const char *s1)
 {
 	unsigned int	len;
 	unsigned int	i;
 	char			*p;
 
 	i = 0;
-	len = ft_strln(s1);
+	len = ft_strlen(s1);
 	p = (char *)malloc((len + 1) * sizeof(char));
 	if (p == 0)
 		return (NULL);
@@ -79,4 +40,32 @@ char	*ft_strdp(char *s1)
 	}
 	p[i] = '\0';
 	return (p);
+}
+
+char	*strjoin(char const *s1, char const *s2)
+{
+	int		i;
+	int		j;
+	char	*rest;
+	size_t	count;
+
+	i = 0;
+	j = 0;
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	count = ft_strlen(s1) + ft_strlen(s2) + 1;
+	rest = (char *) malloc (sizeof(char) * count);
+	if (!rest)
+		return (NULL);
+	while (s1[i] != '\0')
+		rest[j++] = s1[i++];
+	i = 0;
+	while (s2[i] != '\0')
+		rest[j++] = s2[i++];
+	rest[j] = '\0';
+	return (rest);
 }
