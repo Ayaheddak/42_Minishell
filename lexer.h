@@ -25,7 +25,7 @@ token_t *lexer_get_next_token(lexer_t *lexer);// func to get next token in the c
 token_t *lexer_double_quote(lexer_t *lexer);
 
 token_t *lexer_string(lexer_t *lexer);
-
+token_t *expanding(lexer_t *lexer);
 token_t *lexer_advace_with_token(lexer_t *lexer, token_t *token);
 token_t *lexer_single_quote(lexer_t *lexer);
 char *lexer_get_current_char_as_string(lexer_t *lexer); //this func is going to return this "char c" but as a string (whhhhhhhy !!!!!!)

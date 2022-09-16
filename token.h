@@ -4,13 +4,12 @@ typedef struct token_s
 {
 	enum
 	{
-		TOKEN_DOUBLE_QUOTE,
-		TOKEN_SINGLE_QUOTE,
 		TOKEN_STRING,
 		TOKEN_PIPE,
 		TOKEN_IN,
 		TOKEN_OUT,
-		TOKEN_ERR,
+		TOKEN_JSP,
+		TOKEN_EXPANDING,
 
 	} type;
 
