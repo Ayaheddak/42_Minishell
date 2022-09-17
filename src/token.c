@@ -1,5 +1,5 @@
-#include "token.h"
-#include <stdlib.h>
+#include "../includes/minishell.h"
+
 token_t *init_token(int type, char *value)
 {
 	token_t *token = malloc (sizeof(token_t));

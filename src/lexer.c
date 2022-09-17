@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/17 12:39:22 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/17 13:19:28 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../includes/minishell.h"
 // char	*get_exapanded_test(char *key)
 // {
 // 	return (strdup("[EXPANDED VALUE]"));
@@ -28,7 +28,7 @@ lexer_t	*init_lexer(char *str)
  
 void	lexer_advance(lexer_t *lexer)
 {
-	if (lexer->c != '\0' && lexer->i < strlen(lexer->contents))
+	if (lexer->c != '\0' && lexer->i < ft_strlen(lexer->contents))
 	{
 		lexer->i += 1;
 		lexer->c = lexer->contents[lexer->i];

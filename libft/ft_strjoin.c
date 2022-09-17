@@ -1,46 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strjoin.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 05:17:29 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/15 05:26:36 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/17 15:18:53 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	unsigned int	len;
-	unsigned int	i;
-	char			*p;
-
-	i = 0;
-	len = ft_strlen(s1);
-	p = (char *)malloc((len + 1) * sizeof(char));
-	if (p == 0)
-		return (NULL);
-	while (i < len)
-	{
-		p[i] = s1[i];
-		i++;
-	}
-	p[i] = '\0';
-	return (p);
-}
+#include "../includes/minishell.h"
 
 char	*strjoin(char const *s1, char const *s2)
 {

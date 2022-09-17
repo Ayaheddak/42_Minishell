@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 16:14:42 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/17 05:50:05 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/17 15:16:49 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../includes/minishell.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

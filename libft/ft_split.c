@@ -3,45 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 16:14:04 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/17 05:50:01 by aheddak          ###   ########.fr       */
+/*   Created: 2021/11/17 08:23:07 by het-tale          #+#    #+#             */
+/*   Updated: 2022/09/17 13:04:22 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../includes/minishell.h"
 
-static int	ft_count_parts(char const *str, char sep)
+static int	count_words(char const *s, char c)
 {
-	int	i;
 	int	count;
+	int	i;
 
+	count = 0;
 	i = 0;
-	count = 1;
-	if (*str == '\0')
-		return (0);
-	while (str[i] == sep)
-		i++;
-	if (str[i] == '\0')
-		return (0);
-	while (str[i])
+	while (s[i])
 	{
-		if (str[i] == sep && str[i + 1] != sep && str[i + 1] != '\0')
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i] && s[i] != c)
 			count++;
-		i++;
+		while (s[i] && s[i] != c)
+			i++;
 	}
 	return (count);
 }
 
 static	int	word_length(char const *s, char c)
 {
-	int	i;
+	int	l;
 
-	i = 0;
-	while (s[i] && s[i] != c)
-		i++;
-	return (i);
+	l = 0;
+	while (s[l] && s[l] != c)
+		l++;
+	return (l);
 }
 
 static	char	**ft_free(int j, char **str)
@@ -89,7 +86,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (0);
-	count = ft_count_parts(s, c);
+	count = count_words(s, c);
 	str = (char **)malloc((count + 1) * sizeof(char *));
 	if (!str)
 		return (0);

@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 17:47:09 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/17 14:57:44 by het-tale         ###   ########.fr       */
+/*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
+/*   Updated: 2022/09/17 15:10:19 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
+# include "token.h"
+# include "lexer.h"
+# include "libft.h"
 
-void	ft_pwd(void)
-{
-	printf("%s\n", getenv("PWD"));
-}
+//Builtins
+void    ft_echo(t_list *list);
+void	ft_pwd(void);
+// void	ft_env(char *envp[], t_args *option);
+void	ft_change_dir(t_list *list);
+// void	ft_unset(t_list *list, char *envp[]);
+// int		ft_lst_size(t_list *list);
 
+#endif

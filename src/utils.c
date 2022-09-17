@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/17 12:08:37 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/17 14:11:48 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../includes/minishell.h"
 
 t_list	*addnode(void *data)
 {
@@ -29,21 +29,21 @@ void add_back(t_list **lst, t_list *new)
 	t_list *tmp;
 
 	tmp = *lst;
-	if (*lst == NULL)
-	{
+	if (tmp == NULL)
 		*lst = new;
-		return;
+	else
+	{
+		while(tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
-	while(tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = new;
 }
 
 void print_list(t_list *list)
 {
 	while (list != NULL)
 	{
-		printf("value ---->%s\n", list-data);
+		printf("value ---->%s\n", (char*)list->data);
 		//printf("value ---->%s\n", list->value);
 		list = list->next;
 	}
@@ -55,9 +55,27 @@ void add_front(t_list **lst, t_list *new)
 	*lst = new;
 }
 
+t_list  *get_list(int argc, char *argv[])
+{
+    t_list *list;
+	t_list	*temp;
+    int     i;
+
+    i = 1;
+	list = NULL;
+    while (i < argc && argv[i])
+    {
+        temp = addnode((char *)argv[i]);
+        add_back(&list, temp);
+        i++;
+    }
+    return (list);
+}
+
 int get_size(t_list *lst)
 {
 	int i;
+	// t_list	*temp;
 
 	i = 0;
 	while (lst)
@@ -68,18 +86,6 @@ int get_size(t_list *lst)
 	return (i);
 }
 
-// t_list	*addnode(void *value, void *value)
-// {
-// 	t_list	*newnode;
-
-// 	newnode = (t_list *)malloc(sizeof(t_list));
-// 	if (!newnode)
-// 		return (NULL);
-// 	newnode->value = value;
-// 	newnode->value = value;
-// 	newnode->next = NULL;
-// 	return (newnode);
-// }
 // t_list *get_env(char	**env)//i think it can help u f export
 // {
 // 	int	i;
@@ -103,19 +109,11 @@ int get_size(t_list *lst)
 
 // int main (int ac, char *av[])
 // {
-// 	t_list *head = addnode("aya");
-// 	t_list *second = addnode("heddak");
-// 	t_list *new = addnode("new");
-// 	head->next = second;
-// 	// second->next = third;
-// 	print_list(head);
-// 	printf("\n\n");
-// 	add_back(&head, new);
-// 	print_list(head);
-// 	// printf("%d\n",get_size(head));
-// 	//add_front(&head, new);
-// 	//printf("data ---> %s", head->data);
-// 	//	print_list(head);
-// 	//t_list *head = NULL;
-// 	//head = mall
+// 	t_list	*list;
+
+// 	list = get_list(ac, av);
+// 	(void)list;
+// 	printf("%s\n", (char *)list->data);
+// 	printf("%d\n", get_size(list));
+// 	printf("%s\n", (char *)list->data);
 // }

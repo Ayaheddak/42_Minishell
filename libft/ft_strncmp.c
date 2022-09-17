@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 17:47:09 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/17 14:57:44 by het-tale         ###   ########.fr       */
+/*   Created: 2021/11/04 18:44:45 by het-tale          #+#    #+#             */
+/*   Updated: 2022/09/17 13:04:22 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_pwd(void)
+int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
-	printf("%s\n", getenv("PWD"));
-}
+	size_t	i;
 
+	i = 0;
+	while (str1[i] && str2[i] && str1[i] == str2[i] && i < n)
+		i++;
+	if (i == n)
+		return (0);
+	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+}
