@@ -8,9 +8,8 @@ typedef struct token_s
 		TOKEN_PIPE,
 		TOKEN_IN,
 		TOKEN_OUT,
-		TOKEN_JSP,
-		TOKEN_EXPANDING,
-
+		TOKEN_APPEND,
+		TOKEN_DELIMITER,//<<
 	} type;
 
 	char *value;

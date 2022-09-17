@@ -6,14 +6,15 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/16 10:23:39 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/17 12:39:22 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-// char	*get_exapanded(char *key)
+// char	*get_exapanded_test(char *key)
 // {
 // 	return (strdup("[EXPANDED VALUE]"));
+// 	return strdup("");
 // }
 
 lexer_t	*init_lexer(char *str)
@@ -40,7 +41,7 @@ void	lexer_skip_whitespace(lexer_t *lexer)
 		lexer_advance(lexer);
 }
 
-token_t *redirection(lexer_t *lexer, int type, char r)
+token_t *redirection(lexer_t *lexer, int type1, int type2, char r)
 {
 	char *value;
 	char *s;
@@ -55,12 +56,12 @@ token_t *redirection(lexer_t *lexer, int type, char r)
 			s = lexer_get_current_char_as_string(lexer);
 			value = strjoin(value, s);
 			lexer_advance(lexer);
-			return init_token(type, value);
+			return init_token(type2, value);
 		}
 		else
 		{
 			lexer->i  -=1;
-			return lexer_advace_with_token(lexer, init_token(type,&value[0]));
+			return lexer_advace_with_token(lexer, init_token(type1,&value[0]));
 		}
 	}
 	return (void *)0;
@@ -80,13 +81,19 @@ char	*lexer_get_current_char_as_string(lexer_t *lexer)
 	return (str);
 }
 
+int	is_operator_speciaux(char c)
+{
+	if (c == 33 || (c > 35 && c < 38) || (c > 40 && c < 43) || (c > 45 && c < 47) ||
+		(c > 58 && c < 64) || (c > 91 && c < 95) || (c > 123 && c < 126))
+		return (1);
+	return (0);
+}
 int	is_whitespace(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\t')
 		return (1);
 	return (0);
 }
-
 int	is_operator(char c)
 {
 	if (c == '<' || c == '>' || c == '|')
@@ -118,8 +125,6 @@ int	check_err(char *str)
 
 token_t	*lexer_get_next_token(lexer_t *lexer)
 {
-	//if (check_err(lexer->contents))
-	//{
 	while (lexer->c != '\0')
 	{
 		if (is_whitespace(lexer->c))
@@ -131,9 +136,9 @@ token_t	*lexer_get_next_token(lexer_t *lexer)
 		else if (lexer->c == '$')
 			return expanding(lexer);
 		else if (lexer->c == '<')
-			return (redirection(lexer, TOKEN_OUT, '<'));
+			return (redirection(lexer, TOKEN_IN, TOKEN_DELIMITER, '<'));
 		else if (lexer->c == '>')
-			return (redirection(lexer, TOKEN_IN, '>'));
+			return (redirection(lexer, TOKEN_OUT,TOKEN_APPEND, '>'));
 		else if (lexer->c == '|')
 		{
 			return (lexer_advace_with_token(lexer, init_token(TOKEN_PIPE, lexer_get_current_char_as_string(lexer))));
@@ -143,10 +148,6 @@ token_t	*lexer_get_next_token(lexer_t *lexer)
 			return lexer_string(lexer);
 	}
 	return (void*)0;
-	//}
-	//else
-	//	printf("Unclosed quotes\n");
-	//return (void*)0;
 }
 
 void	after_quote(lexer_t *lexer ,char *s ,char **value)
@@ -180,15 +181,15 @@ token_t *expanding(lexer_t *lexer)
 	char *value;
 	char *s;
 
-	lexer_advance(lexer);// cuz we're gonna skip the quote
+	lexer_advance(lexer);
 	value = malloc(sizeof(char));
-	while (!is_whitespace(lexer->c) && lexer->c != '\0')
+	while (!is_whitespace(lexer->c) && lexer->c != '\0' && !is_operator_speciaux(lexer->c))
 	{
 		s = lexer_get_current_char_as_string(lexer);
 		value = strjoin(value, s);
 		lexer_advance(lexer);
 	}
-	return init_token(TOKEN_EXPANDING, value);
+	return init_token(TOKEN_STRING, value);
 	
 }
 token_t	*lexer_double_quote(lexer_t *lexer)// TOKEN_DOUBLE_QUOTE,
