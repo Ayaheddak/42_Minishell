@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/18 15:47:26 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/18 16:02:04 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,15 @@ token_t	*lexer_get_next_token(lexer_t *lexer)
 	return (void*)0;
 }
 
-// // int	is_operator_speciaux(char c)
-// // {
-// // 	if ((c >= 35 && c <= 38) || (c >= 42 && c <= 47) || (c >= 58 && c <= 59) || c == 61 ||
-// // 		(c >= 61 && c <= 64) || (c >= 91 && c <= 94) || (c >= 123 && c <= 125) || c == 126)
-// // 		return (1);
-// // 	return (0);
-// // }
+
+// t_list *conv_token_to_list(token_t *token, lexer_t *lexer)
+// {
+// 	t_list *head;
+
+// 	head = NULL;
+// 	while ((token = lexer_get_next_token(lexer)) != (void *)0)
+// 	{
+// 		add_back(&head,addnode(token->type, token->value));
+// 	}
+// 	// void print_list(t_list *list)
+// }

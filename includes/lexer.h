@@ -19,6 +19,7 @@ typedef struct lexer_s
 typedef struct s_list
 {
 	void *data;
+	int id;
 	struct s_list *next;
 
 } t_list;
@@ -38,7 +39,7 @@ int get_size(t_list *lst);
 void add_front(t_list **lst, t_list *new);
 void print_list(t_list *list);
 void add_back(t_list **lst, t_list *new);
-t_list	*addnode(void *value);
+t_list	*addnode(int id, void *data);
 int	is_operator(char c);
 int	is_whitespace(char c);
 token_t *redirection(lexer_t *lexer, int type1, int type2, char r);

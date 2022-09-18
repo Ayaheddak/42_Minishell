@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/18 04:43:12 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/18 16:15:33 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_list	*addnode(void *data)
+t_list	*addnode(int id, void *data)
 {
 	t_list	*newnode;
 
@@ -20,6 +20,7 @@ t_list	*addnode(void *data)
 	if (!newnode)
 		return (NULL);
 	newnode->data = data;
+	newnode->id = id;
 	newnode->next = NULL;
 	return (newnode);
 }
@@ -41,10 +42,15 @@ void add_back(t_list **lst, t_list *new)
 
 void print_list(t_list *list)
 {
+	int i;
+
+	i = 0;
 	while (list != NULL)
 	{
-		printf("value ---->%s\n", (char*)list->data);
-		//printf("value ---->%s\n", list->value);
+		printf("------------- Node numbre %d  = -------------\n" , i);
+		printf("ur id = %d\n",list->id);
+		printf("ur value = %s\n", (char*)list->data);
+		i++;
 		list = list->next;
 	}
 }
@@ -68,22 +74,22 @@ int get_size(t_list *lst)
 	return (i);
 }
 
-t_list  *get_list(int argc, char *argv[])
-{
-    t_list *list;
-	t_list	*temp;
-    int     i;
+// t_list  *get_list(int argc, char *argv[])
+// {
+//     t_list *list;
+// 	t_list	*temp;
+//     int     i;
 
-    i = 1;
-	list = NULL;
-    while (i < argc && argv[i])
-    {
-        temp = addnode((char *)argv[i]);
-        add_back(&list, temp);
-        i++;
-    }
-    return (list);
-}
+//     i = 1;
+// 	list = NULL;
+//     while (i < argc && argv[i])
+//     {
+//         temp = addnode((char *)argv[i]);
+//         add_back(&list, temp);
+//         i++;
+//     }
+//     return (list);
+// }
 
 // t_list *get_env(char	**env)//i think it can help u f export
 // {

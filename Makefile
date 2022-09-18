@@ -6,13 +6,13 @@
 #    By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/09/18 11:24:40 by aheddak          ###   ########.fr        #
+#    Updated: 2022/09/18 16:10:36 by aheddak          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
 
-UTILS	=	parsing/lexer_1.c parsing/main.c parsing/token.c parsing/utils.c parsing/lexer_2.c \
+UTILS	=	parsing/lexer_1.c parsing/main.c parsing/token.c parsing/utils_list.c parsing/lexer_2.c \
 			builtins/change_dir.c builtins/echo.c builtins/env.c builtins/pwd.c builtins/unset.c \
 			libft/ft_split.c libft/ft_strchr.c libft/ft_strdup.c libft/ft_strjoin.c libft/ft_strlen.c \
 			libft/ft_strncmp.c libft/ft_strtrim.c libft/ft_substr.c
