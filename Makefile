@@ -3,16 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
+#    By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/09/17 15:16:08 by het-tale         ###   ########.fr        #
+#    Updated: 2022/09/18 05:03:06 by aheddak          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
 
-UTILS	=	src/lexer.c src/main.c src/token.c src/utils.c libft/*.c builtins/*.c
+UTILS	=	parsing/lexer.c parsing/main.c parsing/token.c parsing/utils.c \
+			builtins/change_dir.c builtins/echo.c builtins/env.c builtins/pwd.c builtins/unset.c \
+			libft/ft_split.c libft/ft_strchr.c libft/ft_strdup.c libft/ft_strjoin.c libft/ft_strlen.c \
+			libft/ft_strncmp.c libft/ft_strtrim.c libft/ft_substr.c
 
 FLAGS	=	-Wall -Wextra -Werror
 

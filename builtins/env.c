@@ -11,7 +11,7 @@
 // /* ************************************************************************** */
 
 // #include "../includes/minishell.h"
-
+//wili wili hsinu nadya
 // void	ft_env(char *envp[], t_args *option)
 // {
 // 	int	i;

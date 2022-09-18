@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/17 14:11:48 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/18 04:43:12 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,19 @@ void add_front(t_list **lst, t_list *new)
 	*lst = new;
 }
 
+int get_size(t_list *lst)
+{
+	int i;
+
+	i = 0;
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}
+
 t_list  *get_list(int argc, char *argv[])
 {
     t_list *list;
@@ -70,20 +83,6 @@ t_list  *get_list(int argc, char *argv[])
         i++;
     }
     return (list);
-}
-
-int get_size(t_list *lst)
-{
-	int i;
-	// t_list	*temp;
-
-	i = 0;
-	while (lst)
-	{
-		i++;
-		lst = lst->next;
-	}
-	return (i);
 }
 
 // t_list *get_env(char	**env)//i think it can help u f export

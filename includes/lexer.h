@@ -39,5 +39,6 @@ void add_front(t_list **lst, t_list *new);
 void print_list(t_list *list);
 void add_back(t_list **lst, t_list *new);
 t_list	*addnode(void *value);
-t_list  *get_list(int argc, char *argv[]);
+t_list  *get_list(int argc, char *argv[]);//
+token_t *token_expanding(lexer_t *lexer);
 # endif

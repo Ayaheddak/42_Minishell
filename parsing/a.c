@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   a.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/18 04:38:00 by aheddak          ###   ########.fr       */
+/*   Created: 2022/09/18 04:35:13 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/18 05:02:40 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "token.h"
-# include "lexer.h"
-# include "libft.h"
 
-/*
----------------------- Builtins  ----------------------
-*/
-void    ft_echo(t_list *list);
-void	ft_pwd(void);
-// void	ft_env(char *envp[], t_args *option);
-void	ft_change_dir(t_list *list);
-// void	ft_unset(t_list *list, char *envp[]);
-// int		ft_lst_size(t_list *list);
+#include <stdio.h>
 
-#endif
+int main(int argc, char **argv)
+{
+	int i = 0;
+	while(argv[i])
+	{
+		printf("%s\n", argv[i]);
+		i++;
+	}
+}
