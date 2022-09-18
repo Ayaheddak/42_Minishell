@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/18 16:15:33 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/18 16:51:12 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_list	*addnode(int id, void *data)
+t_list	*addnode(void *id, void *data)
 {
 	t_list	*newnode;
 
@@ -48,7 +48,7 @@ void print_list(t_list *list)
 	while (list != NULL)
 	{
 		printf("------------- Node numbre %d  = -------------\n" , i);
-		printf("ur id = %d\n",list->id);
+		printf("ur id = %d\n",*(int*)list->id);
 		printf("ur value = %s\n", (char*)list->data);
 		i++;
 		list = list->next;
@@ -91,12 +91,12 @@ int get_size(t_list *lst)
 //     return (list);
 // }
 
-// t_list *get_env(char	**env)//i think it can help u f export
+// t_env_list	*get_env(char *env[])
 // {
-// 	int	i;
-// 	int j;
-// 	char **split;
-// 	t_list *head;
+// 	int		i;
+// 	int		j;
+// 	char	**split;
+// 	t_list	*head;
 
 // 	i = 0;
 // 	head = NULL;
@@ -104,21 +104,8 @@ int get_size(t_list *lst)
 // 	{
 // 		j = 0;
 // 		split = ft_split(env[i],'=');
-// 		while(split[j])
-// 			j++;
-// 		add_back(&head,addnode(split[j-2],split[j-1]));
+		
 // 		i++;
 // 	}
 // 	return (head);
-// }
-
-// int main (int ac, char *av[])
-// {
-// 	t_list	*list;
-
-// 	list = get_list(ac, av);
-// 	(void)list;
-// 	printf("%s\n", (char *)list->data);
-// 	printf("%d\n", get_size(list));
-// 	printf("%s\n", (char *)list->data);
 // }
