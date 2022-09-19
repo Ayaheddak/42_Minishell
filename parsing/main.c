@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/18 17:03:47 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/19 21:54:50 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,17 @@ t_list *conv_token_to_list(token_t *token, lexer_t *lexer)
 		add_back(&head,addnode(&token->type, token->value));
 	}
 	return (head);
-	// void print_list(t_list *list)
 }
 
-void	ft_exit()
-{
-	exit(0);
-}
-
-int main()
+int main(int argc, char *argv[], char *env[])
 {
 	char *inpt;
 	t_list	*list;
+	t_list	*env_list;
 
+	(void)argc;
+	(void)argv;
+	env_list = get_env(env);
 	while (1)
 	{
 		inpt = readline("./minishell$ ");
@@ -42,7 +40,7 @@ int main()
 		token_t *token = (void *)0;
 		add_history(inpt);
 		list = conv_token_to_list(token, lexer);
-		print_list(list);
+		ft_call_builtins(list, env_list);
 	}
 	return (0);
 }

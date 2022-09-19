@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/18 16:51:12 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/19 14:04:46 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void print_list(t_list *list)
 	while (list != NULL)
 	{
 		printf("------------- Node numbre %d  = -------------\n" , i);
-		printf("ur id = %d\n",*(int*)list->id);
+		printf("ur id = %s\n",(char*)list->id);
 		printf("ur value = %s\n", (char*)list->data);
 		i++;
 		list = list->next;
@@ -91,21 +91,19 @@ int get_size(t_list *lst)
 //     return (list);
 // }
 
-// t_env_list	*get_env(char *env[])
-// {
-// 	int		i;
-// 	int		j;
-// 	char	**split;
-// 	t_list	*head;
+t_list	*get_env(char *env[])
+{
+	int		i;
+	char	**split;
+	t_list	*head;
 
-// 	i = 0;
-// 	head = NULL;
-// 	while (env[i])
-// 	{
-// 		j = 0;
-// 		split = ft_split(env[i],'=');
-		
-// 		i++;
-// 	}
-// 	return (head);
-// }
+	i = 0;
+	head = NULL;
+	while (env[i])
+	{
+		split = ft_split(env[i],'=');
+		add_back(&head, addnode(split[0], split[1]));
+		i++;
+	}
+	return (head);
+}

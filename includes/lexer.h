@@ -44,6 +44,7 @@ int	is_operator(char c);
 int	is_whitespace(char c);
 token_t *redirection(lexer_t *lexer, int type1, int type2, char r);
 t_list  *get_list(int argc, char *argv[]);//
+t_list	*get_env(char *env[]);
 char	*get_exapanded_test(void);
 token_t *lexer_expanding(lexer_t *lexer);
 int	is_operator_speciaux(char c);

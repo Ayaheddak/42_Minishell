@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/18 16:02:04 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/19 16:23:47 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ token_t	*lexer_advace_with_token(lexer_t *lexer, token_t *token)
 
 char	*lexer_get_current_char_as_string(lexer_t *lexer)
 {
-	char *str = malloc(sizeof(char));
+	char *str = malloc(sizeof(char) * 2);//edited
 	str[0] = lexer->c;
 	str[1] = '\0';
 	return (str);
@@ -58,7 +58,7 @@ char	*lexer_get_current_char_as_string(lexer_t *lexer)
 
 int	is_whitespace(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\t')
+	if (c == ' ' || c == '\t' || c == '\t')//to edit
 		return (1);
 	return (0);
 }
