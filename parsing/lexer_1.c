@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/19 16:23:47 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/19 23:26:10 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*lexer_get_current_char_as_string(lexer_t *lexer)
 
 int	is_whitespace(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\t')//to edit
+	if (c == ' ' || c == '\t' || c == '\n')//to edit
 		return (1);
 	return (0);
 }
