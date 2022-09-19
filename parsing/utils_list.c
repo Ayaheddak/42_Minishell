@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/19 14:04:46 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/19 22:10:09 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void print_list(t_list *list)
 	while (list != NULL)
 	{
 		printf("------------- Node numbre %d  = -------------\n" , i);
-		printf("ur id = %s\n",(char*)list->id);
+		printf("ur id = %d\n",*(int*)list->id);
 		printf("ur value = %s\n", (char*)list->data);
 		i++;
 		list = list->next;

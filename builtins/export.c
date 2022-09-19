@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:03:47 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/19 21:29:45 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/19 22:13:43 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_export(t_list *env_list, t_list *list)
 	char	**split;
 
 	temp = list->next;
-	if (!is_valid_arg(temp->data))
+	if (temp && !is_valid_arg(temp->data))
 		return ;
 	while (temp)
 	{
