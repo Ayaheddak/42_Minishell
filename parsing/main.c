@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/20 16:10:34 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/20 20:11:20 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ int main(int argc, char *argv[], char *env[])
 		token_t *token = (void *)0;
 		add_history(inpt);
 		list = conv_token_to_list(token, lexer);
-		print_list(list);
+		//print_list(list);
+		check_err_in_tokens(list);
+		//print_list(list);
 		//system("leaks minishell");
 		//ft_call_builtins(list, env_list);
 	}

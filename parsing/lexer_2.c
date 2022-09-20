@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/20 17:20:17 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/20 17:28:43 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,19 +165,18 @@ token_t *lexer_expanding(lexer_t *lexer)
 	lexer_advance(lexer);// cuz we're gonna skip $
 	while (!is_whitespace(lexer->c) && lexer->c != '\0' && !is_operator_speciaux(lexer->c))
 	{
-		//printf("lexer->c ----> %c\n", lexer->c);
 		s = lexer_get_current_char_as_string(lexer);
 		value = ft_strjoin(value, s);
 		lexer_advance(lexer);
 		if (is_whitespace(lexer->c) || lexer->c == '"' || is_operator_speciaux(lexer->c))
 			break;
 	}
-	// printf("%s\n", value);
-	// if (value == NULL)
-	// {
-	// 	printf("waaaa r")
-	// 	return (void *)0;
-	// }
-	
+	if (value == NULL)
+	{
+		value = "$";
+		return init_token(TOKEN_EXPANDING, value);
+	}
 	return init_token(TOKEN_EXPANDING, get_exapanded_test());
 }
+
+//$$ ????????????????

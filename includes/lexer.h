@@ -48,4 +48,5 @@ t_list	*get_env(char *env[]);
 char	*get_exapanded_test(void);
 token_t *lexer_expanding(lexer_t *lexer);
 int	is_operator_speciaux(char c);
+void check_err_in_tokens(t_list *list);//
 # endif

@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/20 16:53:03 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/20 20:37:28 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,24 +143,31 @@ token_t	*lexer_get_next_token(lexer_t *lexer)
 		printf("Unclosed quotes\n");
 	return (void*)0;
 }
-
+// //  while ((token = lexer_get_next_token(lexer)) != (void *)0)
+// // 	// {
+// // 	// 	printf("token(%d, %s)\n", token->type, token->value);
+// // 	// }
+// // void idk(token_t *token)
+// // {
+// // 	while ((token = lexer_get_next_token(lexer)) != (void *)0)
+// // 	{
+// // 		printf("token(%d, %s)\n", token->type, token->value);
+// // 	}
+// // }
 // void check_err_in_tokens(t_list *list)
 // {
+// 	t_list *tmp;
+// 	int i;
 	
-	
-// 	while (list->)
+// 	i = 0;
+// 	tmp = list;
+// 	while (list)
 // 	{
-// 		printf("token(%d, %s)\n", token->type, token->value);
+// 		i++;
+// 		list = list->next;
 // 	}
+// 	if 
 // }
-
-
-
-
-
-
-
-
 // t_list *conv_token_to_list(token_t *token, lexer_t *lexer)
 // {
 // 	t_list *head;
