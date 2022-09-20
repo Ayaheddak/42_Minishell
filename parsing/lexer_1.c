@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/19 23:26:10 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:17:13 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*lexer_get_current_char_as_string(lexer_t *lexer)
 
 int	is_whitespace(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\n')//to edit
+	if (c == ' ' || c == '\t' || c == '\n')
 		return (1);
 	return (0);
 }
@@ -108,7 +108,7 @@ token_t	*lexer_get_next_token(lexer_t *lexer)
 		{
 			if (is_whitespace(lexer->c))
 				lexer_skip_whitespace (lexer);
-			if (lexer->c == '"')
+			else if (lexer->c == '"')
 				return lexer_double_quote(lexer);
 			else if (lexer->c == 39)
 				return lexer_single_quote(lexer);

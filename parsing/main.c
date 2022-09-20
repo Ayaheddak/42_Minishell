@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/19 22:14:41 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:16:48 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int main(int argc, char *argv[], char *env[])
 		token_t *token = (void *)0;
 		add_history(inpt);
 		list = conv_token_to_list(token, lexer);
-		ft_call_builtins(list, env_list);
+		print_list(list);
+		//ft_call_builtins(list, env_list);
 	}
 	return (0);
 }

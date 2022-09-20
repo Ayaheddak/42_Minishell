@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
+#    By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/09/19 20:44:50 by het-tale         ###   ########.fr        #
+#    Updated: 2022/09/20 10:10:56 by aheddak          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,12 @@ CC		=	gcc
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJCT)	
-	$(CC) $(FLAGS) $(UTILS) -o $(NAME) -lreadline -g
+	@$(CC) $(FLAGS) $(UTILS) -o $(NAME) -lreadline -g
 
 clean :
-	${RM} $(OBJCT)
+	@${RM} $(OBJCT)
 
 fclean :	clean
-	${RM} ${NAME}
+	@${RM} ${NAME}
  
 re : fclean all
