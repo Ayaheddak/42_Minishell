@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/20 10:17:13 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/20 16:53:03 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ token_t	*lexer_advace_with_token(lexer_t *lexer, token_t *token)
 
 char	*lexer_get_current_char_as_string(lexer_t *lexer)
 {
-	char *str = malloc(sizeof(char) * 2);//edited
+	char *str = malloc(sizeof(char) * 2);
 	str[0] = lexer->c;
 	str[1] = '\0';
 	return (str);
@@ -72,30 +72,44 @@ int	is_operator(char c)
 
 int	is_operator_speciaux(char c)
 {
-	if ((c >=35 && c <= 38) || (c >= 42 && c <= 47) || (c >= 58 && c <= 59) || c == 61 ||
+	if ((c >=35 && c <= 39) || (c >= 42 && c <= 47) || (c >= 58 && c <= 59) || c == 61 ||
 		(c >= 61 && c <= 64) || (c >= 91 && c <= 94) || (c >= 123 && c <= 125) || c == 126)
 		return (1);
 	return (0);
 }
 
-int	check_err(char *str)
+int check_err(char *str)
 {
 	int i;
-	int s_count;
-	int d_count;
+	int count_dq;
+	int count_sq;
 
 	i = 0;
-	s_count = 0;
-	d_count = 0;
+	count_dq = 0;
+	count_sq = 0;
 	while (str[i])
 	{
-		if (str[i] == '"')
-			d_count++;
-		if (str[i] == 39)
-			s_count++;
+		if (str[i] == '"' && str[i] != '\0')
+		{
+			count_dq++;
+			i++;
+			while(str[i] != '"' && str[i] != '\0')
+				i++;
+			if (str[i] == '"')
+				count_dq++;
+		}
+		if (str[i] == 39 && str[i] != '\0')
+		{
+			count_sq++;
+			i++;
+			while(str[i] != 39 && str[i] != '\0')
+				i++;
+			if (str[i] == 39)
+				count_sq++;
+		}
 		i++;
 	}
-	if(d_count % 2 == 0 && s_count % 2 == 0)
+	if (count_dq % 2 == 0 && count_sq % 2 == 0)
 		return (1);
 	return (0);
 }
@@ -129,6 +143,22 @@ token_t	*lexer_get_next_token(lexer_t *lexer)
 		printf("Unclosed quotes\n");
 	return (void*)0;
 }
+
+// void check_err_in_tokens(t_list *list)
+// {
+	
+	
+// 	while (list->)
+// 	{
+// 		printf("token(%d, %s)\n", token->type, token->value);
+// 	}
+// }
+
+
+
+
+
+
 
 
 // t_list *conv_token_to_list(token_t *token, lexer_t *lexer)

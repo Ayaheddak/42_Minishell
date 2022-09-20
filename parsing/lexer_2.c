@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/19 17:03:25 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:20:17 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ token_t *redirection(lexer_t *lexer, int type1, int type2, char r)
 	char *value;
 	char *s;
 	
-	value = malloc(sizeof(char));
+	value = malloc (sizeof(char));
 	value[0] = lexer->c;
 	if (lexer->c == r)
 	{
@@ -79,7 +79,7 @@ token_t	*lexer_double_quote(lexer_t *lexer)
 	token_t *token;
 	char *s;
 
-	value = malloc(sizeof(char));
+	value = NULL;
 	lexer_advance(lexer);// cuz we're gonna skip the quote
 	while (lexer->c != '"'&& lexer->c != '\0')
 	{
@@ -97,11 +97,6 @@ token_t	*lexer_double_quote(lexer_t *lexer)
 		value = ft_strjoin(value, s);
 		lexer_advance(lexer);
 	}
-	if (lexer->c == '\0')
-	{
-		printf("Unclosed quotes\n");
-		return (void *)0;
-	}
 	lexer_advance(lexer);
 	after_quote(lexer , s, &value);
 	return init_token(TOKEN_STRING, value);
@@ -112,18 +107,13 @@ token_t	*lexer_single_quote(lexer_t *lexer)
 	char *value;
 	char *s;
 
-	value = malloc(sizeof(char));
+	value = NULL;
 	lexer_advance(lexer);
 	while (lexer->c != 39 && lexer->c != '\0')
 	{
 		s = lexer_get_current_char_as_string(lexer);
 		value = ft_strjoin(value, s);
 		lexer_advance(lexer);
-	}
-	if (lexer->c == '\0')
-	{
-		printf("Unclosed quotes\n");
-		return (void *)0;
 	}
 	lexer_advance(lexer);
 	after_quote(lexer, s, &value);
@@ -171,15 +161,23 @@ token_t *lexer_expanding(lexer_t *lexer)
 	char *value;
 	char *s;
 	
+	value = NULL;
 	lexer_advance(lexer);// cuz we're gonna skip $
-	value = malloc(sizeof(char));
 	while (!is_whitespace(lexer->c) && lexer->c != '\0' && !is_operator_speciaux(lexer->c))
 	{
+		//printf("lexer->c ----> %c\n", lexer->c);
 		s = lexer_get_current_char_as_string(lexer);
 		value = ft_strjoin(value, s);
 		lexer_advance(lexer);
 		if (is_whitespace(lexer->c) || lexer->c == '"' || is_operator_speciaux(lexer->c))
 			break;
 	}
+	// printf("%s\n", value);
+	// if (value == NULL)
+	// {
+	// 	printf("waaaa r")
+	// 	return (void *)0;
+	// }
+	
 	return init_token(TOKEN_EXPANDING, get_exapanded_test());
 }
