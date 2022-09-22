@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/20 17:28:43 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/22 03:28:13 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ token_t *redirection(lexer_t *lexer, int type1, int type2, char r)
 	char *value;
 	char *s;
 	
-	value = malloc (sizeof(char));
+	value = ft_strdup("");
 	value[0] = lexer->c;
 	if (lexer->c == r)
 	{
@@ -174,9 +174,9 @@ token_t *lexer_expanding(lexer_t *lexer)
 	if (value == NULL)
 	{
 		value = "$";
-		return init_token(TOKEN_EXPANDING, value);
+		return init_token(TOKEN_STRING, value);
 	}
-	return init_token(TOKEN_EXPANDING, get_exapanded_test());
+	return init_token(TOKEN_STRING, get_exapanded_test());
 }
 
 //$$ ????????????????

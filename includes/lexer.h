@@ -1,13 +1,6 @@
 #ifndef LEXER_H
 #define LEXER_H
-#include "token.h"
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-# include <unistd.h>
+
 typedef struct lexer_s
 {
 	char			c;
@@ -22,7 +15,7 @@ typedef struct s_list
 	void	*id;
 	struct s_list *next;
 
-} t_list;
+} 	t_list;
 
 lexer_t	*init_lexer(char *contents);
 void lexer_advance(lexer_t *lexer);//going to move our pointer to the next character in the content

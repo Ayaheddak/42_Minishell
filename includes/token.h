@@ -9,7 +9,6 @@ typedef struct token_s
 		TOKEN_IN,
 		TOKEN_OUT,
 		TOKEN_APPEND,
-		TOKEN_EXPANDING,
 		TOKEN_DELIMITER,//<<
 	} type;
 

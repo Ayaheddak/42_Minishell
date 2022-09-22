@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/20 20:37:28 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/22 02:09:48 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,17 @@ int check_err(char *str)
 	count_sq = 0;
 	while (str[i])
 	{
+		if (str[0] == '|' || (str[i] == '|' && str[i + 1] == '|') || (str[i + 1] == '\0' && str[i + 1] == '|'))
+			return (printf("Error : Unexpected token \n"));
+		if (str[0] == '>' || str[0] == '<')
+			return (printf("Error : invalid redirection \n"));
+		if ((str[i + 1] == '\0' && str[i] == '>') || (str[i + 1] == '\0' && str[i] == '<'))
+			return (printf("Error : Unexpected token newlin \n"));
 		if (str[i] == '"' && str[i] != '\0')
 		{
 			count_dq++;
 			i++;
-			while(str[i] != '"' && str[i] != '\0')
+			while(str[i] != '"' && str[i] != '\0' )
 				i++;
 			if (str[i] == '"')
 				count_dq++;
@@ -111,12 +117,14 @@ int check_err(char *str)
 	}
 	if (count_dq % 2 == 0 && count_sq % 2 == 0)
 		return (1);
-	return (0);
+	else
+		return (printf("Error : Unclosed quotes\n"));
+		
 }
 
 token_t	*lexer_get_next_token(lexer_t *lexer)
 {
-	if (check_err(lexer->contents))
+	if (check_err(lexer->contents) == 1)
 	{
 		while (lexer->c != '\0' || lexer->c)
 		{
@@ -139,43 +147,5 @@ token_t	*lexer_get_next_token(lexer_t *lexer)
 				return lexer_string(lexer);
 		}
 	}
-	else
-		printf("Unclosed quotes\n");
 	return (void*)0;
 }
-// //  while ((token = lexer_get_next_token(lexer)) != (void *)0)
-// // 	// {
-// // 	// 	printf("token(%d, %s)\n", token->type, token->value);
-// // 	// }
-// // void idk(token_t *token)
-// // {
-// // 	while ((token = lexer_get_next_token(lexer)) != (void *)0)
-// // 	{
-// // 		printf("token(%d, %s)\n", token->type, token->value);
-// // 	}
-// // }
-// void check_err_in_tokens(t_list *list)
-// {
-// 	t_list *tmp;
-// 	int i;
-	
-// 	i = 0;
-// 	tmp = list;
-// 	while (list)
-// 	{
-// 		i++;
-// 		list = list->next;
-// 	}
-// 	if 
-// }
-// t_list *conv_token_to_list(token_t *token, lexer_t *lexer)
-// {
-// 	t_list *head;
-
-// 	head = NULL;
-// 	while ((token = lexer_get_next_token(lexer)) != (void *)0)
-// 	{
-// 		add_back(&head,addnode(token->type, token->value));
-// 	}
-// 	// void print_list(t_list *list)
-// }
