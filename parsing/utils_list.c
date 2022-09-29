@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/29 22:26:44 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:29:35 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,15 @@ t_list  *get_list(void)
 	file = malloc(sizeof(t_file));
 	len = 2;
 	args = malloc(sizeof(char *) * len);
-	args[0] = "echo";
-	args[1] = "hello";
-	file->type = TOKEN_OUT;
-	file->name = "f1";
+	args[0] = "cat";
+	args[1] = "-e";
+	file->type = TOKEN_DELIMITER;
+	file->name = "end";
 	t1 = new_node(NULL, NULL, args, file);
 	file1 = malloc(sizeof(t_file));
 	args = malloc(sizeof(char *) * len);
-	args[0] = "cat";
-	args[1] = "f1";
+	args[0] = "wc";
+	args[1] = "-l";
 	file1->type = TOKEN_OUT;
 	file1->name = "f3";
 	t2 = new_node(NULL, NULL, args, file1);

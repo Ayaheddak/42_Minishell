@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/29 22:31:06 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:25:02 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int main(int argc, char *argv[], char *env[])
 		token_t *token = (void *)0;
 		add_history(inpt);
 		list = conv_token_to_list(token, lexer);
+		(void)list;
 		exec_list = get_list();
 		start_execution(exec_list, env_list);
 	}
