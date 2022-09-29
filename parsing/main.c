@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/20 16:10:34 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:57:33 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ int main(int argc, char *argv[], char *env[])
 	char *inpt;
 	t_list	*list;
 	t_list	*env_list;
+	t_list	*exec_list;
 
 	(void)argc;
 	(void)argv;
+	(void)env_list;
 	env_list = get_env(env);
 	while (1)
 	{
@@ -40,9 +42,12 @@ int main(int argc, char *argv[], char *env[])
 		token_t *token = (void *)0;
 		add_history(inpt);
 		list = conv_token_to_list(token, lexer);
-		print_list(list);
-		//system("leaks minishell");
-		//ft_call_builtins(list, env_list);
+		(void)list;
+		exec_list = get_list();
+		(void)exec_list;
+		start_execution(exec_list, env_list);
 	}
+	free(exec_list->args);
+	free(exec_list);
 	return (0);
 }

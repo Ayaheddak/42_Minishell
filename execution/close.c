@@ -1,35 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 18:44:45 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/28 19:11:07 by het-tale         ###   ########.fr       */
+/*   Created: 2022/09/29 18:05:25 by het-tale          #+#    #+#             */
+/*   Updated: 2022/09/29 18:08:24 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_strncmp(const char *str1, const char *str2, size_t n)
+void	close_pipes(t_exec *exec, int n)
 {
-	size_t	i;
+	int	j;
 
-	i = 0;
-	while (str1[i] && str2[i] && str1[i] == str2[i] && i < n)
-		i++;
-	if (i == n)
-		return (0);
-	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+	j = 0;
+	while (j < n)
+	{
+		if (exec->fd_pipe[j] != exec->input
+			&& exec->fd_pipe[j] != exec->output)
+			close(exec->fd_pipe[j]);
+		j++;
+	}
 }
 
-int	ft_strcmp(const char *str1, const char *str2)
+void	close_and_free(t_exec exec, int n)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (str1[i] && str2[i] && str1[i] == str2[i])
+	close(exec.infile);
+	close(exec.out_file);
+	// unlink("temp_file");
+	while (i < (n - 1) * 2)
+	{
+		close(exec.fd_pipe[i]);
 		i++;
-	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+	}
+	waitpid(-1, &(exec.status), 0);
+	free(exec.child_pid);
+	free(exec.fd_pipe);
 }

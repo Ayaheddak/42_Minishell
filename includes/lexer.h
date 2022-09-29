@@ -8,6 +8,11 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include <sys/wait.h>
+
+typedef struct s_file t_file;
+
 typedef struct lexer_s
 {
 	char			c;
@@ -20,9 +25,17 @@ typedef struct s_list
 {
 	void	*data;
 	void	*id;
+	char	**args;
+	t_file	*file;
 	struct s_list *next;
+} 	t_list;
 
-} t_list;
+struct s_file
+{
+	int type;
+	char *name;
+	struct s_file *next;
+};
 
 lexer_t	*init_lexer(char *contents);
 void lexer_advance(lexer_t *lexer);//going to move our pointer to the next character in the content
@@ -43,7 +56,7 @@ t_list	*addnode(void *id, void *data);
 int	is_operator(char c);
 int	is_whitespace(char c);
 token_t *redirection(lexer_t *lexer, int type1, int type2, char r);
-t_list  *get_list(int argc, char *argv[]);//
+//t_list  *get_list(int argc, char *argv[]);//
 t_list	*get_env(char *env[]);
 char	*get_exapanded_test(void);
 token_t *lexer_expanding(lexer_t *lexer);

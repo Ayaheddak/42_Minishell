@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/20 11:32:51 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/29 14:50:48 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include "lexer.h"
 # include "libft.h"
 # include "parser.h"
-# define    EXIT_CODE 0
+# include "execute.h"
+# define EXIT_CODE 0
+# define BUFFER_SIZE 42
 
 /*
 ---------------------- Builtins  ----------------------
@@ -33,5 +35,13 @@ void	ft_call_builtins(t_list *head, t_list *env_list);
 ----------------------------list management---------------------------------------
 */
 t_list  *remove_list(t_list **env_list, t_list *remove);
+t_list  *get_list(void);
+/*---------------get_next_line------------------------*/
+char    *get_next_line(int fd);
+char    *extract_line(char *str);
+char    *extract_after_line(char *str);
+char    *ft_read(int *rb, char *temp, char *buf, int fd);
+char    *ft_cpy(char *str, int *i, int *j);
+void    skip_line(char *str, int *j);
 
 #endif
