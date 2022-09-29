@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/19 22:10:09 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:51:01 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,21 @@ t_list	*addnode(void *id, void *data)
 		return (NULL);
 	newnode->data = data;
 	newnode->id = id;
+	newnode->next = NULL;
+	return (newnode);
+}
+
+t_list	*new_node(void *id, void *data, char **args, t_file *file)
+{
+	t_list	*newnode;
+
+	newnode = (t_list *)malloc(sizeof(t_list));
+	if (!newnode)
+		return (NULL);
+	newnode->data = data;
+	newnode->id = id;
+	newnode->args = args;
+	newnode->file = file;
 	newnode->next = NULL;
 	return (newnode);
 }
@@ -48,7 +63,7 @@ void print_list(t_list *list)
 	while (list != NULL)
 	{
 		printf("------------- Node numbre %d  = -------------\n" , i);
-		printf("ur id = %d\n",*(int*)list->id);
+		printf("ur id = %s\n",(char *)list->id);
 		printf("ur value = %s\n", (char*)list->data);
 		i++;
 		list = list->next;
@@ -74,22 +89,35 @@ int get_size(t_list *lst)
 	return (i);
 }
 
-// t_list  *get_list(int argc, char *argv[])
-// {
-//     t_list *list;
-// 	t_list	*temp;
-//     int     i;
-
-//     i = 1;
-// 	list = NULL;
-//     while (i < argc && argv[i])
-//     {
-//         temp = addnode((char *)argv[i]);
-//         add_back(&list, temp);
-//         i++;
-//     }
-//     return (list);
-// }
+t_list  *get_list(void)
+{
+	t_list	*t1;
+	t_list	*t2;
+	t_list	*t3;
+	char	**args;
+	t_file	*file;
+	int len;
+	
+	len = 2;
+	args = malloc(sizeof(char *) * len);
+	args[0] = "echo";
+	args[1] = "hello";
+	t1 = new_node(NULL, NULL, args, NULL);
+	args = malloc(sizeof(char *) * len);
+	args[0] = "cat";
+	args[1] = "file";
+	t2 = new_node(NULL, NULL, args, NULL);
+	len = 1;
+	file = malloc(sizeof(t_file));
+	file->type = TOKEN_OUT;
+	file->name = "f1";
+	args = malloc(sizeof(char *) * len);
+	args[0] = "wc";
+	t3 = new_node(NULL, NULL, args, file);
+	t1->next = t2;
+	t2->next = t3;
+	return (t1);
+}
 
 t_list	*get_env(char *env[])
 {
