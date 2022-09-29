@@ -6,22 +6,25 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/09/29 14:50:48 by het-tale         ###   ########.fr       */
+=======
+/*   Updated: 2022/09/22 04:17:05 by aheddak          ###   ########.fr       */
+>>>>>>> 4467661d4eb95413f90b1f5804a44b29e785b5e1
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
 # include "token.h"
-# include "lexer.h"
-# include "libft.h"
 # include "parser.h"
 # include "execute.h"
 # define EXIT_CODE 0
 # define BUFFER_SIZE 42
 
 /*
----------------------- Builtins  ----------------------
+---------------------- Builtins ---------------------- 
 */
 void    ft_echo(t_list *list);
 void	ft_pwd(t_list *env_list, t_list *head);
@@ -32,7 +35,7 @@ t_list  *ft_unset(t_list *list, t_list *env_list);
 void    ft_export(t_list *env_list, t_list *list);
 void	ft_call_builtins(t_list *head, t_list *env_list);
 /*
-----------------------------list management---------------------------------------
+---------------------- list management ---------------------- 
 */
 t_list  *remove_list(t_list **env_list, t_list *remove);
 t_list  *get_list(void);

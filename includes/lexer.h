@@ -30,12 +30,16 @@ typedef struct s_list
 	struct s_list *next;
 } 	t_list;
 
+<<<<<<< HEAD
 struct s_file
 {
 	int type;
 	char *name;
 	struct s_file *next;
 };
+=======
+} 	t_list;
+>>>>>>> 4467661d4eb95413f90b1f5804a44b29e785b5e1
 
 lexer_t	*init_lexer(char *contents);
 void lexer_advance(lexer_t *lexer);//going to move our pointer to the next character in the content
@@ -61,4 +65,5 @@ t_list	*get_env(char *env[]);
 char	*get_exapanded_test(void);
 token_t *lexer_expanding(lexer_t *lexer);
 int	is_operator_speciaux(char c);
+void check_err_in_tokens(t_list *list);//
 # endif

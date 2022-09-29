@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/09/29 16:49:11 by het-tale         ###   ########.fr       */
+=======
+/*   Updated: 2022/09/22 17:02:09 by aheddak          ###   ########.fr       */
+>>>>>>> 4467661d4eb95413f90b1f5804a44b29e785b5e1
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +23,8 @@ t_list	*addnode(void *id, void *data)
 	newnode = (t_list *)malloc(sizeof(t_list));
 	if (!newnode)
 		return (NULL);
-	newnode->data = data;
 	newnode->id = id;
+	newnode->data = data;
 	newnode->next = NULL;
 	return (newnode);
 }
@@ -70,11 +74,11 @@ void print_list(t_list *list)
 	}
 }
 
-void add_front(t_list **lst, t_list *new)
-{
-	new->next=*lst;
-	*lst = new;
-}
+// void add_front(t_list **lst, t_list *new)
+// {
+// 	new->next=*lst;
+// 	*lst = new;
+// }
 
 int get_size(t_list *lst)
 {
