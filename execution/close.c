@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:05:25 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/29 18:08:24 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:07:28 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ void	close_and_free(t_exec exec, int n)
 	int	i;
 
 	i = 0;
-	close(exec.infile);
-	close(exec.out_file);
-	// unlink("temp_file");
+	if (exec.infile != -1)
+		close(exec.infile);
+	if (exec.out_file != -1)
+		close(exec.out_file);
 	while (i < (n - 1) * 2)
 	{
 		close(exec.fd_pipe[i]);

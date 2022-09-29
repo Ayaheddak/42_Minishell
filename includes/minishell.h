@@ -6,11 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/09/29 14:50:48 by het-tale         ###   ########.fr       */
-=======
-/*   Updated: 2022/09/22 04:17:05 by aheddak          ###   ########.fr       */
->>>>>>> 4467661d4eb95413f90b1f5804a44b29e785b5e1
+/*   Updated: 2022/09/29 22:21:26 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +15,10 @@
 
 # include "token.h"
 # include "parser.h"
+# include "lexer.h"
+# include "libft.h"
+# include "parser.h"
+# include "env.h"
 # include "execute.h"
 # define EXIT_CODE 0
 # define BUFFER_SIZE 42

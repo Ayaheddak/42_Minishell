@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 18:44:45 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/29 22:09:21 by het-tale         ###   ########.fr       */
+/*   Created: 2022/09/29 19:51:32 by het-tale          #+#    #+#             */
+/*   Updated: 2022/09/29 20:26:49 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_strncmp(const char *str1, const char *str2, size_t n)
+#ifndef ENV_H
+# define ENV_H
+
+typedef struct s_env	t_env;
+
+struct s_env
 {
-	size_t	i;
+	char	*key;
+	char	*value;
+	t_env	*next;
+};
 
-	i = 0;
-	while (str1[i] && str2[i] && str1[i] == str2[i] && i < n)
-		i++;
-	if (i == n)
-		return (0);
-	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
-}
-
-int	ft_strcmp(const char *str1, const char *str2)
-{
-	size_t	i;
-
-	i = 0;
-	while (str1[i] && str2[i] && str1[i] == str2[i])
-		i++;
-	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
-}
+t_env	*create_node(char *key, char *value);
+void	add_back_env(t_env **env_head, t_env *new);
+void	add_front_env(t_env **env_head, t_env *new);
+int		get_list_len(t_env	*list);
+char	**get_env_array(t_env *env);
+t_env	*get_env_list(char *env[]);
+#endif

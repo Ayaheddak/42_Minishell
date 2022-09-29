@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/29 22:13:43 by het-tale          #+#    #+#             */
+/*   Updated: 2022/09/29 22:13:51 by het-tale         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LEXER_H
 #define LEXER_H
 #include "token.h"
@@ -30,16 +42,12 @@ typedef struct s_list
 	struct s_list *next;
 } 	t_list;
 
-<<<<<<< HEAD
 struct s_file
 {
 	int type;
 	char *name;
 	struct s_file *next;
 };
-=======
-} 	t_list;
->>>>>>> 4467661d4eb95413f90b1f5804a44b29e785b5e1
 
 lexer_t	*init_lexer(char *contents);
 void lexer_advance(lexer_t *lexer);//going to move our pointer to the next character in the content

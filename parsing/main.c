@@ -6,11 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/09/29 17:57:33 by het-tale         ###   ########.fr       */
-=======
-/*   Updated: 2022/09/22 18:52:25 by aheddak          ###   ########.fr       */
->>>>>>> 4467661d4eb95413f90b1f5804a44b29e785b5e1
+/*   Updated: 2022/09/29 22:31:06 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +26,14 @@ t_list *conv_token_to_list(token_t *token, lexer_t *lexer)
 
 int main(int argc, char *argv[], char *env[])
 {
-	char *inpt;
+	char	*inpt;
 	t_list	*list;
-	t_list	*env_list;
+	t_env	*env_list;
 	t_list	*exec_list;
 
 	(void)argc;
 	(void)argv;
-	(void)env_list;
-	env_list = get_env(env);
+	env_list = get_env_list(env);
 	while (1)
 	{
 		inpt = readline("./minishell$ ");
@@ -46,9 +41,7 @@ int main(int argc, char *argv[], char *env[])
 		token_t *token = (void *)0;
 		add_history(inpt);
 		list = conv_token_to_list(token, lexer);
-		(void)list;
 		exec_list = get_list();
-		(void)exec_list;
 		start_execution(exec_list, env_list);
 	}
 	free(exec_list->args);

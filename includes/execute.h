@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:37:01 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/29 18:07:07 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:07:42 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,12 @@ struct s_path
 void	redirection_handling(t_list	*list);
 void	ft_error(char *str);
 /*--------------------Check commands------------*/
-char	*check_command(char *cmd, t_list *env);
-char	*get_right_path(t_list *env, char *cmd);
-char	*get_right_path_utils(t_path *corr_path, char *cmd, t_list *env);
-void	execute_command(t_exec *exec, char **cmd, t_list *env);
-char	**gt_env(t_list *env);
+char	*check_command(char *cmd, t_env *env);
+char	*get_right_path(t_env *env, char *cmd);
+char	*get_right_path_utils(t_path *corr_path, char *cmd, t_env *env);
+void	execute_command(t_exec *exec, char **cmd, t_env *env);
 /*--------------------create children---------------*/
-void	start_execution(t_list *exec_list, t_list *env);
+void	start_execution(t_list *exec_list, t_env *env);
 void	input_output(int i, t_exec *exec, t_list *exec_list);
 void	ft_error(char *str);
 void	close_pipes(t_exec *exec, int n);
