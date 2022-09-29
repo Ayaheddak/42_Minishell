@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/29 18:49:01 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:56:43 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,18 @@ t_list *conv_token_to_list(token_t *token, lexer_t *lexer)
 
 int main(int argc, char *argv[], char *env[])
 {
-	char *inpt;
+	char	*inpt;
 	t_list	*list;
-	t_list	*env_list;
+	t_env	*env_list;
 	t_list	*exec_list;
 
 	(void)argc;
 	(void)argv;
-	(void)env_list;
-	env_list = get_env(env);
+	(void)env;
+	// env_list = get_env_list(env);
+	env_list = malloc(sizeof(t_env));
+	env_list->key = "PATH";
+	env_list->value = "/home/het-tale/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin";
 	while (1)
 	{
 		inpt = readline("./minishell$ ");
@@ -47,7 +50,5 @@ int main(int argc, char *argv[], char *env[])
 		(void)exec_list;
 		start_execution(exec_list, env_list);
 	}
-	free(exec_list->args);
-	free(exec_list);
 	return (0);
 }

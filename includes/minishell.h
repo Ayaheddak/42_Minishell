@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/29 18:56:23 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:44:07 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "lexer.h"
 # include "libft.h"
 # include "parser.h"
+# include "env.h"
 # include "execute.h"
 # define EXIT_CODE 0
 # define BUFFER_SIZE 42

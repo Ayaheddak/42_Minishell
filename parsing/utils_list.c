@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/29 18:51:01 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:46:53 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,29 +93,35 @@ t_list  *get_list(void)
 {
 	t_list	*t1;
 	t_list	*t2;
-	t_list	*t3;
+	//t_list	*t3;
 	char	**args;
 	t_file	*file;
+	t_file	*file1;
 	int len;
 	
+	file = malloc(sizeof(t_file));
 	len = 2;
 	args = malloc(sizeof(char *) * len);
 	args[0] = "echo";
 	args[1] = "hello";
-	t1 = new_node(NULL, NULL, args, NULL);
-	args = malloc(sizeof(char *) * len);
-	args[0] = "cat";
-	args[1] = "file";
-	t2 = new_node(NULL, NULL, args, NULL);
-	len = 1;
-	file = malloc(sizeof(t_file));
 	file->type = TOKEN_OUT;
 	file->name = "f1";
+	t1 = new_node(NULL, NULL, args, file);
+	file1 = malloc(sizeof(t_file));
 	args = malloc(sizeof(char *) * len);
-	args[0] = "wc";
-	t3 = new_node(NULL, NULL, args, file);
+	args[0] = "cat";
+	args[1] = "f1";
+	file1->type = TOKEN_OUT;
+	file1->name = "f3";
+	t2 = new_node(NULL, NULL, args, file1);
+	// len = 1;
+	// file->type = TOKEN_OUT;
+	// file->name = "f3";
+	// args = malloc(sizeof(char *) * len);
+	// args[0] = "wc";
+	// t3 = new_node(NULL, NULL, args, file);
 	t1->next = t2;
-	t2->next = t3;
+	//t2->next = t3;
 	return (t1);
 }
 
