@@ -6,15 +6,15 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/29 23:25:02 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/30 13:22:31 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_list *conv_token_to_list(token_t *token, lexer_t *lexer)
+t_list	*conv_token_to_list(token_t *token, lexer_t *lexer)
 {
-	t_list *head;
+	t_list	*head;
 
 	head = NULL;
 	while ((token = lexer_get_next_token(lexer)) != (void *)0)
@@ -24,7 +24,7 @@ t_list *conv_token_to_list(token_t *token, lexer_t *lexer)
 	return (head);
 }
 
-int main(int argc, char *argv[], char *env[])
+int	main(int argc, char *argv[], char *env[])
 {
 	char	*inpt;
 	t_list	*list;

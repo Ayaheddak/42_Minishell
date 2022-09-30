@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:03:31 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/29 22:05:38 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/30 11:47:40 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char	*get_right_path_utils(t_path *corr_path, char *cmd, t_env *env)
 			return (corr_path->path);
 		free(corr_path->split[corr_path->j]);
 		corr_path->j++;
-		
 	}
 	return (NULL);
 }

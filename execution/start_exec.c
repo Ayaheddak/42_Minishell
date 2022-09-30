@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:41:04 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/29 22:06:17 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/30 12:49:07 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,26 @@ void	ft_error(char *str)
 	exit(0);
 }
 
-void	start_execution(t_list *exec_list, t_env *env)
+t_exec	*init_args(t_list *exec_list)
 {
 	t_exec	*exec;
-	int	i;
 
 	exec = malloc(sizeof(t_exec));
 	exec->nb_cmd = get_size(exec_list);
-	i = 0;
 	exec->fd_pipe = malloc(sizeof(int) * (exec->nb_cmd - 1) * 2);
 	exec->child_pid = malloc(sizeof(int) * exec->nb_cmd);
 	exec->infile = -1;
 	exec->out_file = -1;
+	return (exec);
+}
+
+void	start_execution(t_list *exec_list, t_env *env)
+{
+	t_exec	*exec;
+	int		i;
+
+	i = 0;
+	exec = init_args(exec_list);
 	while (i < exec->nb_cmd - 1)
 	{	
 		if (pipe(exec->fd_pipe + 2 * i) == -1)

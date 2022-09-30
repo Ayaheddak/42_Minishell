@@ -1,19 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   env_handling.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 19:51:32 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/29 20:26:49 by het-tale         ###   ########.fr       */
+/*   Created: 2022/09/30 12:58:24 by het-tale          #+#    #+#             */
+/*   Updated: 2022/09/30 12:58:43 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-#ifndef ENV_H
-# define ENV_H
+#ifndef ENV_HANDLING_H
+# define ENV_HANDLING_H
 
 typedef struct s_env	t_env;
 

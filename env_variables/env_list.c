@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:56:10 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/29 20:30:22 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/30 12:51:14 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_env	*get_env_list(char *env[])
 	head = NULL;
 	while (env[i])
 	{
-		split = ft_split(env[i],'=');
+		split = ft_split(env[i], '=');
 		add_back_env(&head, create_node(split[0], split[1]));
 		i++;
 	}
