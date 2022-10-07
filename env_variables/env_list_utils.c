@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 20:00:30 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/30 12:51:41 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:33:55 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	add_front_env(t_env **env_head, t_env *new)
 
 int	get_list_len(t_env	*list)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (list != NULL)

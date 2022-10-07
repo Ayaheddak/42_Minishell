@@ -1,172 +1,144 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   parser.c                                           :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2022/09/20 11:30:59 by aheddak           #+#    #+#             */
-// /*   Updated: 2022/09/29 22:09:06 by het-tale         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/30 20:30:20 by aheddak           #+#    #+#             */
+/*   Updated: 2022/10/07 00:16:44 by aheddak          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// #include "../includes/minishell.h"
+#include "../includes/minishell.h"
 
-// void add_back_cmd(t_cmd **lst, t_cmd *new)
-// {
-// 	t_cmd *tmp;
-
-// 	tmp = *lst;
-// 	if (tmp == NULL)
-// 		*lst = new;
-// 	else
-// 	{
-// 		while(tmp->next != NULL)
-// 			tmp = tmp->next;
-// 		tmp->next = new;
-// 	}
-// }
-
-// void add_back_redir(t_redir **lst, t_redir *new)
-// {
-// 	t_redir *tmp;
-
-// 	tmp = *lst;
-// 	if (tmp == NULL)
-// 		*lst = new;
-// 	else
-// 	{
-// 		while(tmp->next != NULL)
-// 			tmp = tmp->next;
-// 		tmp->next = new;
-// 	}
-// }
-// void add_back_exec(t_exec **lst, t_exec *new)
-// {
-// 	t_exec *tmp;
-
-// 	tmp = *lst;
-// 	if (tmp == NULL)
-// 		*lst = new;
-// 	else
-// 	{
-// 		while(tmp->next != NULL)
-// 			tmp = tmp->next;
-// 		tmp->next = new;
-// 	}
-// }
-// void print_list_parser(t_exec *list)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (list != NULL)
-// 	{
-// 		printf("------------- Node numbre %d  = -------------\n" , i);
-// 		// printf("ur id = %d\n",*(int*)list->cmd);
-// 		// printf("ur value = %s\n", (char*)list->redir);
-// 		printf("ur cmd = %s\n",(void *)list->cmd);
-// 		printf("ur redir = %s\n", (void*)list->redir);
-// 		i++;
-// 		list = list->next;
-// 	}
-// }
-// void print_cmd(t_cmd *list)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (list != NULL)
-// 	{
-// 	printf("bef\n");
-// 		printf("------------- Node numbre %d  = -------------\n" , i);
-// 		printf("ur value = %s\n",list->cmd);
-// 		//printf("ur value = %s\n", (char*)list->data);
-// 		i++;
-// 		list = list->next;
-// 	}
-// }
-// int search(t_list *list, int id)
-// {
-// 	t_list *tmp;
+int is_redir(t_token *token)
+{
+	if (token->type == TOKEN_APPEND || token->type == TOKEN_DELIMITER
+		|| token->type == TOKEN_IN || token->type == TOKEN_OUT)
+		return (token->type);
+	return (0);
+}
+int is_op(t_token *token)
+{
+	if (is_redir(token) != 0)
+		return (1);
+	else if (token->type == TOKEN_PIPE)
+		return (2);
+	return (0);
+}
+void *check_parse_errors(t_token *head)
+{
+	t_token *token;
+	int i;
 	
-// 	tmp = list;
-//     while (tmp != NULL) 
-// 	{
-//         if (*(int *)tmp->id == id)
-//             return (1);
-//         tmp = tmp->next;
-//     }
-//     return (0);
-// }
+	i = 0;
+	token = head;
+	while (token != NULL)
+	{
+		if ((i == 0 && is_op(token) == 2)
+		|| (token->next == NULL && is_op(token) > 0))
+			return (ft_errer(2));
+		else if (is_op(token) == 1 && is_op(token->next) > 0)
+			return (ft_errer(2));
+		else if (is_op(token) == 2 && is_op(token->next) == 2)
+			return (ft_errer(2));
+		i++;
+		token = token->next;
+	}
+	return (void *)0;
+}
 
-// void parser(t_list *list)
-// {
-// 	t_list *tmp;
-// 	t_exec *exec;
+t_exec *alocate_exec(void)
+{
+	t_exec *exec;
+	
+	exec = malloc(sizeof(t_exec));
+	exec->args = NULL;
+	exec->next = NULL;
+	exec->redir = NULL;
+	return (exec);
+}
+//realloc function is used to resize a block of memory that was previously allocated.
+int len_of_array(char **args)
+{
+    int i = 0;
 
-// 	exec = malloc(sizeof(t_exec));
-// 	exec->cmd =  NULL;
-// 	exec->redir = NULL;
-// 	tmp = list;
-// 	//while (tmp != NULL)
-// 	//{
-// 		while(tmp != NULL)// && *(int *)tmp->id != TOKEN_PIPE)
-// 		{
-// 		printf("node --> %s\n", tmp->data);
-// 		if (*(int *)tmp->id == TOKEN_PIPE)
-// 		{
-// 			printf("exit pipe\n");
-// 			break;
-// 		}
-// 		if (*(int *)tmp->id == TOKEN_IN)
-// 		{
-// 			tmp = tmp->next;
-// 			t_redir *newnode = (t_redir *)malloc(sizeof(t_redir));
-// 			newnode->type = TOKEN_IN;
-// 			newnode->file = tmp->data;
-// 			newnode->next = NULL;
-// 			add_back_redir(&exec->redir, newnode);
-// 		}
-// 		else if (*(int *)tmp->id == TOKEN_OUT)
-// 		{
-// 			tmp = tmp->next;
-// 			t_redir *newnode = (t_redir *)malloc(sizeof(t_redir));
-// 			newnode->type = TOKEN_OUT;
-// 			newnode->file = tmp->data;
-// 			newnode->next = NULL;
-// 			add_back_redir(&exec->redir, newnode);
-// 		}
-// 		else if (*(int *)tmp->id == TOKEN_APPEND)
-// 		{
-// 			tmp = tmp->next;
-// 			t_redir *newnode = (t_redir *)malloc(sizeof(t_redir));
-// 			newnode->type = TOKEN_APPEND;
-// 			newnode->file = tmp->data;
-// 			newnode->next = NULL;
-// 			add_back_redir(&exec->redir, newnode);
-// 		}
-// 		else if (*(int *)tmp->id == TOKEN_DELIMITER)
-// 		{
-// 			tmp = tmp->next;
-// 			t_redir *newnode = (t_redir *)malloc(sizeof(t_redir));
-// 			newnode->type = TOKEN_DELIMITER;
-// 			newnode->file = tmp->data;
-// 			newnode->next = NULL;
-// 			add_back_redir(&exec->redir, newnode);
-// 		}
-// 		else if (*(int *)tmp->id == TOKEN_STRING)
-// 		{
-// 			t_cmd *newnode = (t_cmd *)malloc(sizeof(t_cmd));
-// 			newnode->cmd = tmp->data;
-// 			newnode->next = NULL;
-// 			add_back_cmd(&exec->cmd, newnode);
-// 		}
-// 		tmp = tmp->next;
-// 	}
-// 	// if (tmp == NULL)
-// 	// 	break;
-// 	// tmp = tmp->next;
-// 	// exec =  exec->next;
-// 	//}
-// }
+    if (args)
+    {
+        while(*args)
+        {
+            i++;
+           args++;
+        }
+    }
+    return (i);
+}
+char **ft_realloc(char **args, char *str)
+{
+	int i;
+	int len;
+	char **res;
+
+	i = 0;
+	len = len_of_array(args);
+	res = (char **)malloc(sizeof(char *) * (len + 2));
+	if(!res)
+		return NULL;
+	while(i < len)
+	{
+		res[i] = args[i];
+		i++;
+	}
+	free(args);
+	res[i] = ft_strdup(str);
+	i++;
+	res[i]= NULL;
+	return (res);
+}
+
+t_exec *parser(t_token *head)
+{
+	t_token *token;
+	t_exec *exec;
+
+	check_parse_errors(head);
+	token = head;
+	exec = alocate_exec();
+	while(token)
+	{
+		if (token == NULL)
+		{
+			exec->next = NULL;
+			break;
+		}
+		if (token->type == TOKEN_PIPE)
+		{
+			exec->next = parser(token->next);
+			break;
+		}
+		if (token->type == TOKEN_STRING)
+			exec->args = ft_realloc(exec->args,token->value);
+		if (is_redir(token) != 0)
+		{
+			addredirection(&exec->redir,is_redir(token),token->next->value);
+			token = token->next;
+		}
+		token = token->next;
+	}
+	//print_redir(exec->redir);
+	return exec;
+}
+
+void	free_exec(t_exec *exec)
+{
+	t_exec	*tmp;
+
+	while (exec != NULL)
+	{
+		tmp = exec;
+		exec = exec->next;
+		free (tmp);
+	}
+	free (exec);
+}

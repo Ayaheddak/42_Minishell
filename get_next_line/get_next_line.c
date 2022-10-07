@@ -6,34 +6,34 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:45:44 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/29 23:34:13 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:45:54 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_strchrr(char *s, int c)
-{
-	size_t	i;
+// int	ft_strchr(char *s, int c)
+// {
+// 	size_t	i;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-	{
-		if (s[i] == (char )c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	if (!s)
+// 		return (0);
+// 	while (s[i])
+// 	{
+// 		if (s[i] == (char )c)
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 char	*ft_read(int *rb, char *temp, char *buf, int fd)
 {
 	int	k;
 
 	k = *rb;
-	while (k > 0 && !ft_strchrr(buf, '\n'))
+	while (k > 0 && !ft_strchr(buf, '\n'))
 	{
 		k = read(fd, temp, BUFFER_SIZE);
 		if (k < 0)

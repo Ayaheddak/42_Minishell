@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:03:47 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/20 10:54:31 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/19 22:13:43 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	is_valid_arg(char *str)
 		if (!((str[i] >= '0' && str[i] <= '9') || (str[i] >= 'a' && str[i] <= 'z')
 			|| (str[i] >= 'A' && str[i] <= 'Z') || (str[i] == '_') || (str[i] == '=')))
 		{
-			printf("dkhli dkhli chy hja m9ada hdchy madayzch !(I miss u btw ;))\n");//yalah hayd elia mn hna ,i miss u moree !!
+			printf("dkhli dkhli chy hja m9ada hdchy madayzch !(I miss u btw ;))\n");
 			return (0);
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_dir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:29:48 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/20 10:53:24 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/09/19 21:54:10 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_change_dir(t_list *list, t_list *env_list)
 	else if (temp)
 	{
 		if (!ft_strncmp(temp->data, ".", ft_strlen(temp->data)) || !ft_strncmp(temp->data, "..", ft_strlen(temp->data)))
-			printf("Dear programmer we accept either absolute or relative paths ok?\n");// wlah mateaseeb azayn '_'
+			printf("Dear programmer we accept either absolute or relative paths ok?\n");
 		else
 		{
 			change = chdir(temp->data);

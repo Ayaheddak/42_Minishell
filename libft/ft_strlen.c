@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 11:08:40 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/17 13:04:22 by het-tale         ###   ########.fr       */
+/*   Created: 2021/11/02 12:15:14 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/23 22:22:40 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen(const char *s)
 {
-	size_t	count;
+	size_t	i;
 
-	count = 0;
-	while (str[count] != '\0')
-		count++;
-	return (count);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

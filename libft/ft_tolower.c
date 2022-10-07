@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   a.c                                                :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 04:35:13 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/22 02:07:38 by aheddak          ###   ########.fr       */
+/*   Created: 2021/11/03 14:33:26 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/23 22:22:11 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/minishell.h"
 
-#include <stdio.h>
-
-int main(int argc, char **argv)
+int	ft_tolower(int c)
 {
-	int i = 0;
-	while(argv[i])
-	{
-		printf("%s\n", argv[i]);
-		i++;
-	}
+	if (c >= 65 && c <= 90)
+		c += 32;
+	return (c);
 }

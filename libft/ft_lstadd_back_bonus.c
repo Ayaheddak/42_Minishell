@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 23:03:44 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/23 22:22:19 by aheddak          ###   ########.fr       */
+/*   Created: 2021/11/20 12:16:56 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/30 20:04:42 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+void ft_lstadd_back(t_list **alst, t_list *new)
 {
-	int			i;
-	int			len;
+	t_list *tmp;
 
-	if (!s1 || !set)
-		return (NULL);
-	len = ft_strlen(s1);
-	i = 0;
-	while (ft_strchr(set, s1[i]))
+	if (!(*alst))
 	{
-		i++;
-		if (i > len)
-			break ;
+		*alst = new;
+		return ;
 	}
-	while (ft_strchr(set, s1[len - 1]))
-	{
-		len--;
-		if (len == 0)
-			break ;
-	}
-	if (len < i)
-		return (ft_strdup(""));
-	return (ft_substr(s1, i, len - i));
+	tmp = *alst;
+	while(tmp->next)
+		tmp  = tmp->next;
+	tmp->next = new;
 }

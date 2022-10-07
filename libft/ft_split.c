@@ -5,40 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 08:23:07 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/18 04:35:06 by aheddak          ###   ########.fr       */
+/*   Created: 2021/11/18 11:35:29 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/23 22:23:06 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	count_words(char const *s, char c)
+static int	ft_count_parts(char const *str, char sep)
 {
-	int	count;
 	int	i;
+	int	count;
 
-	count = 0;
 	i = 0;
-	while (s[i])
+	count = 1;
+	if (*str == '\0')
+		return (0);
+	while (str[i] == sep)
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	while (str[i])
 	{
-		while (s[i] && s[i] == c)
-			i++;
-		if (s[i] && s[i] != c)
+		if (str[i] == sep && str[i + 1] != sep && str[i + 1] != '\0')
 			count++;
-		while (s[i] && s[i] != c)
-			i++;
+		i++;
 	}
 	return (count);
 }
 
 static	int	word_length(char const *s, char c)
 {
-	int	l;
+	int	i;
 
-	l = 0;
-	while (s[l] && s[l] != c)
-		l++;
-	return (l);
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	return (i);
 }
 
 static	char	**ft_free(int j, char **str)
@@ -86,7 +89,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (0);
-	count = count_words(s, c);
+	count = ft_count_parts(s, c);
 	str = (char **)malloc((count + 1) * sizeof(char *));
 	if (!str)
 		return (0);
