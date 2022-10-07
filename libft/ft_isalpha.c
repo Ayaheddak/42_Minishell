@@ -1,39 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 23:03:44 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/23 22:22:19 by aheddak          ###   ########.fr       */
+/*   Created: 2021/11/02 09:18:19 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/23 22:24:12 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+int	ft_isalpha(int c)
 {
-	int			i;
-	int			len;
-
-	if (!s1 || !set)
-		return (NULL);
-	len = ft_strlen(s1);
-	i = 0;
-	while (ft_strchr(set, s1[i]))
-	{
-		i++;
-		if (i > len)
-			break ;
-	}
-	while (ft_strchr(set, s1[len - 1]))
-	{
-		len--;
-		if (len == 0)
-			break ;
-	}
-	if (len < i)
-		return (ft_strdup(""));
-	return (ft_substr(s1, i, len - i));
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	return (0);
 }

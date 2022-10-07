@@ -3,141 +3,97 @@
 /*                                                        :::      ::::::::   */
 /*   utils_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/29 19:46:53 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/06 23:39:58 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_list	*addnode(void *id, void *data)
-{
-	t_list	*newnode;
-
-	newnode = (t_list *)malloc(sizeof(t_list));
-	if (!newnode)
-		return (NULL);
-	newnode->data = data;
-	newnode->id = id;
-	newnode->next = NULL;
-	return (newnode);
-}
-
-t_list	*new_node(void *id, void *data, char **args, t_file *file)
-{
-	t_list	*newnode;
-
-	newnode = (t_list *)malloc(sizeof(t_list));
-	if (!newnode)
-		return (NULL);
-	newnode->data = data;
-	newnode->id = id;
-	newnode->args = args;
-	newnode->file = file;
-	newnode->next = NULL;
-	return (newnode);
-}
-
-void add_back(t_list **lst, t_list *new)
-{
-	t_list *tmp;
-
-	tmp = *lst;
-	if (tmp == NULL)
-		*lst = new;
-	else
-	{
-		while(tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
-}
-
-void print_list(t_list *list)
-{
-	int i;
-
-	i = 0;
-	while (list != NULL)
-	{
-		printf("------------- Node numbre %d  = -------------\n" , i);
-		printf("ur id = %s\n",(char *)list->id);
-		printf("ur value = %s\n", (char*)list->data);
-		i++;
-		list = list->next;
-	}
-}
-
-void add_front(t_list **lst, t_list *new)
-{
-	new->next=*lst;
-	*lst = new;
-}
-
-int get_size(t_list *lst)
-{
-	int i;
-
-	i = 0;
-	while (lst)
-	{
-		i++;
-		lst = lst->next;
-	}
-	return (i);
-}
-
-t_list  *get_list(void)
-{
-	t_list	*t1;
-	t_list	*t2;
-	//t_list	*t3;
-	char	**args;
-	t_file	*file;
-	t_file	*file1;
-	int len;
-	
-	file = malloc(sizeof(t_file));
-	len = 2;
-	args = malloc(sizeof(char *) * len);
-	args[0] = "echo";
-	args[1] = "hello";
-	file->type = TOKEN_OUT;
-	file->name = "f1";
-	t1 = new_node(NULL, NULL, args, file);
-	file1 = malloc(sizeof(t_file));
-	args = malloc(sizeof(char *) * len);
-	args[0] = "cat";
-	args[1] = "f1";
-	file1->type = TOKEN_OUT;
-	file1->name = "f3";
-	t2 = new_node(NULL, NULL, args, file1);
-	// len = 1;
-	// file->type = TOKEN_OUT;
-	// file->name = "f3";
-	// args = malloc(sizeof(char *) * len);
-	// args[0] = "wc";
-	// t3 = new_node(NULL, NULL, args, file);
-	t1->next = t2;
-	//t2->next = t3;
-	return (t1);
-}
-
-t_list	*get_env(char *env[])
+char	*freejoin(char *s1, char *s2)
 {
 	int		i;
-	char	**split;
-	t_list	*head;
+	int		j;
+	char	*rest;
+	size_t	count;
 
 	i = 0;
-	head = NULL;
-	while (env[i])
-	{
-		split = ft_split(env[i],'=');
-		add_back(&head, addnode(split[0], split[1]));
-		i++;
-	}
-	return (head);
+	j = 0;
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (s1);
+	count = ft_strlen(s1) + ft_strlen(s2) + 1;
+	rest = (char *)malloc(sizeof(char) * count);
+	if (!rest)
+		return (NULL);
+	while (s1[i] != '\0')
+		rest[j++] = s1[i++];
+	i = 0;
+	while (s2[i] != '\0')
+		rest[j++] = s2[i++];
+	rest[j] = '\0';
+	free(s1);
+	free(s2);
+	return (rest);
 }
+
+void addback(t_token **head, void *value, void *type)
+{
+    t_token *new;
+	t_token *temp;
+
+	new = malloc(sizeof(t_token));
+    new->value = value;
+	new->type = *(int *)type;
+    new->next = NULL;
+    if(*head == NULL)
+	{
+        *head = new;
+        return;
+    }
+	temp = *head;
+    while(temp->next != NULL)
+        temp = temp->next;
+    temp->next = new;
+}
+
+void	addredirection(t_redir **head, int type, char *file)
+{
+	t_redir *tmp;
+	t_redir *new;
+
+	new = malloc(sizeof(t_redir));
+	new->name = file;
+	new->type = type;
+	new->next = NULL;
+	if (*head == NULL)
+	{
+		*head = new;
+		return ;
+	}
+	tmp = *head;
+	while(tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
+}
+
+void print_redir(t_redir *redir)
+{
+	int i;
+	
+	i = 0;
+    while(redir != NULL)
+    {
+		printf("------------- Node numbre %d  = -------------\n" , i);
+        printf("ur name of file = %s\n", redir->name);
+		printf("ur type = %d\n",redir->type); 
+		redir = redir->next;
+		i++;
+    }
+}
+

@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 23:03:44 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/23 22:22:19 by aheddak          ###   ########.fr       */
+/*   Created: 2021/11/16 00:38:40 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/23 22:23:13 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int			i;
-	int			len;
+	char			c;
+	unsigned int	a;
 
-	if (!s1 || !set)
-		return (NULL);
-	len = ft_strlen(s1);
-	i = 0;
-	while (ft_strchr(set, s1[i]))
+	if (n < 0)
 	{
-		i++;
-		if (i > len)
-			break ;
+		a = (unsigned int ) -n;
+		write (fd, "-", 1);
 	}
-	while (ft_strchr(set, s1[len - 1]))
+	else
+		a = (unsigned int) n;
+	if (a >= 10)
 	{
-		len--;
-		if (len == 0)
-			break ;
+		c = (a % 10) + '0';
+		ft_putnbr_fd(a / 10, fd);
+		write (fd, &c, 1);
 	}
-	if (len < i)
-		return (ft_strdup(""));
-	return (ft_substr(s1, i, len - i));
+	if (a < 10)
+	{
+		c = a + '0';
+		write (fd, &c, 1);
+	}
 }

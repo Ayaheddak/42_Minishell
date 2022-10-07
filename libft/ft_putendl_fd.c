@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 23:03:44 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/23 22:22:19 by aheddak          ###   ########.fr       */
+/*   Created: 2021/11/12 01:56:47 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/23 22:23:15 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+void	ft_putendl_fd(char *s, int fd)
 {
-	int			i;
-	int			len;
+	int	i;
 
-	if (!s1 || !set)
-		return (NULL);
-	len = ft_strlen(s1);
 	i = 0;
-	while (ft_strchr(set, s1[i]))
+	if (s == NULL)
+		return ;
+	while (s[i])
 	{
+		write(fd, &s[i], 1);
 		i++;
-		if (i > len)
-			break ;
 	}
-	while (ft_strchr(set, s1[len - 1]))
-	{
-		len--;
-		if (len == 0)
-			break ;
-	}
-	if (len < i)
-		return (ft_strdup(""));
-	return (ft_substr(s1, i, len - i));
+	write(fd, "\n", 1);
 }

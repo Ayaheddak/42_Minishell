@@ -1,39 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 23:03:44 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/23 22:22:19 by aheddak          ###   ########.fr       */
+/*   Created: 2021/11/03 14:14:27 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/23 22:22:07 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+int	ft_toupper(int c)
 {
-	int			i;
-	int			len;
-
-	if (!s1 || !set)
-		return (NULL);
-	len = ft_strlen(s1);
-	i = 0;
-	while (ft_strchr(set, s1[i]))
-	{
-		i++;
-		if (i > len)
-			break ;
-	}
-	while (ft_strchr(set, s1[len - 1]))
-	{
-		len--;
-		if (len == 0)
-			break ;
-	}
-	if (len < i)
-		return (ft_strdup(""));
-	return (ft_substr(s1, i, len - i));
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
+	return (c);
 }

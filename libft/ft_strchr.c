@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 14:17:50 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/17 13:04:22 by het-tale         ###   ########.fr       */
+/*   Created: 2021/11/03 14:42:59 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/23 22:23:03 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (s[i])
 	{
-		if (str[i] == (char)c)
-			return ((char *)(str + i));
+		if (s[i] == (char)c)
+			return ((char *)s + i);
 		i++;
 	}
 	if (c == '\0')
-		return ((char *)(str + i));
+		return ((char *)s + i);
 	return (NULL);
 }

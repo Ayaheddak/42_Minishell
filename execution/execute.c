@@ -6,13 +6,13 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:03:31 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/29 20:44:25 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/07 20:58:38 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	execute_command(t_exec *exec, char **cmd, t_env *env)
+void	execute_command(t_execute *exec, char **cmd, t_env *env)
 {
 	char	*right_path;
 	char	**str_env;

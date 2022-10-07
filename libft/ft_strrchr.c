@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 23:03:44 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/23 22:22:19 by aheddak          ###   ########.fr       */
+/*   Created: 2021/11/04 11:07:19 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/23 22:22:24 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strrchr(const char *s, int c)
 {
-	int			i;
-	int			len;
+	int	i;
 
-	if (!s1 || !set)
-		return (NULL);
-	len = ft_strlen(s1);
 	i = 0;
-	while (ft_strchr(set, s1[i]))
-	{
+	while (s[i])
 		i++;
-		if (i > len)
-			break ;
-	}
-	while (ft_strchr(set, s1[len - 1]))
+	while (i >= 0)
 	{
-		len--;
-		if (len == 0)
-			break ;
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i--;
 	}
-	if (len < i)
-		return (ft_strdup(""));
-	return (ft_substr(s1, i, len - i));
+	return (NULL);
 }

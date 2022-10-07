@@ -6,13 +6,13 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:05:25 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/29 21:28:25 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/07 21:10:39 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	close_pipes(t_exec *exec, int n)
+void	close_pipes(t_execute *exec, int n)
 {
 	int	j;
 
@@ -26,7 +26,7 @@ void	close_pipes(t_exec *exec, int n)
 	}
 }
 
-void	close_and_free(t_exec exec, int n)
+void	close_and_free(t_execute exec, int n)
 {
 	int	i;
 

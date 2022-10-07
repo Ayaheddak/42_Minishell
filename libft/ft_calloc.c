@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 23:03:44 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/23 22:22:19 by aheddak          ###   ########.fr       */
+/*   Created: 2021/11/10 20:20:08 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/23 22:24:18 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int			i;
-	int			len;
+	char	*p;
+	size_t	i;
 
-	if (!s1 || !set)
-		return (NULL);
-	len = ft_strlen(s1);
 	i = 0;
-	while (ft_strchr(set, s1[i]))
-	{
-		i++;
-		if (i > len)
-			break ;
-	}
-	while (ft_strchr(set, s1[len - 1]))
-	{
-		len--;
-		if (len == 0)
-			break ;
-	}
-	if (len < i)
-		return (ft_strdup(""));
-	return (ft_substr(s1, i, len - i));
+	p = malloc(size * count);
+	if (p == 0)
+		return (NULL);
+	return (ft_memset(p, 0, count * size));
 }

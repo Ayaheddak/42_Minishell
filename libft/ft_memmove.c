@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 23:03:44 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/23 22:22:19 by aheddak          ###   ########.fr       */
+/*   Created: 2021/11/18 09:14:58 by aheddak           #+#    #+#             */
+/*   Updated: 2022/09/23 22:23:24 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int			i;
-	int			len;
+	int	i;
 
-	if (!s1 || !set)
+	i = len - 1;
+	if (!dst && !src)
 		return (NULL);
-	len = ft_strlen(s1);
-	i = 0;
-	while (ft_strchr(set, s1[i]))
+	if (src < dst)
 	{
-		i++;
-		if (i > len)
-			break ;
+		while (i >= 0)
+		{
+			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+			i--;
+		}
 	}
-	while (ft_strchr(set, s1[len - 1]))
-	{
-		len--;
-		if (len == 0)
-			break ;
-	}
-	if (len < i)
-		return (ft_strdup(""));
-	return (ft_substr(s1, i, len - i));
+	else
+		ft_memcpy(dst, src, len);
+	return (dst);
 }
