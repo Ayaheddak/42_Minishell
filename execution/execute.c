@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:03:31 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/08 14:00:44 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/08 23:29:43 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	execute_command(t_execute *exec, char **cmd, t_env *env)
 	char	*right_path;
 	char	**str_env;
 
-	if (dup2(exec->input, 0) == -1)
+	if (exec->input != 0 && dup2(exec->input, 0) == -1)
 		ft_error("Redirecting input error");
-	if (dup2(exec->output, 1) == -1)
+	if (exec->output != 1 && dup2(exec->output, 1) == -1)
 		ft_error("Redirecting output error");
 	right_path = check_command(cmd[0], env);
 	str_env = get_env_array(env);

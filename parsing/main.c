@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/08 16:54:20 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/08 23:33:02 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,40 @@ void	ft_traverse_redir(t_redir *red)
 	}
 }
 
+void	ft_traverse_exec(t_exec *exec)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (exec)
+	{
+		i = 0;
+		printf("-------arguments of %d node ----\n", j + 1);
+		while (exec->args[i])
+		{
+			printf("arg number %d: %s\n", i, exec->args[i]);
+			i++;
+		}
+		while (exec->redir)
+		{
+			printf("------Redirections of %d node----\n", j + 1);
+			printf("The redirection type: %d,\nThe redirection value: %s\n", exec->redir->type, exec->redir->name);
+			exec->redir = exec->redir->next;
+		}
+		j++;
+		exec = exec->next;
+	}
+}
+
 int main(int argc, char *argv[], char *env[])
 {
 	char	*inpt;
 	t_token *token;
-	//t_env	*env_list;
+	t_env	*env_list;
 	//t_exec	*exec_l;
+	pid_t pid;
+	int	status;
 	
 	(void)argc;
 	(void)argv;
@@ -42,8 +70,7 @@ int main(int argc, char *argv[], char *env[])
 		g_global.exec = parser(token);
 		// ft_traverse_redir(g_global.exec->redir);
 		//exec_l = get_list();
-		//env_list = get_env_list(env);
-		//start_execution(exec_l, env_list);
+		env_list = get_env_list(env);
 		if (g_global.errorlexer == 1)
 		{
 			free_tokenizer(token);
@@ -57,7 +84,13 @@ int main(int argc, char *argv[], char *env[])
 			g_global.errorparser = 0;
 			continue ;
 		}
+		pid = fork();
+		if (!pid)
+			start_execution(g_global.exec, env_list);
+		waitpid(pid, &status, 0);
+		//printf("here\n");
 		// print_redir(g_global.exec->redir);
+		// ft_traverse_exec(g_global.exec);
 		// system("leaks minishell");
 	}
 	return (0);
