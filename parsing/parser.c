@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 20:30:20 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/08 11:40:14 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:39:26 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,35 @@ int is_redir(t_token *token)
 }
 int is_op(t_token *token)
 {
+	if (!token)
+		return (0);
 	if (is_redir(token) != 0)
 		return (1);
 	else if (token->type == TOKEN_PIPE)
 		return (2);
 	return (0);
 }
+// void *check_parse_errors(t_token *head)
+// {
+// 	t_token *token;
+// 	int i;
+	
+// 	i = 0;
+// 	token = head;
+// 	while (token != NULL)
+// 	{
+// 		if ((i == 0 && is_op(token) == 2)
+// 		|| (token->next == NULL && is_op(token) > 0))
+// 			return (ft_errer(2));
+// 		else if (is_op(token) == 1 && is_op(token->next) > 0)
+// 			return (ft_errer(2));
+// 		else if (is_op(token) == 2 && is_op(token->next) == 2)
+// 			return (ft_errer(2));
+// 		i++;
+// 		token = token->next;
+// 	}
+// 	return (void *)0;
+// }
 void *check_parse_errors(t_token *head)
 {
 	t_token *token;
@@ -37,7 +60,7 @@ void *check_parse_errors(t_token *head)
 	while (token != NULL)
 	{
 		if ((i == 0 && is_op(token) == 2)
-		|| (token->next == NULL && is_op(token) > 0))
+		|| (token->next == NULL  && is_op(token) > 0))
 			return (ft_errer(2));
 		else if (is_op(token) == 1 && is_op(token->next) > 0)
 			return (ft_errer(2));
@@ -48,6 +71,7 @@ void *check_parse_errors(t_token *head)
 	}
 	return (void *)0;
 }
+
 
 t_exec *alocate_exec(void)
 {
@@ -66,11 +90,8 @@ int len_of_array(char **args)
 
     if (args)
     {
-        while(*args)
-        {
+        while(args[i])
             i++;
-           args++;
-        }
     }
     return (i);
 }
@@ -115,20 +136,18 @@ t_exec *parser(t_token *head)
 		if (token->type == TOKEN_PIPE)
 		{
 			exec->next = parser(token->next);
-			//break;
+			break;
 		}
 		if (token->type == TOKEN_STRING)
 			exec->args = ft_realloc(exec->args,token->value);
-		if (is_redir(token) != 0)
+		if (is_redir(token) != 0 && token->next)
 		{
-			if (token->type == TOKEN_OUT && token->next->type == TOKEN_IN)
-				break ;	
 			addredirection(&exec->redir,is_redir(token),token->next->value);
 			token = token->next;
 		}
-		token = token->next;
+		if (token)
+			token = token->next;
 	}
-	//print_redir(exec->redir);
 	return exec;
 }
 
