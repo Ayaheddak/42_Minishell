@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 20:30:20 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/07 00:16:44 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/08 11:40:14 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,14 @@ t_exec *parser(t_token *head)
 		if (token->type == TOKEN_PIPE)
 		{
 			exec->next = parser(token->next);
-			break;
+			//break;
 		}
 		if (token->type == TOKEN_STRING)
 			exec->args = ft_realloc(exec->args,token->value);
 		if (is_redir(token) != 0)
 		{
+			if (token->type == TOKEN_OUT && token->next->type == TOKEN_IN)
+				break ;	
 			addredirection(&exec->redir,is_redir(token),token->next->value);
 			token = token->next;
 		}

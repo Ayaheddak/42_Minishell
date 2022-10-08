@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:03:31 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/07 20:58:38 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/08 14:00:44 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	execute_command(t_execute *exec, char **cmd, t_env *env)
 	right_path = check_command(cmd[0], env);
 	str_env = get_env_array(env);
 	if (!right_path)
-		exit(1);
+		ft_error("Error command");
 	execve(right_path, cmd, str_env);
-	free(str_env);
+	close(exec->output);
+	//free(str_env);
 }
 
 char	*get_right_path_utils(t_path *corr_path, char *cmd, t_env *env)
@@ -40,7 +41,7 @@ char	*get_right_path_utils(t_path *corr_path, char *cmd, t_env *env)
 		corr_path->path = ft_strjoin(corr_path->path, cmd);
 		if (access(corr_path->path, F_OK) == 0)
 			return (corr_path->path);
-		free(corr_path->split[corr_path->j]);
+		//free(corr_path->split[corr_path->j]);
 		corr_path->j++;
 		
 	}

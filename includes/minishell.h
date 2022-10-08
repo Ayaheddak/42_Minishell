@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/07 21:09:51 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/08 14:15:45 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,20 @@ char    *extract_after_line(char *str);
 char    *ft_read(int *rb, char *temp, char *buf, int fd);
 char    *ft_cpy(char *str, int *i, int *j);
 void    skip_line(char *str, int *j);
+
+/*--------------------Check commands------------*/
+char	*check_command(char *cmd, t_env *env);
+char	*get_right_path(t_env *env, char *cmd);
+char	*get_right_path_utils(t_path *corr_path, char *cmd, t_env *env);
+void	execute_command(t_execute *exec, char **cmd, t_env *env);
+/*--------------------create children---------------*/
+void	start_execution(t_exec *exec_list, t_env *env);
+void	input_output(int i, t_execute *exec, t_exec *exec_list);
+void	ft_error(char *str);
+void	close_pipes(t_execute *exec, int n);
+void	close_and_free(t_execute exec, int n);
+void    file_exist(int  *d, t_execute *exec, t_exec *exec_list);
+int		get_size(t_exec *lst);
+
+t_exec	*get_list(void);
 #endif
