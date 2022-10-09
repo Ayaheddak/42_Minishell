@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 22:31:46 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 22:43:13 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,4 +134,5 @@ t_env	*change_pwd(t_env *env_list, char *key);
 int		ft_change_dir(char **args, t_env *env);
 int		ft_env(t_env *env, char **args, t_execute *exec);
 char	*join_key_value(char *key, char *value);
+int		ft_pwd(char **args, t_env *env, t_execute *exec);
 #endif

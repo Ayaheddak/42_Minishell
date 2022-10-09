@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 20:00:30 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 22:33:07 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 22:48:02 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	*get_env_value(t_env *env, char *key)
 	{
 		if (!ft_strcmp(env->key, key))
 			return (env->value);
+		env = env->next;
 	}
 	return (NULL);
 }
