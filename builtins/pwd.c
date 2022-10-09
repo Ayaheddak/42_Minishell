@@ -6,37 +6,23 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:47:09 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/19 21:44:45 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 22:37:00 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_pwd(t_list *env_list, t_list *head)
+int	ft_pwd(char **args, t_env *env, t_execute *exec)
 {
-	t_list	*temp;
-	char	*str;
-	t_list	*tmp;
+	char	*value;
 
-	temp = env_list;
-	tmp = head->next;
-	if (tmp)
+	if (args[1])
+		ft_putstr_fd("Invalid input\n", 2);
+	else
 	{
-		str = tmp->data;
-		if (str[0] == '-')
-		{
-			write(2, "invalid option\n", 15);
-			return ;
-		}
+		value = get_env_value(env, "PWD");
+		if (value)
+			ft_putstr_fd(value, exec->output);
 	}
-	while (temp)
-	{
-		if (!ft_strncmp(temp->id, "PWD", ft_strlen(temp->id)))
-		{
-			printf("%s\n", (char *)temp->data);
-			break ;
-		}
-		temp = temp->next;
-	}
+	return (1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:51:32 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 01:09:55 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 22:31:49 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ void	add_front_env(t_env **env_head, t_env *new);
 int		get_list_len(t_env	*list);
 char	**get_env_array(t_env *env);
 t_env	*get_env_list(char *env[]);
+char	*get_env_value(t_env *env, char *key);
 #endif
