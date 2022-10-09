@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 16:05:25 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:13:48 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int		get_size(t_exec *lst);
 t_exec	*get_list(void);
 
 /*----------------------------Builtins------------------------*/
-int	ft_echo(char **args);
-int	valid_option(char *str);
-int	ft_call_builtins(t_exec *head, t_env *env_list);
+int		ft_echo(char **args, t_execute *exec);
+int		valid_option(char *str);
+int		ft_call_builtins(t_exec *head, t_env *env_list, t_execute *exec);
 #endif

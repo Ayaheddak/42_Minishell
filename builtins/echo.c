@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:01:59 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 15:45:20 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:13:40 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	valid_option(char *str)
 	return (1);
 }
 
-int	ft_echo(char **args)
+int	ft_echo(char **args, t_execute *exec)
 {
 	int	i;
 	int	d;
@@ -52,14 +52,14 @@ int	ft_echo(char **args)
 		}
 		if (args[i])
 		{
-			printf("%s", args[i]);
+			ft_putstr_fd(args[i], exec->output);
 			d = 1;
 		}
 		if (args[i + 1])
-			printf(" ");
+			ft_putstr_fd(" ", exec->output);
 		i++;
 	}
 	if (!args[1] || (args[1] && !valid_option(args[1])))
-		printf("\n");
+		ft_putstr_fd("\n", exec->output);
 	return (1);
 }

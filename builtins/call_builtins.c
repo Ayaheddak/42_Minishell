@@ -6,19 +6,19 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 20:37:58 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 16:08:33 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:07:47 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_call_builtins(t_exec *head, t_env *env_list)
+int	ft_call_builtins(t_exec *head, t_env *env_list, t_execute *exec)
 {
 	(void)env_list;
 	if (head->args)
 	{
 		if (!ft_strcmp(head->args[0], "echo"))
-			return (ft_echo(head->args));
+			return (ft_echo(head->args, exec));
         // else if (ft_strncmp(head->data, "pwd", ft_strlen(head->data)) == 0)
         //     ft_pwd(env_list, head);
         // else if (ft_strncmp(head->data, "env", ft_strlen(head->data)) == 0)
