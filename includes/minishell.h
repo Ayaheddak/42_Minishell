@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/08 14:15:45 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 01:14:55 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <unistd.h>
+# include <signal.h>
 # include <fcntl.h>
 # include "libft.h"
 # include "token.h"
@@ -32,7 +33,7 @@ typedef struct s_redir
 	int				type;
 	char			*name;
 	struct s_redir	*next;
-} 				t_redir;
+}	t_redir;
 
 typedef struct s_exec
 {
@@ -50,8 +51,7 @@ typedef struct s_global
 	int		errorparser;
 }		t_global;
 
-t_global g_global;
-
+t_global	g_global;
 
 /*
 	========================== Token ==========================
@@ -89,7 +89,7 @@ int		is_operator_speciaux(char c);
 	========================== Error ==========================
 */
 
-void *ft_errer(int i);
+void	*ft_errer(int i);
 
 /*
 	========================== Parser ==========================
@@ -102,12 +102,12 @@ void	addredirection(t_redir **head, int type, char *file);
 void	print_redir(t_redir *redir);
 void	free_exec(t_exec *exec);
 /*---------------get_next_line------------------------*/
-char    *get_next_line(int fd);
-char    *extract_line(char *str);
-char    *extract_after_line(char *str);
-char    *ft_read(int *rb, char *temp, char *buf, int fd);
-char    *ft_cpy(char *str, int *i, int *j);
-void    skip_line(char *str, int *j);
+char	*get_next_line(int fd);
+char	*extract_line(char *str);
+char	*extract_after_line(char *str);
+char	*ft_read(int *rb, char *temp, char *buf, int fd);
+char	*ft_cpy(char *str, int *i, int *j);
+void	skip_line(char *str, int *j);
 
 /*--------------------Check commands------------*/
 char	*check_command(char *cmd, t_env *env);
@@ -120,7 +120,7 @@ void	input_output(int i, t_execute *exec, t_exec *exec_list);
 void	ft_error(char *str);
 void	close_pipes(t_execute *exec, int n);
 void	close_and_free(t_execute exec, int n);
-void    file_exist(int  *d, t_execute *exec, t_exec *exec_list);
+void	file_exist(int *d, t_execute *exec, t_exec *exec_list);
 int		get_size(t_exec *lst);
 
 t_exec	*get_list(void);

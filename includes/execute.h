@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:37:01 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/08 12:12:04 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 01:10:12 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "minishell.h"
 
 typedef struct s_execute	t_execute;
-typedef struct s_path	t_path;
+typedef struct s_path		t_path;
 
 struct s_execute
 {

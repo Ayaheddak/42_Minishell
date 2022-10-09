@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/08 16:52:03 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/09 01:50:00 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,30 @@ char	*freejoin(char *s1, char *s2)
 	return (rest);
 }
 
-void addback(t_token **head, void *value, void *type)
+void	addback(t_token **head, void *value, void *type)
 {
-    t_token *new;
-	t_token *temp;
+	t_token	*new;
+	t_token	*temp;
 
 	new = malloc(sizeof(t_token));
-    new->value = value;
+	new->value = value;
 	new->type = *(int *)type;
-    new->next = NULL;
-    if(*head == NULL)
+	new->next = NULL;
+	if (*head == NULL)
 	{
-        *head = new;
-        return;
-    }
+		*head = new;
+		return ;
+	}
 	temp = *head;
-    while(temp->next != NULL)
-        temp = temp->next;
-    temp->next = new;
+	while (temp->next != NULL)
+		temp = temp->next;
+	temp->next = new;
 }
 
 void	addredirection(t_redir **head, int type, char *file)
 {
-	t_redir *tmp;
-	t_redir *new;
+	t_redir	*tmp;
+	t_redir	*new;
 
 	new = malloc(sizeof(t_redir));
 	new->name = file;
@@ -77,7 +77,7 @@ void	addredirection(t_redir **head, int type, char *file)
 		return ;
 	}
 	tmp = *head;
-	while(tmp->next != NULL)
+	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new;
 }

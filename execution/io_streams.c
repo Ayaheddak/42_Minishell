@@ -6,18 +6,18 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:00:58 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 00:00:10 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 01:08:26 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void    file_exist(int  *d, t_execute *exec, t_exec *exec_list)
+void	file_exist(int *d, t_execute *exec, t_exec *exec_list)
 {
 	int		temp_fd;
 	char	*line;
 
-    while (exec_list->redir)
+	while (exec_list->redir)
 	{
 		if (exec_list->redir->type == TOKEN_DELIMITER)
 		{
@@ -28,16 +28,14 @@ void    file_exist(int  *d, t_execute *exec, t_exec *exec_list)
 				line = get_next_line(0);
 				if (line == NULL)
 					break ;
-				if (!ft_strncmp(exec_list->redir->name, line, ft_strlen(exec_list->redir->name))
-						&& (ft_strlen(exec_list->redir->name) + 1) == ft_strlen(line))
+				if (!ft_strcmp(exec_list->redir->name, line))
 				{
 					free(line);
 					break ;
 				}
-				printf("here here\n");
 				write(temp_fd, line, ft_strlen(line));
 				free(line);
-        	}
+			}
 			close(temp_fd);
 			exec->infile = open("temp_file", O_RDONLY, 0444);
 			*d = 0;
@@ -66,7 +64,7 @@ void	input_output(int i, t_execute *exec, t_exec *exec_list)
 	int	d;
 
 	d = -1;
-    file_exist(&d, exec, exec_list);
+	file_exist(&d, exec, exec_list);
 	if (d == -1)
 	{
 		if (i == 0)

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:41:04 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/08 13:44:07 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 01:09:01 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_error(char *str)
 void	start_execution(t_exec *exec_list, t_env *env)
 {
 	t_execute	*exec;
-	int	i;
+	int			i;
 
 	exec = malloc(sizeof(t_execute));
 	exec->nb_cmd = get_size(exec_list);

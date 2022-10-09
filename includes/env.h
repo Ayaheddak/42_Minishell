@@ -6,11 +6,9 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:51:32 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/29 20:26:49 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 01:09:55 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../includes/minishell.h"
 
 #ifndef ENV_H
 # define ENV_H
