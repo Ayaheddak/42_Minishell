@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:41:04 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 18:07:38 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:10:37 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	start_execution(t_exec *exec_list, t_env *env)
 	while (exec_list)
 	{
 		input_output(i, exec, exec_list);
-		if (ft_call_builtins(exec_list, env, exec) != -1 && exec->nb_cmd == 1)
+		if (exec->nb_cmd == 1 && ft_call_builtins(exec_list, env, exec) != -1)
 			break ;
 		exec->child_pid[i] = fork();
 		if (exec->child_pid[i] == 0)

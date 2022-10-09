@@ -6,68 +6,57 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:29:48 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/19 21:54:10 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:08:34 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_change_dir(t_list *list, t_list *env_list)
+t_env	*change_pwd(t_env *env_list, char *key)
 {
-	t_list	*temp;
-	t_list	*tmp;
-	t_list	*pwd;
-	int		len;
-	int		change;
+	t_env	*env;
 
-    if (!list)
-		return ;
-	temp = list->next;
-	tmp = env_list;
-	change = 0;
-	len = get_size(list);
-	if (len > 2)
-		write(2, "too many arguments\n", 19);
-	else if (len == 1 || temp->data == NULL)
+	env = env_list;
+	while (env)
 	{
-		while (tmp)
+		if (!ft_strcmp(env->key, key))
 		{
-			if (!ft_strncmp(tmp->id, "HOME", ft_strlen(tmp->id)))
-			{
-				pwd = env_list;
-				change = chdir(tmp->data);
-				while (pwd)
-				{
-					if (!ft_strncmp(pwd->id, "PWD", ft_strlen(pwd->id)))
-					{
-						pwd->data = getcwd(tmp->data, 100);
-						break ;
-					}
-					pwd = pwd->next;
-				}
-			}
-			tmp = tmp->next;
+			env->value = getcwd(env->value, 100);
+			break ;
 		}
+		env = env->next;
 	}
-	else if (temp)
+	return (env_list);
+}
+
+int	ft_change_dir(char **args, t_env *env)
+{
+	int	i;
+	int	change;
+
+	i = 1;
+	change = 0;
+	if (args[i])
 	{
-		if (!ft_strncmp(temp->data, ".", ft_strlen(temp->data)) || !ft_strncmp(temp->data, "..", ft_strlen(temp->data)))
-			printf("Dear programmer we accept either absolute or relative paths ok?\n");
-		else
+		env = change_pwd(env, "OLDPWD");
+		change = chdir(args[i]);
+		env = change_pwd(env, "PWD");
+	}
+	else
+	{
+		env = change_pwd(env, "OLDPWD");
+		while (env)
 		{
-			change = chdir(temp->data);
-			tmp = env_list;
-			while (tmp)
+			if (!ft_strcmp(env->key, "HOME"))
 			{
-				if (!ft_strncmp(tmp->id, "PWD", ft_strlen(tmp->id)))
-				{
-					tmp->data = getcwd(tmp->data, 100);
-					break ;
-				}
-				tmp = tmp->next;
+				change = chdir(env->value);
+				break ;
 			}
+			env = env->next;
 		}
+		env = change_pwd(env, "PWD");
 	}
 	if (change == -1)
-		perror("Error");
+		perror("cd");
+	return (1);
 }

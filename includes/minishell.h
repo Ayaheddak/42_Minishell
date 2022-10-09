@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 18:13:48 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:30:24 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_global
 {
 	t_exec	*exec;
 	char	**env;
+	t_env	*env_list;
 	int		exitstauts;
 	int		errorlexer;
 	int		errorparser;
@@ -129,4 +130,8 @@ t_exec	*get_list(void);
 int		ft_echo(char **args, t_execute *exec);
 int		valid_option(char *str);
 int		ft_call_builtins(t_exec *head, t_env *env_list, t_execute *exec);
+t_env	*change_pwd(t_env *env_list, char *key);
+int		ft_change_dir(char **args, t_env *env);
+int		ft_env(t_env *env, char **args, t_execute *exec);
+char	*join_key_value(char *key, char *value);
 #endif

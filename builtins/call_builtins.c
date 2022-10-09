@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 20:37:58 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 18:07:47 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:12:49 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	ft_call_builtins(t_exec *head, t_env *env_list, t_execute *exec)
 			return (ft_echo(head->args, exec));
         // else if (ft_strncmp(head->data, "pwd", ft_strlen(head->data)) == 0)
         //     ft_pwd(env_list, head);
-        // else if (ft_strncmp(head->data, "env", ft_strlen(head->data)) == 0)
-        //     ft_env(env_list, head);
-        // else if (ft_strncmp(head->data, "cd", ft_strlen(head->data)) == 0)
-        //     ft_change_dir(head, env_list);
+        else if (!ft_strcmp(head->args[0], "env"))
+            return (ft_env(env_list, head->args, exec));
+        else if (!ft_strcmp(head->args[0], "cd"))
+            return (ft_change_dir(head->args, env_list));
         // else if (ft_strncmp(head->data, "unset", ft_strlen(head->data)) == 0)
         //     ft_unset(head, env_list);
         // else if (ft_strncmp(head->data, "export", ft_strlen(head->data)) == 0)
