@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/09 01:19:08 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 13:39:28 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	main(int argc, char *argv[], char *env[])
 	char	*inpt;
 	t_token	*token;
 	t_env	*env_list;
-	pid_t	pid;
-	int		status;
 	lexer_t	*lexer;
 
 	(void)argc;
@@ -47,10 +45,7 @@ int	main(int argc, char *argv[], char *env[])
 			g_global.errorparser = 0;
 			continue ;
 		}
-		pid = fork();
-		if (!pid)
-			start_execution(g_global.exec, env_list);
-		waitpid(pid, &status, 0);
+		start_execution(g_global.exec, env_list);
 	}
 	return (0);
 }
