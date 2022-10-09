@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:41:04 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 01:09:01 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 16:04:12 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	start_execution(t_exec *exec_list, t_env *env)
 		if (exec->child_pid[i] == 0)
 		{
 			close_pipes(exec, (exec->nb_cmd - 1) * 2);
-			execute_command(exec, exec_list->args, env);
+			execute_command(exec, exec_list, env);
 		}
 		i++;
 		exec_list = exec_list->next;

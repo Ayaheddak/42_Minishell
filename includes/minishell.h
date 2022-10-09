@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 01:14:55 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 16:05:25 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	skip_line(char *str, int *j);
 char	*check_command(char *cmd, t_env *env);
 char	*get_right_path(t_env *env, char *cmd);
 char	*get_right_path_utils(t_path *corr_path, char *cmd, t_env *env);
-void	execute_command(t_execute *exec, char **cmd, t_env *env);
+void	execute_command(t_execute *exec, t_exec *exec_list, t_env *env);
 /*--------------------create children---------------*/
 void	start_execution(t_exec *exec_list, t_env *env);
 void	input_output(int i, t_execute *exec, t_exec *exec_list);
@@ -124,4 +124,9 @@ void	file_exist(int *d, t_execute *exec, t_exec *exec_list);
 int		get_size(t_exec *lst);
 
 t_exec	*get_list(void);
+
+/*----------------------------Builtins------------------------*/
+int	ft_echo(char **args);
+int	valid_option(char *str);
+int	ft_call_builtins(t_exec *head, t_env *env_list);
 #endif

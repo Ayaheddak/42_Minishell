@@ -6,63 +6,60 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:01:59 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/17 14:48:11 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 15:45:20 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int valid_option(char *str)
+int	valid_option(char *str)
 {
-    size_t	len;
-    size_t	i;
-    int d;
+	size_t	len;
+	size_t	i;
+	int		d;
 
-    len = ft_strlen(str);
-    i = 1;
-    d = -1;
-    if (str[0] == '-')
-    {
-        d = 0;
-        while (i < len)
-        {
-            if (str[i] != 'n')
-                d = 1;
-            i++;
-        }
-    }
-    if (d < 0 || d == 1)
-        return (0);
-    return (1);
+	len = ft_strlen(str);
+	i = 1;
+	d = -1;
+	if (str[0] == '-')
+	{
+		while (i < len)
+		{
+			d = 0;
+			if (str[i] != 'n')
+				d = 1;
+			i++;
+		}
+	}
+	if (d < 0 || d == 1)
+		return (0);
+	return (1);
 }
 
-void	ft_echo(t_list *list)
+int	ft_echo(char **args)
 {
-	t_list  *temp;
+	int	i;
+	int	d;
 
-	if (!list)
-		return ;
-	temp = list->next;
-	if (temp && valid_option(temp->data))
-    {
-		temp = temp->next;
-        while (temp)
-        {
-			printf("%s", (char *)temp->data);
-            if (temp->next)
-				printf(" ");
-            temp = temp->next;
-        }
-    }
-	else
+	i = 1;
+	d = 0;
+	while (args[i])
 	{
-		while (temp)
-        {
-            printf("%s", (char *)temp->data);
-            if (temp->next)
-				printf(" ");
-            temp = temp->next;
-        }
+		if (valid_option(args[i]) && !d)
+		{
+			i++;
+			continue ;
+		}
+		if (args[i])
+		{
+			printf("%s", args[i]);
+			d = 1;
+		}
+		if (args[i + 1])
+			printf(" ");
+		i++;
+	}
+	if (!args[1] || (args[1] && !valid_option(args[1])))
 		printf("\n");
-    }
+	return (1);
 }
