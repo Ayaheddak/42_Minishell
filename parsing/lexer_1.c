@@ -3,26 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/09 01:22:38 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 03:01:13 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 //function for replace expanded
+
+char	*get_expanded_test(char *value)
+{
+	char *str;
+
+	str = get_env_value(get_env_list(g_global.env), value);
+	if (str == NULL)
+		return (ft_strdup(""));
+	return (str);
+}
+
+/*
 char	*get_exapanded_test(void)
 {
 	return (strdup("[EXPANDED VALUE]"));
 }
+*/ 
 
 lexer_t	*init_lexer(char *str)
 {
 	lexer_t	*lexer;
 
-	lexer = malloc(sizeof(lexer_t));
+	lexer = malloc(sizeof(lexer_t));//
 	lexer->contents = str;
 	lexer->i = 0;
 	lexer->c = str[lexer->i];
@@ -58,26 +71,4 @@ char	*lexer_get_current_char_as_string(lexer_t *lexer)
 	str[0] = lexer->c;
 	str[1] = '\0';
 	return (str);
-}
-
-int	is_whitespace(char c)
-{
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (1);
-	return (0);
-}
-
-int	is_operator(char c)
-{
-	if (c == '<' || c == '>' || c == '|')
-		return (1);
-	return (0);
-}
-
-int	is_operator_speciaux(char c)
-{
-	if ((c >= 35 && c <= 39) || (c >= 42 && c <= 47) || (c >= 58 && c <= 59) || c == 61
-		|| (c >= 61 && c <= 64) || (c >= 91 && c <= 94) || (c >= 123 && c <= 125) || c == 126)
-		return (1);
-	return (0);
 }
