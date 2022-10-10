@@ -6,12 +6,13 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:03:47 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 21:33:17 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:48:12 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+//to edit
 int	is_valid_arg(char *str)
 {
 	int	i;

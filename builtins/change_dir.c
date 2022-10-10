@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:29:48 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 21:17:50 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:14:14 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	ft_change_dir(char **args, t_env *env)
 	if (args[i])
 	{
 		env = change_pwd(env, "OLDPWD");
-		change = chdir(args[i]);
+		if (ft_strcmp(args[i], ""))
+			change = chdir(args[i]);
 		env = change_pwd(env, "PWD");
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/10 21:16:55 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:56:54 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char *argv[], char *env[])
 	(void)argv;
 	g_global.env = env;
 	env_list = get_env_list(g_global.env);
+	g_global.env_list = env_list;
 	g_global.exitstauts = 0;
 	while (1)
 	{
@@ -45,7 +46,6 @@ int	main(int argc, char *argv[], char *env[])
 		free(inpt);
 		check_parse_errors(token);
 		g_global.exec = parser(token);
-		g_global.env_list = env_list;
 		if (g_global.errorlexer == 1)
 		{
 			free_tokenizer(token);
@@ -62,7 +62,7 @@ int	main(int argc, char *argv[], char *env[])
 		// 	continue ;
 		// }
 		start_execution(g_global.exec, g_global.env_list);
-		printf("The status is: %d\n", g_global.exitstauts);
+		// printf("The status is: %d\n", g_global.exitstauts);
 	}
 	return (0);
 }

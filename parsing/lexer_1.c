@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/10 03:01:13 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/10 23:04:41 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_expanded_test(char *value)
 {
 	char *str;
 
-	str = get_env_value(get_env_list(g_global.env), value);
+	str = get_env_value(g_global.env_list, value);
 	if (str == NULL)
 		return (ft_strdup(""));
 	return (str);
