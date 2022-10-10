@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 13:42:21 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 13:54:45 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,7 @@ void	print_tokenizer(t_token *token);
 t_token	*tokenizer(lexer_t *lexer);
 t_token	*lexer_get_next_token(lexer_t *lexer);
 void	free_tokenizer(t_token *token);
-/*
-	========================== test ==========================
-*/
 
-t_env	*get_env_list_test(char *env[]);
-void	print_env(t_env *env);
-char	*get_env_value_test(t_env *env, char *key);
 /*
 	========================== lexer ==========================
 */
