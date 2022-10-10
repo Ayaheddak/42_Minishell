@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 20:00:30 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 22:48:02 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:32:17 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	get_list_len(t_env	*list)
 
 char	*get_env_value(t_env *env, char *key)
 {
+	if (!key)
+		return (NULL);
 	while (env)
 	{
 		if (!ft_strcmp(env->key, key))

@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/10 03:01:46 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/10 15:34:43 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ t_token	*lexer_string(lexer_t *lexer)//
 	t_token	*token;
 
 	value = ft_strdup("");
+	//printf("c---> %c\n", lexer->c);
 	while (lexer->c != '\0' && !is_whitespace(lexer->c) && !is_operator(lexer->c))
 	{
 		if (lexer->c == '$')
@@ -171,20 +172,25 @@ t_token	*lexer_expanding(lexer_t *lexer)
 {
 	char	*value;
 	char	*s;
+	int		tmp;
 
-	value = ft_strdup("");
+	value = NULL;
+	tmp = 0;
 	lexer_advance(lexer);
 	while (!is_whitespace(lexer->c) && lexer->c != '\0' && !is_operator_speciaux(lexer->c))
 	{
 		if (is_whitespace(lexer->c) || lexer->c == '"' || is_operator_speciaux(lexer->c))
+		{
+			tmp = 1;
 			break ;
+		}
 		s = lexer_get_current_char_as_string(lexer);
 		value = freejoin(value, s);
 		lexer_advance(lexer);
 	}
-	if (value == NULL)
+	if (tmp == 0 && value == NULL)
 	{
-		value = "$";
+		value = ft_strdup("$");
 		return (init_token(TOKEN_STRING, value));
 	}
 	return (init_token(TOKEN_STRING, get_expanded_test(value)));

@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/10 00:27:58 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/10 14:18:16 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ t_token	*tokenizer(lexer_t *lexer)
 void	print_tokenizer(t_token *token)
 {
 	int		i;
-	t_token	*tmp;
 
 	i = 0;
 	while (token != NULL)
@@ -72,11 +71,7 @@ void	print_tokenizer(t_token *token)
 		printf("------------- Node numbre %d  = -------------\n", i);
 		printf("ur value = %s\n", (char *)token->value);
 		printf("ur type = %d\n", token->type);
-		tmp = token;
 		token = token->next;
-		if (tmp->value)
-			free(tmp->value);
-		free (tmp);
 		i++;
 	}
 }

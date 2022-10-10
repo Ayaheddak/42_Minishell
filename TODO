@@ -1,0 +1,8 @@
+echo $> USER
+echo $"USER" #done
+echo $'USER'
+echo $< USER
+echo < $USER #done
+$$ #done
+$$USER$hsdfjd 
+$USER%hsdfjd what's diff $$USER%hsdfjd
