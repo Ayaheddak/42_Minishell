@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/09 01:31:07 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 03:01:46 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	*ft_errer(int i)
-{
-	if (i == 1)
-	{
-		g_global.errorlexer = 1;
-		ft_putstr_fd("Error : Unclosed quotes\n", 2);
-	}
-	if (i == 2)
-	{
-		g_global.errorparser = 1;
-		ft_putstr_fd("Error : Synthax Error \n", 2);
-	}
-	return ((void *)0);
-}
 
 t_token	*redirection(lexer_t *lexer, int type1, int type2, char r)
 {
@@ -53,7 +38,7 @@ t_token	*redirection(lexer_t *lexer, int type1, int type2, char r)
 	return ((void *)0);
 }
 
-char	*after_quote(lexer_t *lexer , char *s, char **value)
+char	*after_quote(lexer_t *lexer , char *s, char **value)//
 {
 	t_token	*token;
 
@@ -93,7 +78,7 @@ char	*after_quote(lexer_t *lexer , char *s, char **value)
 	return (*value);
 }
 
-t_token	*lexer_double_quote(lexer_t *lexer)
+t_token	*lexer_double_quote(lexer_t *lexer)//
 {
 	char	*value;
 	char	*s;
@@ -142,7 +127,7 @@ t_token	*lexer_single_quote(lexer_t *lexer)
 	return (init_token(TOKEN_STRING, value));
 }
 
-t_token	*lexer_string(lexer_t *lexer)
+t_token	*lexer_string(lexer_t *lexer)//
 {
 	char	*value;
 	char	*s;
@@ -151,6 +136,14 @@ t_token	*lexer_string(lexer_t *lexer)
 	value = ft_strdup("");
 	while (lexer->c != '\0' && !is_whitespace(lexer->c) && !is_operator(lexer->c))
 	{
+		if (lexer->c == '$')
+		{
+			while (lexer->c == '$')
+			{
+				token = lexer_expanding(lexer);
+				value = freejoin(value, token->value);	
+			}
+		}
 		if (lexer->c == '"')
 		{
 			token = lexer_double_quote(lexer);
@@ -165,16 +158,8 @@ t_token	*lexer_string(lexer_t *lexer)
 				return ((void *)0);
 			value = freejoin(value, token->value);
 		}
-		if (lexer->c == '$')
-		{
-			while (lexer->c == '$')
-			{
-				token = lexer_expanding(lexer);
-				value = freejoin(value, token->value);
-			}
-		}
 		s = lexer_get_current_char_as_string(lexer);
-		value = freejoin(value, s);
+		value = freejoin(value, s);	
 		if (is_whitespace(lexer->c) || is_operator(lexer->c))
 			break ;
 		lexer_advance(lexer);
@@ -187,20 +172,20 @@ t_token	*lexer_expanding(lexer_t *lexer)
 	char	*value;
 	char	*s;
 
-	value = NULL;
+	value = ft_strdup("");
 	lexer_advance(lexer);
 	while (!is_whitespace(lexer->c) && lexer->c != '\0' && !is_operator_speciaux(lexer->c))
 	{
+		if (is_whitespace(lexer->c) || lexer->c == '"' || is_operator_speciaux(lexer->c))
+			break ;
 		s = lexer_get_current_char_as_string(lexer);
 		value = freejoin(value, s);
 		lexer_advance(lexer);
-		if (is_whitespace(lexer->c) || lexer->c == '"' || is_operator_speciaux(lexer->c))
-			break ;
 	}
 	if (value == NULL)
 	{
 		value = "$";
 		return (init_token(TOKEN_STRING, value));
 	}
-	return (init_token(TOKEN_STRING, get_exapanded_test()));
+	return (init_token(TOKEN_STRING, get_expanded_test(value)));
 }

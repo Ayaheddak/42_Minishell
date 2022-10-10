@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 22:43:13 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 03:01:30 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,13 @@ void	print_tokenizer(t_token *token);
 t_token	*tokenizer(lexer_t *lexer);
 t_token	*lexer_get_next_token(lexer_t *lexer);
 void	free_tokenizer(t_token *token);
+/*
+	========================== test ==========================
+*/
 
+t_env	*get_env_list_test(char *env[]);
+void	print_env(t_env *env);
+char	*get_env_value_test(t_env *env, char *key);
 /*
 	========================== lexer ==========================
 */
@@ -82,15 +88,15 @@ void	addback(t_token **head, void *value, void *type);
 char	*lexer_get_current_char_as_string(lexer_t *lexer);
 char	*get_path(char	**env);
 char	*freejoin(char *s1, char *s2);
-char	*get_exapanded_test(void);//
+char	*get_expanded_test(char *value);
+/*
+	========================== Utils ==========================
+*/
 int		is_operator(char c);
 int		is_whitespace(char c);
 int		is_operator_speciaux(char c);
-/*
-	========================== Error ==========================
-*/
-
 void	*ft_errer(int i);
+int		is_redir(t_token *token);
 
 /*
 	========================== Parser ==========================
@@ -102,7 +108,12 @@ t_exec	*parser(t_token *head);
 void	addredirection(t_redir **head, int type, char *file);
 void	print_redir(t_redir *redir);
 void	free_exec(t_exec *exec);
-/*---------------get_next_line------------------------*/
+char	**ft_realloc(char **args, char *str);
+int		len_of_array(char **args);
+
+/*
+	---------------get_next_line------------------------
+*/
 char	*get_next_line(int fd);
 char	*extract_line(char *str);
 char	*extract_after_line(char *str);
@@ -110,12 +121,16 @@ char	*ft_read(int *rb, char *temp, char *buf, int fd);
 char	*ft_cpy(char *str, int *i, int *j);
 void	skip_line(char *str, int *j);
 
-/*--------------------Check commands------------*/
+/*
+	--------------------Check commands------------
+*/
 char	*check_command(char *cmd, t_env *env);
 char	*get_right_path(t_env *env, char *cmd);
 char	*get_right_path_utils(t_path *corr_path, char *cmd, t_env *env);
 void	execute_command(t_execute *exec, t_exec *exec_list, t_env *env);
-/*--------------------create children---------------*/
+/*
+	--------------------create children---------------
+*/
 void	start_execution(t_exec *exec_list, t_env *env);
 void	input_output(int i, t_execute *exec, t_exec *exec_list);
 void	ft_error(char *str);
@@ -126,7 +141,9 @@ int		get_size(t_exec *lst);
 
 t_exec	*get_list(void);
 
-/*----------------------------Builtins------------------------*/
+/*
+	----------------------------Builtins------------------------
+*/
 int		ft_echo(char **args, t_execute *exec);
 int		valid_option(char *str);
 int		ft_call_builtins(t_exec *head, t_env *env_list, t_execute *exec);

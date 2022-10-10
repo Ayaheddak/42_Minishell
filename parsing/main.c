@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/09 22:48:29 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 01:06:18 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,37 @@ int	main(int argc, char *argv[], char *env[])
 
 	(void)argc;
 	(void)argv;
-	env_list = get_env_list(env);
+	g_global.env = env;
+	env_list = get_env_list(g_global.env);
 	while (1)
 	{
-		inpt = readline("./minishell$ ");
+		inpt = readline("./minishell$ ");//
 		if (!inpt)
 			continue ;
-		lexer = init_lexer(inpt);
+		lexer = init_lexer(inpt);//
 		add_history(inpt);
 		token = tokenizer(lexer);
-		check_parse_errors(token);
-		g_global.exec = parser(token);
-		g_global.env_list = env_list;
+		free(lexer);
+		free(inpt);
+		//check_parse_errors(token);
+		//g_global.exec = parser(token);
+		//g_global.env_list = env_list;
 		if (g_global.errorlexer == 1)
 		{
 			free_tokenizer(token);
 			g_global.errorlexer = 0;
 			continue ;
 		}
-		if (g_global.errorparser == 1)
-		{
-			free_tokenizer(token);
-			free_exec(g_global.exec);
-			g_global.errorparser = 0;
-			continue ;
-		}
-		start_execution(g_global.exec, g_global.env_list);
+		print_tokenizer(token);
+		//system("leaks minishell");
+		// if (g_global.errorparser == 1)
+		// {
+		// 	free_tokenizer(token);
+		// 	free_exec(g_global.exec);
+		// 	g_global.errorparser = 0;
+		// 	continue ;
+		// }
+		//start_execution(g_global.exec, g_global.env_list);
 	}
 	return (0);
 }
