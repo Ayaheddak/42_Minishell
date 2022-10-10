@@ -6,7 +6,7 @@
 #    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/10/09 22:39:20 by het-tale         ###   ########.fr        #
+#    Updated: 2022/10/10 00:21:21 by het-tale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ UTILS	=	parsing/lexer_1.c parsing/main.c parsing/token.c parsing/utils_list.c pa
 			get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 			env_variables/env_list.c env_variables/env_list_utils.c \
 			execution/execute.c execution/start_exec.c execution/close.c execution/io_streams.c \
-			builtins/echo.c builtins/call_builtins.c builtins/change_dir.c builtins/env.c builtins/pwd.c
+			builtins/echo.c builtins/call_builtins.c builtins/change_dir.c builtins/env.c builtins/pwd.c builtins/unset.c builtins/export.c
 
 FLAGS	=	 -Wall -Wextra -Werror
 
@@ -35,7 +35,7 @@ CC		=	gcc
 all		:	$(NAME)
 
 $(NAME)	:	$(UTILS)	
-	@$(CC) $(FLAGS) $(UTILS) -o $(NAME) -lreadline -g
+	@$(CC) $(FLAGS) $(UTILS) -o $(NAME) -lreadline -g3
 
 clean :
 	@${RM} $(OBJCT)

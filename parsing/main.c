@@ -6,11 +6,20 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/09 22:48:29 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 02:16:22 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_traverse(t_env *env)
+{
+	while(env)
+	{
+		printf("%s=%s\n", env->key, env->value);
+		env = env->next;
+	}
+}
 
 int	main(int argc, char *argv[], char *env[])
 {
@@ -47,6 +56,7 @@ int	main(int argc, char *argv[], char *env[])
 			continue ;
 		}
 		start_execution(g_global.exec, g_global.env_list);
+		// ft_traverse(ft_sort_env(g_global.env_list));
 	}
 	return (0);
 }

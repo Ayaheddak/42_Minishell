@@ -6,51 +6,51 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 21:11:33 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/19 19:18:41 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/09 23:16:06 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_list  *remove_list(t_list **env_list, t_list *remove)
+t_env	*remove_list(t_env **env_list, t_env *remove)
 {
-    t_list  *temp;
+	t_env	*temp;
 
-    temp = *env_list;
-    if (remove == temp)
-        *env_list = temp->next;
-    else
-    {
-        while (temp)
-        {
-            if(temp->next == remove)
-            { 
-                temp->next = remove->next;
-                free(remove);
-                break;
-            }
-            temp = temp->next;
-        }
-    }
-    return (*env_list);
+	temp = *env_list;
+	if (remove == temp)
+		*env_list = temp->next;
+	else
+	{
+		while (temp)
+		{
+			if(temp->next == remove)
+			{
+				temp->next = remove->next;
+				free(remove);
+				break;
+			}
+			temp = temp->next;
+		}
+	}
+	return (*env_list);
 }
 
-t_list  *ft_unset(t_list *list, t_list *env_list)
+int	ft_unset(char **args, t_env *env_iter)
 {
-	t_list  *temp;
-    t_list  *env_iter;
+	int	i;
+	t_env	*env;
 
-	temp = list->next;
-	while (temp)
+	i = 1;
+	while (args[i])
     {
-        env_iter = env_list;
-        while (env_iter)
+		env = env_iter;
+        while (env)
         {
-            if (!ft_strncmp(env_iter->id, temp->data, ft_strlen(temp->data)))
-                env_list = remove_list(&env_list, env_iter);
-            env_iter = env_iter->next;
+            if (!ft_strcmp(args[i], env->key))
+                env_iter = remove_list(&env_iter, env);
+            env = env->next;
         }
-        temp = temp->next;
+		i++;
     }
-	return (env_list);
+	return (1);
 }
