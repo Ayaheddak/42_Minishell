@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 13:42:21 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:00:34 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_global
 	t_exec	*exec;
 	char	**env;
 	t_env	*env_list;
+	t_env	*env_copy;
 	int		exitstauts;
 	int		errorlexer;
 	int		errorparser;
@@ -63,13 +64,7 @@ void	print_tokenizer(t_token *token);
 t_token	*tokenizer(lexer_t *lexer);
 t_token	*lexer_get_next_token(lexer_t *lexer);
 void	free_tokenizer(t_token *token);
-/*
-	========================== test ==========================
-*/
 
-t_env	*get_env_list_test(char *env[]);
-void	print_env(t_env *env);
-char	*get_env_value_test(t_env *env, char *key);
 /*
 	========================== lexer ==========================
 */
@@ -150,12 +145,14 @@ int		ft_call_builtins(t_exec *head, t_env *env_list, t_execute *exec);
 t_env	*change_pwd(t_env *env_list, char *key);
 int		ft_change_dir(char **args, t_env *env);
 int		ft_env(t_env *env, char **args, t_execute *exec);
-void	print_env(t_env *env, t_execute *exec);
+void	print_env(t_env *env, t_execute *exec, int d);
 char	*join_key_value(char *key, char *value);
 int		ft_pwd(char **args, t_env *env, t_execute *exec);
 t_env	*remove_list(t_env **env_list, t_env *remove);
 int		ft_unset(char **args, t_env *env_iter);
-int		ft_export_to_env(t_env *env_list, char **args);
+int		ft_export_to_env(t_env *env_list, char **args, t_execute *exec);
 int		is_replaced(t_env *env_list, char *search, char *replace);
 int		is_valid_arg(char *str);
+int		ft_export_to_copy(t_env *env, char **args, t_execute *exec);
+void	ft_exit(void);
 #endif
