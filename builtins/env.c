@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 18:48:22 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 20:57:33 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:38:26 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,14 @@ int	ft_env(t_env *env, char **args, t_execute *exec)
 
 	i = 1;
 	if (args[i])
+	{
+		g_global.exitstauts = 1;
 		ft_putstr_fd("Invalid input\n", 2);
+	}
 	else
+	{
 		print_env(env, exec, 1);
-	return (1);
+		g_global.exitstauts = 0;	
+	}
+	return (g_global.exitstauts);
 }

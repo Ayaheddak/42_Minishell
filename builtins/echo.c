@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:01:59 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 18:13:40 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:08:02 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ int	ft_echo(char **args, t_execute *exec)
 	}
 	if (!args[1] || (args[1] && !valid_option(args[1])))
 		ft_putstr_fd("\n", exec->output);
-	return (1);
+	return (g_global.exitstauts);
 }

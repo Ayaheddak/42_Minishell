@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:29:48 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 21:08:34 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:17:50 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ int	ft_change_dir(char **args, t_env *env)
 		env = change_pwd(env, "PWD");
 	}
 	if (change == -1)
+	{
 		perror("cd");
-	return (1);
+		g_global.exitstauts = 1;
+	}
+	else
+		g_global.exitstauts = 0;
+	return (g_global.exitstauts);
 }

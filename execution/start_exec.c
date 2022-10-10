@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:41:04 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 21:10:37 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:40:30 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	ft_error(char *str)
 {
 	perror(str);
-	exit(0);
+	g_global.exitstauts = 1;
+	exit(g_global.exitstauts);
 }
 
 void	start_execution(t_exec *exec_list, t_env *env)
