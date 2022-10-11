@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 20:30:20 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/09 23:07:48 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/11 02:42:44 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,24 @@ void	*check_parse_errors(t_token *head)
 	return ((void *)0);
 }
 
+void free_tab(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free (str);
+}
+
 t_exec	*parser(t_token *head)
 {
 	t_token	*token;
 	t_exec	*exec;
+	char **split;
 
 	token = head;
 	exec = alocate_exec();
@@ -54,7 +68,18 @@ t_exec	*parser(t_token *head)
 			break ;
 		}
 		if (token->type == TOKEN_STRING)
-			exec->args = ft_realloc(exec->args, token->value);
+		{
+			if (!token->split)
+				exec->args = ft_realloc(exec->args, token->value);
+			else
+				{
+					split = ft_split(token->value, ' ');
+					int i = 0;
+					while (split[i])
+						exec->args = ft_realloc(exec->args, split[i++]);
+					free_tab(split);
+				}
+		}
 		if (is_redir(token) != 0 && token->next)
 		{
 			addredirection(&exec->redir, is_redir(token), token->next->value);

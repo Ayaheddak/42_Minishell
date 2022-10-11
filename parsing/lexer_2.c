@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/10 15:34:43 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/11 02:36:21 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ t_token	*redirection(lexer_t *lexer, int type1, int type2, char r)
 			s = lexer_get_current_char_as_string(lexer);
 			value = freejoin(value, s);
 			lexer_advance(lexer);
-			return (init_token(type2, value));
+			return (init_token(type2, value, 0));
 		}
 		else
 		{
 			lexer->i -= 1;
-			return (lexer_advace_with_token(lexer, init_token(type1, &value[0])));
+			return (lexer_advace_with_token(lexer, init_token(type1, &value[0], 0)));
 		}
 	}
 	return ((void *)0);
@@ -103,7 +103,7 @@ t_token	*lexer_double_quote(lexer_t *lexer)//
 	lexer_advance(lexer);
 	if (after_quote(lexer, s, &value) == NULL)
 		return ((void *)0);
-	return (init_token(TOKEN_STRING, value));
+	return (init_token(TOKEN_STRING, value, 0));
 }
 
 t_token	*lexer_single_quote(lexer_t *lexer)
@@ -124,8 +124,22 @@ t_token	*lexer_single_quote(lexer_t *lexer)
 	lexer_advance(lexer);
 	if (after_quote(lexer, s, &value) == NULL)
 		return ((void *)0);
-	return (init_token(TOKEN_STRING, value));
+	return (init_token(TOKEN_STRING, value, 0));
 }
+
+int needs_splitting(char *str)
+{
+	int	i;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 
 t_token	*lexer_string(lexer_t *lexer)//
 {
@@ -135,6 +149,7 @@ t_token	*lexer_string(lexer_t *lexer)//
 
 	value = ft_strdup("");
 	//printf("c---> %c\n", lexer->c);
+	int a = 0;
 	while (lexer->c != '\0' && !is_whitespace(lexer->c) && !is_operator(lexer->c))
 	{
 		if (lexer->c == '$')
@@ -142,8 +157,10 @@ t_token	*lexer_string(lexer_t *lexer)//
 			while (lexer->c == '$')
 			{
 				token = lexer_expanding(lexer);
-				value = freejoin(value, token->value);	
+				value = freejoin(value, token->value);
 			}
+			a = needs_splitting(token->value);
+			printf("a: %d value: %s\n", a, value);
 		}
 		if (lexer->c == '"')
 		{
@@ -159,14 +176,16 @@ t_token	*lexer_string(lexer_t *lexer)//
 				return ((void *)0);
 			value = freejoin(value, token->value);
 		}
-		s = lexer_get_current_char_as_string(lexer);
-		value = freejoin(value, s);	
 		if (is_whitespace(lexer->c) || is_operator(lexer->c))
 			break ;
+		s = lexer_get_current_char_as_string(lexer);
+		value = freejoin(value, s);	
 		lexer_advance(lexer);
 	}
-	return (init_token(TOKEN_STRING, value));
+	//printf("value--> %s\n", value);
+	return (init_token(TOKEN_STRING, value, a));
 }
+
 
 t_token	*lexer_expanding(lexer_t *lexer)
 {
@@ -191,7 +210,12 @@ t_token	*lexer_expanding(lexer_t *lexer)
 	if (tmp == 0 && value == NULL)
 	{
 		value = ft_strdup("$");
-		return (init_token(TOKEN_STRING, value));
+		return (init_token(TOKEN_STRING, value, 0));
 	}
-	return (init_token(TOKEN_STRING, get_expanded_test(value)));
+		//printf("value inside exp --> %s\n", value);
+	char *expanded = get_expanded_test(value);
+	return (init_token(TOKEN_STRING, expanded, 0));
+	
+	// return (init_token(TOKEN_STRING, get_expanded_test(value)));
 }
+

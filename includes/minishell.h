@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/11 02:16:59 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:54:43 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_global	g_global;
 	========================== Token ==========================
 */
 
-t_token	*init_token(int type, char *value);
+t_token	*init_token(int type, char *value, int split);
 void	print_tokenizer(t_token *token);
 t_token	*tokenizer(lexer_t *lexer);
 t_token	*lexer_get_next_token(lexer_t *lexer);
@@ -80,7 +80,7 @@ t_token	*lexer_single_quote(lexer_t *lexer);
 t_token	*lexer_expanding(lexer_t *lexer);
 void	lexer_advance(lexer_t *lexer);
 void	lexer_skip_whitespace(lexer_t *lexer);
-void	addback(t_token **head, void *value, void *type);
+void	addback(t_token **head, void *value, void *type, int split);
 char	*lexer_get_current_char_as_string(lexer_t *lexer);
 char	*get_path(char	**env);
 char	*freejoin(char *s1, char *s2);

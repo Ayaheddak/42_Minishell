@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/10 23:04:41 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:54:52 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*get_expanded_test(char *value)
 	str = get_env_value(g_global.env_list, value);
 	if (str == NULL)
 		return (ft_strdup(""));
+	printf("get_expanded_test: %s\n", str);
 	return (str);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/09 01:50:00 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/11 02:35:23 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ char	*freejoin(char *s1, char *s2)
 	return (rest);
 }
 
-void	addback(t_token **head, void *value, void *type)
+void	addback(t_token **head, void *value, void *type, int split)
 {
 	t_token	*new;
 	t_token	*temp;
 
 	new = malloc(sizeof(t_token));
 	new->value = value;
+	new->split = split;
 	new->type = *(int *)type;
 	new->next = NULL;
 	if (*head == NULL)

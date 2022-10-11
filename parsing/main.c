@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/11 02:16:23 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:54:40 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ int	main(int argc, char *argv[], char *env[])
 		free(inpt);
 		check_parse_errors(token);
 		g_global.exec = parser(token);
+<<<<<<< HEAD
+=======
+		//g_global.env_list = env_list;
+>>>>>>> 98b599f56eacc72152541b7c3067d1a4e89a4525
 		if (g_global.errorlexer == 1)
 		{
 			free_tokenizer(token);
@@ -54,6 +58,7 @@ int	main(int argc, char *argv[], char *env[])
 		}
 		//print_tokenizer(token);
 		//system("leaks minishell");
+<<<<<<< HEAD
 		// if (g_global.errorparser == 1)
 		// {
 		// 	free_tokenizer(token);
@@ -64,6 +69,16 @@ int	main(int argc, char *argv[], char *env[])
 		start_execution(g_global.exec, g_global.env_list);
 		// printf("The status is: %d\n", g_global.exitstauts);
 		signal(SIGINT, ctrl_c);
+=======
+		if (g_global.errorparser == 1)
+		{
+			free_tokenizer(token);
+			free_exec(g_global.exec);
+			g_global.errorparser = 0;
+			continue ;
+		}
+		//start_execution(g_global.exec, g_global.env_list);
+>>>>>>> 98b599f56eacc72152541b7c3067d1a4e89a4525
 	}
 	return (0);
 }
