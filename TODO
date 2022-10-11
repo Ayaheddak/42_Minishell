@@ -6,3 +6,20 @@ echo < $USER #done
 $$ #done
 $$USER$hsdfjd 
 $USER%hsdfjd what's diff $$USER%hsdfjd
+echo $>aywa //
+
+
+
+
+ <<"$USER" cat
+ export a="ls -la"
+
+
+
+
+
+
+ls       -la
+
+klma klma asdasd      asd
+sdls -la

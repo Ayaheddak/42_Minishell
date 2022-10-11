@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/10 15:34:43 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/11 00:01:09 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,12 +159,13 @@ t_token	*lexer_string(lexer_t *lexer)//
 				return ((void *)0);
 			value = freejoin(value, token->value);
 		}
-		s = lexer_get_current_char_as_string(lexer);
-		value = freejoin(value, s);	
 		if (is_whitespace(lexer->c) || is_operator(lexer->c))
 			break ;
+		s = lexer_get_current_char_as_string(lexer);
+		value = freejoin(value, s);	
 		lexer_advance(lexer);
 	}
+	//printf("value--> %s\n", value);
 	return (init_token(TOKEN_STRING, value));
 }
 
@@ -193,5 +194,6 @@ t_token	*lexer_expanding(lexer_t *lexer)
 		value = ft_strdup("$");
 		return (init_token(TOKEN_STRING, value));
 	}
+		//printf("value inside exp --> %s\n", value);
 	return (init_token(TOKEN_STRING, get_expanded_test(value)));
 }

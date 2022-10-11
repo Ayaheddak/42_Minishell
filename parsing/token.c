@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/10 14:18:16 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/11 01:42:41 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ t_token	*lexer_get_next_token(lexer_t *lexer)
 	{
 		if (is_whitespace(lexer->c))
 			lexer_skip_whitespace (lexer);
-		else if (lexer->c == '"')
+		else if (lexer->c == '"') //   check if you had '<<' before // if yes : don't expand (but remove the quotes)
 			return (lexer_double_quote(lexer));
 		else if (lexer->c == 39)
 			return (lexer_single_quote(lexer));
-		else if (lexer->c == '<')
-			return (redirection(lexer, TOKEN_IN, TOKEN_DELIMITER, '<'));
+		else if (lexer->c == '<') 
+			return (redirection(lexer, TOKEN_IN, TOKEN_DELIMITER, '<')); // if it's a delimiter mark the flag
 		else if (lexer->c == '>')
 			return (redirection(lexer, TOKEN_OUT, TOKEN_APPEND, '>'));
 		else if (lexer->c == '|')
@@ -42,7 +42,7 @@ t_token	*lexer_get_next_token(lexer_t *lexer)
 			break ;
 		}
 		else
-			return (lexer_string(lexer));
+			return (lexer_string(lexer)); // hna fin lhrira
 	}
 	return ((void *)0);
 }
