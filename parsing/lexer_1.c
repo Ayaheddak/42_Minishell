@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/11 01:33:07 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/11 02:16:37 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*get_expanded_test(char *value)
 	str = get_env_value(get_env_list(g_global.env), value);
 	if (str == NULL)
 		return (ft_strdup(""));
+	printf("get_expanded_test: %s\n", str);
 	return (str);
 }
 

@@ -6,19 +6,20 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/11 01:42:41 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/11 02:36:05 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_token	*init_token(int type, char *value)
+t_token	*init_token(int type, char *value, int split)
 {
 	t_token	*token;
 
 	token = malloc (sizeof(t_token));
 	token->type = type;
 	token->value = value;
+	token->split = split;
 	return (token);
 }
 
@@ -38,11 +39,11 @@ t_token	*lexer_get_next_token(lexer_t *lexer)
 			return (redirection(lexer, TOKEN_OUT, TOKEN_APPEND, '>'));
 		else if (lexer->c == '|')
 		{
-			return (lexer_advace_with_token(lexer, init_token(TOKEN_PIPE, lexer_get_current_char_as_string(lexer))));
+			return (lexer_advace_with_token(lexer, init_token(TOKEN_PIPE, lexer_get_current_char_as_string(lexer), 0)));
 			break ;
 		}
 		else
-			return (lexer_string(lexer)); // hna fin lhrira
+			return (lexer_string(lexer));
 	}
 	return ((void *)0);
 }
@@ -55,7 +56,7 @@ t_token	*tokenizer(lexer_t *lexer)
 	head = NULL;
 	while ((token = lexer_get_next_token(lexer)) != (void *)0)
 	{
-		addback(&head, token->value, &token->type);
+		addback(&head, token->value, &token->type, token->split);
 		free(token);
 	}
 	return (head);
@@ -71,6 +72,7 @@ void	print_tokenizer(t_token *token)
 		printf("------------- Node numbre %d  = -------------\n", i);
 		printf("ur value = %s\n", (char *)token->value);
 		printf("ur type = %d\n", token->type);
+		printf("ur type split = %d\n", token->split);
 		token = token->next;
 		i++;
 	}

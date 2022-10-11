@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/10 13:41:57 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/11 02:41:39 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	main(int argc, char *argv[], char *env[])
 		token = tokenizer(lexer);
 		free(lexer);
 		free(inpt);
-		//check_parse_errors(token);
-		//g_global.exec = parser(token);
+		check_parse_errors(token);
+		g_global.exec = parser(token);
 		//g_global.env_list = env_list;
 		if (g_global.errorlexer == 1)
 		{
@@ -51,15 +51,15 @@ int	main(int argc, char *argv[], char *env[])
 			g_global.errorlexer = 0;
 			continue ;
 		}
-		print_tokenizer(token);
+		//print_tokenizer(token);
 		//system("leaks minishell");
-		// if (g_global.errorparser == 1)
-		// {
-		// 	free_tokenizer(token);
-		// 	free_exec(g_global.exec);
-		// 	g_global.errorparser = 0;
-		// 	continue ;
-		// }
+		if (g_global.errorparser == 1)
+		{
+			free_tokenizer(token);
+			free_exec(g_global.exec);
+			g_global.errorparser = 0;
+			continue ;
+		}
 		//start_execution(g_global.exec, g_global.env_list);
 	}
 	return (0);
