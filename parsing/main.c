@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/10 22:56:54 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/11 02:16:23 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char *argv[], char *env[])
 	g_global.exitstauts = 0;
 	while (1)
 	{
-		inpt = readline("./minishell$ ");//
+		inpt = readline("minishell$ ");//
 		if (!inpt)
 			continue ;
 		lexer = init_lexer(inpt);//
@@ -63,6 +63,7 @@ int	main(int argc, char *argv[], char *env[])
 		// }
 		start_execution(g_global.exec, g_global.env_list);
 		// printf("The status is: %d\n", g_global.exitstauts);
+		signal(SIGINT, ctrl_c);
 	}
 	return (0);
 }

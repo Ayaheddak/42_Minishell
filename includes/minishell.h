@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 21:04:07 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/11 02:16:59 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,4 +156,9 @@ int		is_replaced(t_env *env_list, char *search, char *replace);
 int		is_valid_arg(char *str);
 int		ft_export_to_copy(t_env *env, char **args, t_execute *exec);
 void	ft_exit(void);
+
+/*
+----------------------------------Signals---------------------
+*/
+void	ctrl_c(int signum);
 #endif
