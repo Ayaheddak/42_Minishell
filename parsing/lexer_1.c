@@ -18,7 +18,7 @@ char	*get_expanded_test(char *value)
 {
 	char *str;
 
-	str = get_env_value(get_env_list(g_global.env), value);
+	str = get_env_value(g_global.env_list, value);
 	if (str == NULL)
 		return (ft_strdup(""));
 	printf("get_expanded_test: %s\n", str);
