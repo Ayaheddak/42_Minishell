@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:03:31 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 18:12:24 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:42:21 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ void	execute_command(t_execute *exec, t_exec *exec_list, t_env *env)
 	str_env = get_env_array(env);
 	if (!right_path)
 		ft_error("Error command");
-	if (ft_call_builtins(exec_list, env, exec) != -1)
-		exit(0);
+	g_global.exitstauts = ft_call_builtins(exec_list, env, exec);
+	if (g_global.exitstauts != -1)
+		exit(g_global.exitstauts);
 	execve(right_path, exec_list->args, str_env);
 	close(exec->output);
 }

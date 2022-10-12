@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:13:00 by het-tale          #+#    #+#             */
-/*   Updated: 2022/09/19 17:34:42 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:39:04 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void    ft_exit(void)
+void	ft_exit(void)
 {
-    exit(EXIT_CODE);
+    g_global.exitstauts = 0;
+    exit(g_global.exitstauts);
 }

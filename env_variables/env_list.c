@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:56:10 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/12 02:31:30 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 03:17:49 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_env	*ft_copy_env(t_env *env)
 {
 	t_env	*env_copy;
 
-	env_copy = malloc(sizeof(t_env));
+	env_copy = NULL;
 	while(env)
 	{
 		add_back_env(&env_copy, create_node(env->key, env->value));

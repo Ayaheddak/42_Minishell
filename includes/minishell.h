@@ -6,9 +6,10 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/12 00:49:51 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 03:17:10 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -147,12 +148,19 @@ int		ft_call_builtins(t_exec *head, t_env *env_list, t_execute *exec);
 t_env	*change_pwd(t_env *env_list, char *key);
 int		ft_change_dir(char **args, t_env *env);
 int		ft_env(t_env *env, char **args, t_execute *exec);
-void	print_env(t_env *env, t_execute *exec);
+void	print_env(t_env *env, t_execute *exec, int d);
 char	*join_key_value(char *key, char *value);
 int		ft_pwd(char **args, t_env *env, t_execute *exec);
 t_env	*remove_list(t_env **env_list, t_env *remove);
 int		ft_unset(char **args, t_env *env_iter);
-int		ft_export_to_env(t_env *env_list, char **args);
+int		ft_export_to_env(t_env *env_list, char **args, t_execute *exec);
 int		is_replaced(t_env *env_list, char *search, char *replace);
 int		is_valid_arg(char *str);
+int		ft_export_to_copy(t_env *env, char **args, t_execute *exec);
+void	ft_exit(void);
+
+/*
+----------------------------------Signals---------------------
+*/
+void	ctrl_c(int signum);
 #endif

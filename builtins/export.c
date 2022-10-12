@@ -6,12 +6,13 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:03:47 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 02:17:22 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:48:12 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+//to edit
 int	is_valid_arg(char *str)
 {
 	int	i;
@@ -47,14 +48,19 @@ int	is_replaced(t_env *env_list, char *search, char *replace)
 	return (0);
 }
 
-int	ft_export_to_env(t_env *env_list, char **args)
+int	ft_export_to_env(t_env *env_list, char **args, t_execute *exec)
 {
 	char	**split;
 	int		i;
 
 	i = 1;
 	if (args[i] && !is_valid_arg(args[i]))
-		return (0);
+	{
+		g_global.exitstauts = 1;
+		return (g_global.exitstauts);
+	}
+	if (!args[i])
+		print_env(env_list, exec, 0);
 	while (args[i])
 	{
 		if (ft_strchr(args[i], '='))
@@ -71,51 +77,9 @@ int	ft_export_to_env(t_env *env_list, char **args)
 				break ;
 			add_back_env(&env_list, create_node(split[0], split[1]));
 		}
+		else
+			add_back_env(&env_list, create_node(args[i], NULL));
 		i++;
 	}
-	return (1);
+	return (g_global.exitstauts);
 }
-/*
-export : print list of env variables sorted
-export key=val : add in the env_list at the end (done)
-				 add at the end of copy as well (added values should be sorted)
-*/
-
-// int	ft_export_to_copy(t_env *env, char **args, t_execute *exec)
-// {
-// 	t_env	*original;
-// 	t_env	*env_copy;
-// 	int		i;
-// 	char	**split;
-
-// 	original = ft_copy_env(env);
-// 	original = ft_sort_env(original);
-// 	env_copy = ft_copy_env(original);
-// 	i = 1;
-// 	if (!args[i])
-// 		print_env(env_copy, exec);
-// 	else
-// 	{
-// 		if (args[i] && !is_valid_arg(args[i]))
-// 			return (0);
-// 		while (args[i])
-// 		{
-// 			if (ft_strchr(args[i], '='))
-// 			{
-// 				split = ft_split(args[i], '=');
-// 				if(!split[1])
-// 					split[1] = "";
-// 				if(!split[0])
-// 				{
-// 					ft_putstr_fd("`=': not a valid identifier\n", 2);
-// 					return (0);
-// 				}
-// 				if (is_replaced(env_copy, split[0], split[1]))
-// 					break ;
-// 			}
-// 			add_back_env(&env_copy, create_node(split[0], split[1]));
-// 			i++;
-// 		}
-// 	}
-// 	return (1);
-// }

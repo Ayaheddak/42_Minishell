@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 21:11:33 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 23:16:06 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:35:08 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ int	ft_unset(char **args, t_env *env_iter)
 	t_env	*env;
 
 	i = 1;
+	if (args[i] && !is_valid_arg(args[i]))
+	{
+		g_global.exitstauts = 1;
+		return (g_global.exitstauts);
+	}
 	while (args[i])
     {
 		env = env_iter;
@@ -52,5 +57,6 @@ int	ft_unset(char **args, t_env *env_iter)
         }
 		i++;
     }
-	return (1);
+	g_global.exitstauts = 0;
+	return (g_global.exitstauts);
 }
