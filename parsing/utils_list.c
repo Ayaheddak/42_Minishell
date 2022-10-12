@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 01:53:45 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 08:04:45 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ char	*freejoin(char *s1, char *s2)
 		return (ft_strdup(s2));
 	if (!s2)
 		return (s1);
-	rest = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	j = (ft_strlen(s1) + ft_strlen(s2) + 1);//
+	rest = (char *)malloc(sizeof(char) * j);
 	if (!rest)
 		return (NULL);
+	j = 0;
 	while (s1[i] != '\0')
 		rest[j++] = s1[i++];
 	i = 0;
@@ -36,7 +38,7 @@ char	*freejoin(char *s1, char *s2)
 		rest[j++] = s2[i++];
 	rest[j] = '\0';
 	free(s1);
-	free(s2);
+	//free(s2);
 	return (rest);
 }
 

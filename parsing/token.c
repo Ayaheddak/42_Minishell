@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 02:13:11 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 05:35:19 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,8 @@ t_token	*tokenizer(lexer_t *lexer)
 	{
 		addback(&head, token->value, &token->type, token->split);
 		g_global.last_token = token;
-		free(token);
 	}
-	free(token);//
+	free(token);
 	return (head);
 }
 

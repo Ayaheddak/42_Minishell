@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 03:16:58 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 08:13:47 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@ char	*get_expanded_test(char *value)
 	free_env(env);
 	return (str);
 }
-
-/*
-char	*get_exapanded_test(void)
-{
-	return (strdup("[EXPANDED VALUE]"));
-}
-*/ 
 
 lexer_t	*init_lexer(char *str)
 {

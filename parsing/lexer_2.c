@@ -6,19 +6,30 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 03:09:26 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 08:13:55 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+char *conv_char(char c)
+{
+	char *res;
 
+	res = malloc(sizeof(char)* 2);
+	if(!res)
+		return(NULL);
+	res[0] = c;
+	res[1] = '\0';
+	return (res);
+}
 t_token	*redirection(lexer_t *lexer, int type1, int type2, char r)
 {
 	char	*value;
 	char	*s;
+	char	now;
 
-	value = ft_strdup("");
-	value[0] = lexer->c;
+	now = lexer->c;
+	value = conv_char(now);
 	if (lexer->c == r)
 	{
 		lexer_advance(lexer);
@@ -166,9 +177,8 @@ t_token	*lexer_string(lexer_t *lexer)//
 		{
 			while (lexer->c == '$')
 			{
-				token = lexer_expanding(lexer);//
+				token = lexer_expanding(lexer);
 				value = freejoin(value, token->value);
-				//free(token);
 			}
 			a = needs_splitting(token->value);
 		}
