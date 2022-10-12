@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 20:00:30 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 15:32:17 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 02:45:13 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,23 @@ char	*get_env_value(t_env *env, char *key)
 	while (env)
 	{
 		if (!ft_strcmp(env->key, key))
-			return (env->value);
+			return (ft_strdup(env->value));
 		env = env->next;
 	}
 	return (NULL);
+}
+
+void	free_env(t_env *env)
+{
+	t_env	*tmp;
+
+	while (env != NULL)
+	{
+		tmp = env;
+		free(env->key);
+		free(env->value);
+		env = env->next;
+		free (tmp);
+	}
+	free (env);
 }

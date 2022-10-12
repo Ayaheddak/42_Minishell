@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:56:10 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 01:50:39 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 02:31:30 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ t_env	*get_env_list(char *env[])
 		add_back_env(&head, create_node(split[0], split[1]));
 		i++;
 	}
+	// for (int i = 0; split[i]; i++)
+	// 	free(split[i]);
+	free(split);
 	return (head);
 }
 

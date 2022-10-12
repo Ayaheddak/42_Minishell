@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/11 02:35:23 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 01:53:45 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	*freejoin(char *s1, char *s2)
 	int		i;
 	int		j;
 	char	*rest;
-	size_t	count;
 
 	i = 0;
 	j = 0;
@@ -27,8 +26,7 @@ char	*freejoin(char *s1, char *s2)
 		return (ft_strdup(s2));
 	if (!s2)
 		return (s1);
-	count = ft_strlen(s1) + ft_strlen(s2) + 1;
-	rest = (char *)malloc(sizeof(char) * count);
+	rest = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!rest)
 		return (NULL);
 	while (s1[i] != '\0')
@@ -81,21 +79,6 @@ void	addredirection(t_redir **head, int type, char *file)
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new;
-}
-
-void print_redir(t_redir *redir)
-{
-	int i;
-	
-	i = 0;
-    while(redir != NULL)
-    {
-		printf("------------- Node numbre %d  = -------------\n" , i);
-        printf("ur name of file = %s\n", redir->name);
-		printf("ur type = %d\n",redir->type); 
-		redir = redir->next;
-		i++;
-    }
 }
 
 t_exec	*get_list(void)

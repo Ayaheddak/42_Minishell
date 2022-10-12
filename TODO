@@ -1,6 +1,6 @@
 echo $> USER
 echo $"USER" #done
-echo $'USER'
+echo $'USER' //prb
 echo $< USER
 echo < $USER #done
 $$ #done

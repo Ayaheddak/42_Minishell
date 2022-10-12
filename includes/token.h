@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 01:15:25 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/11 01:43:58 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/11 23:43:40 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef struct s_token
 		TOKEN_DELIMITER,
 	}	type;
 	char			*value;
-	int split;
+	int				split;
+	//struct	s_token *last_token;
 	struct s_token	*next;
 }	t_token;
 #endif

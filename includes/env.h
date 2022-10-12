@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:51:32 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 01:51:58 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 02:34:47 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ t_env	*get_env_list(char *env[]);
 char	*get_env_value(t_env *env, char *key);
 t_env	*ft_copy_env(t_env *env);
 t_env	*ft_sort_env(t_env *env);
+void	free_env(t_env *env);
 #endif

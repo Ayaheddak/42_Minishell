@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 20:30:20 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/11 02:42:44 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 01:43:25 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ t_exec	*parser(t_token *head)
 		if (token)
 			token = token->next;
 	}
+	//printf("arg[0]-->%s\n",exec->args[0]);
+	// printf("arg[1]-->%s\n",exec->args[1]);
 	return (exec);
 }
 

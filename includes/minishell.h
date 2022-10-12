@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/11 02:35:52 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 00:49:51 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ typedef struct s_global
 	t_exec	*exec;
 	char	**env;
 	t_env	*env_list;
+	t_token *last_token;
 	int		exitstauts;
 	int		errorlexer;
 	int		errorparser;
 }		t_global;
-
+ 
 t_global	g_global;
 
 /*
@@ -62,6 +63,7 @@ t_token	*init_token(int type, char *value, int split);
 void	print_tokenizer(t_token *token);
 t_token	*tokenizer(lexer_t *lexer);
 t_token	*lexer_get_next_token(lexer_t *lexer);
+// t_token	*lexer_get_next_token(lexer_t *lexer, t_token *token);
 void	free_tokenizer(t_token *token);
 
 /*
@@ -71,6 +73,7 @@ void	free_tokenizer(t_token *token);
 lexer_t	*init_lexer(char *contents);
 t_token	*redirection(lexer_t *lexer, int type1, int type2, char r);
 t_token	*lexer_double_quote(lexer_t *lexer);
+// t_token	*lexer_double_quote(lexer_t *lexer, t_token *token);//
 t_token	*lexer_string(lexer_t *lexer);
 t_token	*expanding(lexer_t *lexer);
 t_token	*lexer_advace_with_token(lexer_t *lexer, t_token *token);
