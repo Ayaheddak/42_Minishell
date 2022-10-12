@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:56:10 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/12 03:17:49 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 09:21:48 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_env	*get_env_list(char *env[])
 	}
 	// for (int i = 0; split[i]; i++)
 	// 	free(split[i]);
-	free(split);
+	// free(split);
 	return (head);
 }
 

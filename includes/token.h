@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 01:15:25 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/12 08:45:01 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 20:29:25 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_token
 	}	type;
 	char			*value;
 	int				split;
-	//struct	s_token *last_token;
 	struct s_token	*next;
 }	t_token;
 #endif
