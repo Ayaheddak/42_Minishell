@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:03:47 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 23:48:12 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 07:50:23 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,10 @@ int	ft_export_to_env(t_env *env_list, char **args, t_execute *exec)
 {
 	char	**split;
 	int		i;
+	int		d;
 
 	i = 1;
-	if (args[i] && !is_valid_arg(args[i]))
-	{
-		g_global.exitstauts = 1;
-		return (g_global.exitstauts);
-	}
+	d = 0;
 	if (!args[i])
 		print_env(env_list, exec, 0);
 	while (args[i])
@@ -71,15 +68,32 @@ int	ft_export_to_env(t_env *env_list, char **args, t_execute *exec)
 			if(!split[0])
 			{
 				ft_putstr_fd("`=': not a valid identifier\n", 2);
-				return (0);
+				d = 1;
+				i++;
+				continue ;
 			}
 			if (is_replaced(env_list, split[0], split[1]))
-				break ;
+			{
+				i++;
+				continue ;
+			}
 			add_back_env(&env_list, create_node(split[0], split[1]));
 		}
 		else
+		{
+			if (!is_valid_arg(args[i]))
+			{
+				d = 1;
+				i++;
+				continue ;
+			}
 			add_back_env(&env_list, create_node(args[i], NULL));
+		}
 		i++;
 	}
+	if (!d)
+		g_global.exitstauts = 0;
+	else
+		g_global.exitstauts = 1;
 	return (g_global.exitstauts);
 }

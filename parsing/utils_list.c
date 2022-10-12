@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/11 02:35:23 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 05:14:02 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ char	*freejoin(char *s1, char *s2)
 	while (s2[i] != '\0')
 		rest[j++] = s2[i++];
 	rest[j] = '\0';
-	free(s1);
-	free(s2);
+	// free(s1);
+	// free(s2);
 	return (rest);
 }
 

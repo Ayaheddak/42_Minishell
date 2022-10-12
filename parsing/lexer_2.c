@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/11 02:36:21 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 07:12:01 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,8 +159,8 @@ t_token	*lexer_string(lexer_t *lexer)//
 				token = lexer_expanding(lexer);
 				value = freejoin(value, token->value);
 			}
-			a = needs_splitting(token->value);
-			printf("a: %d value: %s\n", a, value);
+			a = needs_splitting(value);
+			// printf("a: %d value: %s\n", a, value);
 		}
 		if (lexer->c == '"')
 		{
@@ -196,6 +196,11 @@ t_token	*lexer_expanding(lexer_t *lexer)
 	value = NULL;
 	tmp = 0;
 	lexer_advance(lexer);
+	if(lexer->c == '?')
+	{
+		lexer_advance(lexer);
+		return(init_token(TOKEN_STRING, ft_itoa(g_global.exitstauts), 0));
+	}
 	while (!is_whitespace(lexer->c) && lexer->c != '\0' && !is_operator_speciaux(lexer->c))
 	{
 		if (is_whitespace(lexer->c) || lexer->c == '"' || is_operator_speciaux(lexer->c))

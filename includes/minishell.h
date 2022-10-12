@@ -6,10 +6,9 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/11 21:54:43 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 08:09:45 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -21,6 +20,7 @@
 # include <readline/history.h>
 # include <unistd.h>
 # include <signal.h>
+# include <errno.h>
 # include <fcntl.h>
 # include "libft.h"
 # include "token.h"
@@ -148,7 +148,7 @@ int		ft_change_dir(char **args, t_env *env);
 int		ft_env(t_env *env, char **args, t_execute *exec);
 void	print_env(t_env *env, t_execute *exec, int d);
 char	*join_key_value(char *key, char *value);
-int		ft_pwd(char **args, t_env *env, t_execute *exec);
+int		ft_pwd(char **args, t_execute *exec);
 t_env	*remove_list(t_env **env_list, t_env *remove);
 int		ft_unset(char **args, t_env *env_iter);
 int		ft_export_to_env(t_env *env_list, char **args, t_execute *exec);
@@ -160,5 +160,8 @@ void	ft_exit(void);
 /*
 ----------------------------------Signals---------------------
 */
-void	ctrl_c(int signum);
+void	ctrl_d(char *input);
+void	ctrlback(int d);
+void	signals(void);
+void	ctrl_c(void);
 #endif

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:41:04 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 21:40:30 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 08:08:56 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	start_execution(t_exec *exec_list, t_env *env)
 	i = 0;
 	exec->fd_pipe = malloc(sizeof(int) * (exec->nb_cmd - 1) * 2);
 	exec->child_pid = malloc(sizeof(int) * exec->nb_cmd);
-	exec->infile = -1;
-	exec->out_file = -1;
+	exec->infile = -2;
+	exec->out_file = -2;
 	while (i < exec->nb_cmd - 1)
 	{	
 		if (pipe(exec->fd_pipe + 2 * i) == -1)
@@ -50,6 +50,8 @@ void	start_execution(t_exec *exec_list, t_env *env)
 		exec->child_pid[i] = fork();
 		if (exec->child_pid[i] == 0)
 		{
+			ctrl_c();
+			ctrlback(1);
 			close_pipes(exec, (exec->nb_cmd - 1) * 2);
 			execute_command(exec, exec_list, env);
 		}

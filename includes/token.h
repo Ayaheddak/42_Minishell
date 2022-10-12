@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 01:15:25 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/11 01:43:58 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 08:09:57 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_token
 		TOKEN_DELIMITER,
 	}	type;
 	char			*value;
-	int split;
+	int				split;
 	struct s_token	*next;
 }	t_token;
 #endif

@@ -6,13 +6,13 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:47:09 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 21:29:17 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 07:24:11 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_pwd(char **args, t_env *env, t_execute *exec)
+int	ft_pwd(char **args, t_execute *exec)
 {
 	char	*value;
 
@@ -23,12 +23,13 @@ int	ft_pwd(char **args, t_env *env, t_execute *exec)
 	}
 	else
 	{
-		value = getcwd(env->value, 100);
+		value = getcwd(NULL, 100);
 		if (value)
 		{
 			ft_putstr_fd(value, exec->output);
 			ft_putstr_fd("\n", exec->output);
 		}
+		g_global.exitstauts = 0;
 	}
 	return (g_global.exitstauts);
 }

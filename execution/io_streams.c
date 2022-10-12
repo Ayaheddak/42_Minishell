@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:00:58 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 01:08:26 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 06:45:24 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	file_exist(int *d, t_execute *exec, t_exec *exec_list)
 				line = get_next_line(0);
 				if (line == NULL)
 					break ;
-				if (!ft_strcmp(exec_list->redir->name, line))
+				if (!ft_strncmp(exec_list->redir->name, line, ft_strlen(exec_list->redir->name)))
 				{
 					free(line);
 					break ;

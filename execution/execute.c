@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:03:31 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 21:42:21 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 06:33:28 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_right_path_utils(t_path *corr_path, char *cmd, t_env *env)
 	{
 		corr_path->path = ft_strjoin(corr_path->split[corr_path->j], "/");
 		corr_path->path = ft_strjoin(corr_path->path, cmd);
-		if (access(corr_path->path, F_OK) == 0)
+		if (access(corr_path->path, F_OK | X_OK) == 0)
 			return (corr_path->path);
 		corr_path->j++;
 	}
@@ -55,6 +55,7 @@ char	*get_right_path(t_env *env, char *cmd)
 	corr_path.i = 0;
 	corr_path.len = 0;
 	corr_path.d = 0;
+	corr_path.path = NULL;
 	while (env)
 	{
 		if (!ft_strcmp(env->key, "PATH"))
@@ -68,7 +69,7 @@ char	*get_right_path(t_env *env, char *cmd)
 
 char	*check_command(char *cmd, t_env *env)
 {
-	if (access(cmd, F_OK) == 0)
+	if (access(cmd, F_OK | X_OK) == 0)
 		return (cmd);
 	return (get_right_path(env, cmd));
 }

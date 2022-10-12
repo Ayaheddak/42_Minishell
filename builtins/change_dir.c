@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:29:48 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 22:14:14 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 04:39:58 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_env	*change_pwd(t_env *env_list, char *key)
 	{
 		if (!ft_strcmp(env->key, key))
 		{
-			env->value = getcwd(env->value, 100);
+			env->value = getcwd(NULL, 0);
 			break ;
 		}
 		env = env->next;

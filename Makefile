@@ -6,7 +6,7 @@
 #    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/10/11 02:34:59 by het-tale         ###   ########.fr        #
+#    Updated: 2022/10/12 06:36:02 by het-tale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ UTILS	=	parsing/lexer_1.c parsing/main.c parsing/token.c parsing/utils_list.c pa
 			env_variables/env_list.c env_variables/env_list_utils.c parsing/parsing_utils.c\
 			execution/execute.c execution/start_exec.c execution/close.c execution/io_streams.c \
 			builtins/echo.c builtins/call_builtins.c builtins/change_dir.c builtins/env.c builtins/pwd.c builtins/unset.c builtins/export.c builtins/exit.c \
-			signals/ctrlc.c
+			signals/ctrlc.c signals/ctrld.c signals/ctrlback.c signals/signals.c
 
-FLAGS	=	 -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS	=	 -Wall -Wextra -Werror -I /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/include/ #-fsanitize=address
 
 
 # OBJCT	=	${UTILS:.c=.o}
@@ -36,8 +36,8 @@ CC		=	gcc
 all		:	$(NAME)
 
 $(NAME)	:	$(UTILS)	
-	@$(CC) $(FLAGS) $(UTILS) -o $(NAME) -lreadline
-
+	@$(CC) $(CFLAGS) $(UTILS) -o $(NAME) -lreadline -L /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/lib  -g
+	
 clean :
 	@${RM} $(OBJCT)
 

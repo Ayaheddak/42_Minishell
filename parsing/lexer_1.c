@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/11 21:54:52 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 05:14:53 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_expanded_test(char *value)
 	str = get_env_value(g_global.env_list, value);
 	if (str == NULL)
 		return (ft_strdup(""));
-	printf("get_expanded_test: %s\n", str);
+	// printf("get_expanded_test: %s\n", str);
 	return (str);
 }
 
@@ -36,6 +36,8 @@ lexer_t	*init_lexer(char *str)
 {
 	lexer_t	*lexer;
 
+	if (!str)
+		return (NULL);
 	lexer = malloc(sizeof(lexer_t));//
 	lexer->contents = str;
 	lexer->i = 0;
