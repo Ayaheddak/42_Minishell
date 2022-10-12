@@ -6,9 +6,10 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 07:14:10 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 08:46:34 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/minishell.h"
 
@@ -32,6 +33,19 @@ int	main(int argc, char *argv[], char *env[])
 		lexer = init_lexer(inpt);
 		add_history(inpt);
 		if (lexer)
+		token = tokenizer(lexer);//
+		free(lexer);
+		free(inpt);
+		check_parse_errors(token);
+		g_global.exec = parser(token);
+		if (g_global.errorlexer == 1)
+		{
+			free_tokenizer(token);
+			g_global.errorlexer = 0;
+			continue ;
+		}
+		//system("leaks minishell");
+		if (g_global.errorparser == 1)
 		{
 			token = tokenizer(lexer);
 			//free(lexer);
@@ -55,6 +69,17 @@ int	main(int argc, char *argv[], char *env[])
 		}
 		ctrl_d(inpt);
 		printf("%d\n", g_global.exitstauts);
+		start_execution(g_global.exec, g_global.env_list);
+		// printf("The status is: %d\n", g_global.exitstauts);
+		//signal(SIGINT, ctrl_c);
+		// if (g_global.errorparser == 1)
+		// {
+		// 	free_tokenizer(token);
+		// 	g_global.errorparser = 0;
+		// 	continue ;
+		// }
+		//start_execution(g_global.exec, g_global.env_list);
+
 	}
 	return (0);
 }

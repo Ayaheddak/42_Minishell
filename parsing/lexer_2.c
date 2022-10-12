@@ -6,19 +6,31 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 07:12:01 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 08:46:12 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
 
+#include "../includes/minishell.h"
+char *conv_char(char c)
+{
+	char *res;
+
+	res = malloc(sizeof(char)* 2);
+	if(!res)
+		return(NULL);
+	res[0] = c;
+	res[1] = '\0';
+	return (res);
+}
 t_token	*redirection(lexer_t *lexer, int type1, int type2, char r)
 {
 	char	*value;
 	char	*s;
+	char	now;
 
-	value = ft_strdup("");
-	value[0] = lexer->c;
+	now = lexer->c;
+	value = conv_char(now);
 	if (lexer->c == r)
 	{
 		lexer_advance(lexer);
@@ -52,6 +64,7 @@ char	*after_quote(lexer_t *lexer , char *s, char **value)//
 				if (token == (void *)0)
 					return (NULL);
 				*value = freejoin(*value, token->value);
+				//free(token);
 			}
 			if (lexer->c == 39)
 			{
@@ -59,6 +72,7 @@ char	*after_quote(lexer_t *lexer , char *s, char **value)//
 				if (token == (void *)0)
 					return (NULL);
 				*value = freejoin(*value, token->value);
+				//free(token);
 			}
 			if (lexer->c == '$')
 			{
@@ -66,6 +80,7 @@ char	*after_quote(lexer_t *lexer , char *s, char **value)//
 				{
 					token = lexer_expanding(lexer);
 					*value = freejoin(*value, token->value);
+					free(token);
 				}
 			}
 			if (is_whitespace(lexer->c))
@@ -82,12 +97,16 @@ t_token	*lexer_double_quote(lexer_t *lexer)//
 {
 	char	*value;
 	char	*s;
+	int		tmp;
 
-	value = ft_strdup("");
+	value =ft_strdup("");
+	tmp = 0;
+	if (g_global.last_token && g_global.last_token->type == TOKEN_DELIMITER)
+		tmp = 1;
 	lexer_advance(lexer);
 	while (lexer->c != '"' && lexer->c != '\0')
 	{
-		if (lexer->c == '$')
+		if (lexer->c == '$' && tmp == 0)
 		{
 			while (lexer->c == '$')
 				value = freejoin(value, lexer_expanding(lexer)->value);
@@ -140,27 +159,29 @@ int needs_splitting(char *str)
 	return (0);
 }
 
-
 t_token	*lexer_string(lexer_t *lexer)//
 {
 	char	*value;
 	char	*s;
 	t_token	*token;
+	int		a;
+	int		tmp;
 
+	a = 0;
+	tmp = 0;
 	value = ft_strdup("");
-	//printf("c---> %c\n", lexer->c);
-	int a = 0;
+	if (g_global.last_token && g_global.last_token->type == TOKEN_DELIMITER)
+		tmp = 1;
 	while (lexer->c != '\0' && !is_whitespace(lexer->c) && !is_operator(lexer->c))
 	{
-		if (lexer->c == '$')
+		if (lexer->c == '$' && tmp == 0)
 		{
 			while (lexer->c == '$')
 			{
 				token = lexer_expanding(lexer);
 				value = freejoin(value, token->value);
 			}
-			a = needs_splitting(value);
-			// printf("a: %d value: %s\n", a, value);
+			a = needs_splitting(token->value);
 		}
 		if (lexer->c == '"')
 		{
@@ -175,6 +196,7 @@ t_token	*lexer_string(lexer_t *lexer)//
 			if (token == (void *)0)
 				return ((void *)0);
 			value = freejoin(value, token->value);
+			free(token);
 		}
 		if (is_whitespace(lexer->c) || is_operator(lexer->c))
 			break ;
@@ -182,10 +204,8 @@ t_token	*lexer_string(lexer_t *lexer)//
 		value = freejoin(value, s);	
 		lexer_advance(lexer);
 	}
-	//printf("value--> %s\n", value);
 	return (init_token(TOKEN_STRING, value, a));
 }
-
 
 t_token	*lexer_expanding(lexer_t *lexer)
 {
@@ -193,17 +213,17 @@ t_token	*lexer_expanding(lexer_t *lexer)
 	char	*s;
 	int		tmp;
 
-	value = NULL;
+	value = ft_strdup("");
 	tmp = 0;
 	lexer_advance(lexer);
 	if(lexer->c == '?')
 	{
 		lexer_advance(lexer);
-		return(init_token(TOKEN_STRING, ft_itoa(g_global.exitstauts), 0));
+		return (init_token(TOKEN_STRING, ft_itoa(g_global.exitstauts), 0));
 	}
 	while (!is_whitespace(lexer->c) && lexer->c != '\0' && !is_operator_speciaux(lexer->c))
 	{
-		if (is_whitespace(lexer->c) || lexer->c == '"' || is_operator_speciaux(lexer->c))
+		if (is_whitespace(lexer->c) || lexer->c == '"' || is_operator_speciaux(lexer->c) || lexer->c == 39)
 		{
 			tmp = 1;
 			break ;
@@ -216,11 +236,7 @@ t_token	*lexer_expanding(lexer_t *lexer)
 	{
 		value = ft_strdup("$");
 		return (init_token(TOKEN_STRING, value, 0));
+		
 	}
-		//printf("value inside exp --> %s\n", value);
-	char *expanded = get_expanded_test(value);
-	return (init_token(TOKEN_STRING, expanded, 0));
-	
-	// return (init_token(TOKEN_STRING, get_expanded_test(value)));
+	return (init_token(TOKEN_STRING, get_expanded_test(value), 0));//
 }
-

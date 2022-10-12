@@ -6,15 +6,15 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 12:15:14 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/23 22:22:40 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 05:56:57 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s[i])

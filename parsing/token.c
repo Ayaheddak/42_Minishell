@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 04:55:04 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 08:47:09 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ t_token	*lexer_get_next_token(lexer_t *lexer)
 	{
 		if (is_whitespace(lexer->c))
 			lexer_skip_whitespace (lexer);
-		else if (lexer->c == '"') //   check if you had '<<' before // if yes : don't expand (but remove the quotes)
+		else if (lexer->c == '"') 
 			return (lexer_double_quote(lexer));
 		else if (lexer->c == 39)
 			return (lexer_single_quote(lexer));
 		else if (lexer->c == '<') 
-			return (redirection(lexer, TOKEN_IN, TOKEN_DELIMITER, '<')); // if it's a delimiter mark the flag
+			return (redirection(lexer, TOKEN_IN, TOKEN_DELIMITER, '<'));
 		else if (lexer->c == '>')
 			return (redirection(lexer, TOKEN_OUT, TOKEN_APPEND, '>'));
 		else if (lexer->c == '|')
@@ -43,7 +43,7 @@ t_token	*lexer_get_next_token(lexer_t *lexer)
 			break ;
 		}
 		else
-			return (lexer_string(lexer));
+			return (lexer_string(lexer));//
 	}
 	return ((void *)0);
 }
@@ -54,11 +54,13 @@ t_token	*tokenizer(lexer_t *lexer)
 	t_token	*token;
 
 	head = NULL;
-	while ((token = lexer_get_next_token(lexer)) != (void *)0)
+	g_global.last_token = 0;
+	while ((token = lexer_get_next_token(lexer)) != (void *)0)//
 	{
 		addback(&head, token->value, &token->type, token->split);
-		free(token);
+		g_global.last_token = token;
 	}
+	free(token);
 	return (head);
 }
 
@@ -72,7 +74,7 @@ void	print_tokenizer(t_token *token)
 		printf("------------- Node numbre %d  = -------------\n", i);
 		printf("ur value = %s\n", (char *)token->value);
 		printf("ur type = %d\n", token->type);
-		printf("ur type split = %d\n", token->split);
+		//printf("ur type split = %d\n", token->split);
 		token = token->next;
 		i++;
 	}

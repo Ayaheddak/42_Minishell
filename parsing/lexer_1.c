@@ -6,9 +6,10 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 05:14:53 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 08:45:17 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/minishell.h"
 
@@ -17,20 +18,16 @@
 char	*get_expanded_test(char *value)
 {
 	char *str;
+	t_env *env;
 
-	str = get_env_value(g_global.env_list, value);
+	env = get_env_list(g_global.env);	
+	str = get_env_value(env, value);
 	if (str == NULL)
 		return (ft_strdup(""));
 	// printf("get_expanded_test: %s\n", str);
+	free_env(env);
 	return (str);
 }
-
-/*
-char	*get_exapanded_test(void)
-{
-	return (strdup("[EXPANDED VALUE]"));
-}
-*/ 
 
 lexer_t	*init_lexer(char *str)
 {
