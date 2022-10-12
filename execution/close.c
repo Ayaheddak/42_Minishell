@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:05:25 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/12 07:22:22 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 09:10:36 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ void	close_and_free(t_execute exec, int n)
 		close(exec.fd_pipe[i]);
 		i++;
 	}
+	i = -1;
+	while (++i < n)
+		waitpid(-1, &(exec.status), 0);
+	if (WIFEXITED(exec.status))
+		g_global.exitstauts = WEXITSTATUS(exec.status);
 	if (exec.nb_cmd > 1)
 	{
-		i = -1;
-		while (++i < n)
-			waitpid(-1, &(exec.status), 0);
-		if (WIFEXITED(exec.status))
-			g_global.exitstauts = WEXITSTATUS(exec.status);
 		free(exec.child_pid);
 		free(exec.fd_pipe);
 	}

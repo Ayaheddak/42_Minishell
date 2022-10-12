@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 08:46:34 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/12 09:06:17 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,8 @@ int	main(int argc, char *argv[], char *env[])
 			start_execution(g_global.exec, g_global.env_list);
 		}
 		ctrl_d(inpt);
-		printf("%d\n", g_global.exitstauts);
 		start_execution(g_global.exec, g_global.env_list);
-		// printf("The status is: %d\n", g_global.exitstauts);
+		printf("The status is: %d\n", g_global.exitstauts);
 		//signal(SIGINT, ctrl_c);
 		// if (g_global.errorparser == 1)
 		// {
