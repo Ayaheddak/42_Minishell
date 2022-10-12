@@ -6,7 +6,7 @@
 #    By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/10/12 05:27:16 by aheddak          ###   ########.fr        #
+#    Updated: 2022/10/12 09:26:20 by aheddak          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ UTILS	=	parsing/lexer_1.c parsing/main.c parsing/token.c parsing/utils_list.c pa
 			builtins/echo.c builtins/call_builtins.c builtins/change_dir.c builtins/env.c builtins/pwd.c builtins/unset.c builtins/export.c builtins/exit.c \
 			signals/ctrlc.c
 
-FLAGS	=	 -Wall -Wextra -Werror -fsanitize=address -g3
+FLAGS	=	 -Wall -Wextra -Werror #-fsanitize=address -g3
 
 
 # OBJCT	=	${UTILS:.c=.o}

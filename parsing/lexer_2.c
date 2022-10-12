@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 08:13:55 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 09:22:41 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*after_quote(lexer_t *lexer , char *s, char **value)//
 				if (token == (void *)0)
 					return (NULL);
 				*value = freejoin(*value, token->value);
-				//free(token);
+				free(token);
 			}
 			if (lexer->c == 39)
 			{
@@ -71,7 +71,7 @@ char	*after_quote(lexer_t *lexer , char *s, char **value)//
 				if (token == (void *)0)
 					return (NULL);
 				*value = freejoin(*value, token->value);
-				//free(token);
+				free(token);
 			}
 			if (lexer->c == '$')
 			{
@@ -177,10 +177,11 @@ t_token	*lexer_string(lexer_t *lexer)//
 		{
 			while (lexer->c == '$')
 			{
-				token = lexer_expanding(lexer);
+				token = lexer_expanding(lexer);//
 				value = freejoin(value, token->value);
 			}
 			a = needs_splitting(token->value);
+			// free(token);
 		}
 		if (lexer->c == '"')
 		{
@@ -200,7 +201,8 @@ t_token	*lexer_string(lexer_t *lexer)//
 		if (is_whitespace(lexer->c) || is_operator(lexer->c))
 			break ;
 		s = lexer_get_current_char_as_string(lexer);
-		value = freejoin(value, s);	
+		value = freejoin(value, s);
+		free(s);
 		lexer_advance(lexer);
 	}
 	return (init_token(TOKEN_STRING, value, a));

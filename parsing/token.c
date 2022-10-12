@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 05:35:19 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/12 09:20:40 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,15 @@ t_token	*tokenizer(lexer_t *lexer)
 	g_global.last_token = 0;
 	while ((token = lexer_get_next_token(lexer)) != (void *)0)//
 	{
+		free(g_global.last_token);
 		addback(&head, token->value, &token->type, token->split);
 		g_global.last_token = token;
 	}
+	free(g_global.last_token);
 	free(token);
 	return (head);
 }
-
+//36
 void	print_tokenizer(t_token *token)
 {
 	int		i;
