@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 08:47:42 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/14 00:36:52 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,45 +83,3 @@ void	addredirection(t_redir **head, int type, char *file)
 		tmp = tmp->next;
 	tmp->next = new;
 }
-
-t_exec	*get_list(void)
-{
-	t_exec	*t1;
-	t_exec	*t2;
-	//t_list	*t3;
-	char	**args;
-	t_redir	*file;
-	t_redir	*file1;
-	int len;
-	
-	file = NULL;//malloc(sizeof(t_redir));
-	len = 2;
-	args = malloc(sizeof(char *) * len);
-	args[0] = "cat";
-	args[1] = "out";
-	// file->type = TOKEN_OUT;
-	// file->name = "out";
-	t1 = alocate_exec();
-	t1->args = args;
-	//t1->redir = file;
-	file1 = malloc(sizeof(t_redir));
-	args = malloc(sizeof(char *) * len);
-	args[0] = "wc";
-	args[1] = "-l";
-	file1->type = TOKEN_OUT;
-	file1->name = "out";
-	//t2 = new_node(NULL, NULL, args, file1);
-	t2 = alocate_exec();
-	t2->args = args;
-	t2->redir = file1;
-	// len = 1;
-	// file->type = TOKEN_OUT;
-	// file->name = "f3";
-	// args = malloc(sizeof(char *) * len);
-	// args[0] = "wc";
-	// t3 = new_node(NULL, NULL, args, file);
-	t1->next = t2;
-	//t2->next = t3;
-	return (t1);
-}
-

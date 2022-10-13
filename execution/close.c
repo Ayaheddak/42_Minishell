@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:05:25 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/12 09:10:36 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/13 18:23:53 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	close_and_free(t_execute exec, int n)
 	int	i;
 
 	i = 0;
-	if (exec.infile != -2)
-		close(exec.infile);
-	if (exec.out_file != -2)
-		close(exec.out_file);
+	if (exec.input)
+		close(exec.input);
+	if (exec.output != 1)
+		close(exec.output);
 	unlink("temp_file");
 	while (i < (n - 1) * 2)
 	{
@@ -44,8 +44,6 @@ void	close_and_free(t_execute exec, int n)
 	i = -1;
 	while (++i < n)
 		waitpid(-1, &(exec.status), 0);
-	if (WIFEXITED(exec.status))
-		g_global.exitstauts = WEXITSTATUS(exec.status);
 	if (exec.nb_cmd > 1)
 	{
 		free(exec.child_pid);
