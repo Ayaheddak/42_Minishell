@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
+#    By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/10/12 20:29:07 by het-tale         ###   ########.fr        #
+#    Updated: 2022/10/13 20:45:56 by aheddak          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ UTILS	=	parsing/lexer_1.c parsing/main.c parsing/token.c parsing/utils_list.c pa
 			builtins/echo.c builtins/call_builtins.c builtins/change_dir.c builtins/env.c builtins/pwd.c builtins/unset.c builtins/export.c builtins/exit.c \
 			signals/ctrlc.c signals/ctrld.c signals/ctrlback.c signals/signals.c
 
-CFLAGS	=	 -Wall -Wextra -Werror -I /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/include/ #-fsanitize=address
+CFLAGS	=	 -Wall -Wextra -Werror #-I /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/include/ #-fsanitize=address
 
 
 # OBJCT	=	${UTILS:.c=.o}
@@ -37,7 +37,7 @@ CC		=	gcc
 all		:	$(NAME)
 
 $(NAME)	:	$(UTILS)	
-	@$(CC) $(CFLAGS) $(UTILS) -o $(NAME) -lreadline -L /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/lib  -g
+	@$(CC) $(CFLAGS) $(UTILS) -o $(NAME) -lreadline -g #-L /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/lib  -g
 	
 clean :
 	@${RM} $(OBJCT)

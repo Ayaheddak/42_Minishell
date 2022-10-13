@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 20:27:07 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/14 00:02:01 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../includes/minishell.h"
-char *conv_char(char c)
-{
-	char *res;
 
-	res = malloc(sizeof(char)* 2);
-	if(!res)
-		return(NULL);
+char	*conv_char(char c)
+{
+	char	*res;
+
+	res = malloc(sizeof(char) * 2);
+	if (!res)
+		return (NULL);
 	res[0] = c;
 	res[1] = '\0';
 	return (res);
 }
+
 t_token	*redirection(lexer_t *lexer, int type1, int type2, char r)
 {
 	char	*value;
@@ -45,13 +45,14 @@ t_token	*redirection(lexer_t *lexer, int type1, int type2, char r)
 		else
 		{
 			lexer->i -= 1;
-			return (lexer_advace_with_token(lexer, init_token(type1, &value[0], 0)));
+			return (lexer_advace_with_token(lexer,
+					init_token(type1, &value[0], 0)));
 		}
 	}
 	return ((void *)0);
 }
 
-char	*after_quote(lexer_t *lexer , char *s, char **value)//
+char	*after_quote(lexer_t *lexer, char *s, char **value)
 {
 	t_token	*token;
 
@@ -85,7 +86,7 @@ char	*after_quote(lexer_t *lexer , char *s, char **value)//
 				}
 			}
 			if (is_whitespace(lexer->c))
-				break;
+				break ;
 			s = lexer_get_current_char_as_string(lexer);
 			*value = freejoin(*value, s);
 			lexer_advance(lexer);
@@ -94,20 +95,30 @@ char	*after_quote(lexer_t *lexer , char *s, char **value)//
 	return (*value);
 }
 
-t_token	*lexer_double_quote(lexer_t *lexer)//
+int	check_redir(void)
+{
+	if (g_global.last_token && is_redir(g_global.last_token) == 5)//TOKEN_DELIMITER
+		return (1);
+	else if (g_global.last_token && is_redir(g_global.last_token) > 0)
+		return (2);
+	else
+		return (0);
+}
+
+t_token	*lexer_double_quote(lexer_t *lexer)
 {
 	char	*value;
 	char	*s;
 	int		tmp;
 
-	value =ft_strdup("");
+	value = ft_strdup("");
 	tmp = 0;
 	if (g_global.last_token && g_global.last_token->type == TOKEN_DELIMITER)
 		tmp = 1;
 	lexer_advance(lexer);
 	while (lexer->c != '"' && lexer->c != '\0')
 	{
-		if (lexer->c == '$' && tmp == 0)
+		if (lexer->c == '$' && tmp == 0)//I mean if there was $ before hearoc don't expanded 
 		{
 			while (lexer->c == '$')
 				value = freejoin(value, lexer_expanding(lexer)->value);
@@ -147,9 +158,10 @@ t_token	*lexer_single_quote(lexer_t *lexer)
 	return (init_token(TOKEN_STRING, value, 0));
 }
 
-int needs_splitting(char *str)
+int	needs_splitting(char *str)
 {
 	int	i;
+
 	i = 0;
 	while (str[i])
 	{
@@ -171,19 +183,33 @@ t_token	*lexer_string(lexer_t *lexer)//
 	a = 0;
 	tmp = 0;
 	value = ft_strdup("");
-	if (g_global.last_token && g_global.last_token->type == TOKEN_DELIMITER)
+	// if (g_global.last_token && g_global.last_token->type == TOKEN_DELIMITER)
+	// 	tmp = 1;
+	if (check_redir() == 1)
 		tmp = 1;
+	if (check_redir()== 2)
+		tmp = 2;
 	while (lexer->c != '\0' && !is_whitespace(lexer->c) && !is_operator(lexer->c))
 	{
 		if (lexer->c == '$' && tmp == 0)
 		{
 			while (lexer->c == '$')
 			{
-				token = lexer_expanding(lexer);//
+				token = lexer_expanding(lexer);
 				value = freejoin(value, token->value);
 			}
 			a = needs_splitting(token->value);
-			// free(token);
+		}
+		else if (lexer->c == '$' && tmp == 2)
+		{
+			while (lexer->c == '$')
+			{
+				token = lexer_expanding(lexer);
+				value = freejoin(value, token->value);
+			}
+			a = needs_splitting(token->value);
+			if (a == 1)
+				value = strdup("");
 		}
 		if (lexer->c == '"')
 		{
@@ -216,10 +242,10 @@ t_token	*lexer_expanding(lexer_t *lexer)
 	char	*s;
 	int		tmp;
 
-	value = ft_strdup("");
 	tmp = 0;
+	value = ft_strdup("");
 	lexer_advance(lexer);
-	if(lexer->c == '?')
+	if (lexer->c == '?')
 	{
 		lexer_advance(lexer);
 		return (init_token(TOKEN_STRING, ft_itoa(g_global.exitstauts), 0));
@@ -239,7 +265,7 @@ t_token	*lexer_expanding(lexer_t *lexer)
 	{
 		value = ft_strdup("$");
 		return (init_token(TOKEN_STRING, value, 0));
-		
 	}
-	return (init_token(TOKEN_STRING, get_expanded_test(value), 0));//
+	return (init_token(TOKEN_STRING, get_expanded_test(value), 0));
 }
+

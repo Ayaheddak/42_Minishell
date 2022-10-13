@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 20:30:20 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 08:46:47 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/14 00:02:36 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	*check_parse_errors(t_token *head)
 	return ((void *)0);
 }
 
-void free_tab(char **str)
+void	free_tab(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -51,8 +51,10 @@ t_exec	*parser(t_token *head)
 {
 	t_token	*token;
 	t_exec	*exec;
-	char **split;
+	char	**split;
+	int		i;
 
+	i = 0;
 	token = head;
 	exec = alocate_exec();
 	while (token)
@@ -72,13 +74,12 @@ t_exec	*parser(t_token *head)
 			if (!token->split)
 				exec->args = ft_realloc(exec->args, token->value);
 			else
-				{
-					split = ft_split(token->value, ' ');
-					int i = 0;
-					while (split[i])
-						exec->args = ft_realloc(exec->args, split[i++]);
-					free_tab(split);
-				}
+			{
+				split = ft_split(token->value, ' ');
+				while (split[i])
+					exec->args = ft_realloc(exec->args, split[i++]);
+				free_tab(split);
+			}
 		}
 		if (is_redir(token) != 0 && token->next)
 		{
