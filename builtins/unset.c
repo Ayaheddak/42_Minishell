@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 21:11:33 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/10 21:35:08 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/14 22:31:53 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ t_env	*remove_list(t_env **env_list, t_env *remove)
 	{
 		while (temp)
 		{
-			if(temp->next == remove)
+			if (temp->next == remove)
 			{
 				temp->next = remove->next;
 				free(remove);
-				break;
+				break ;
 			}
 			temp = temp->next;
 		}
@@ -37,7 +37,7 @@ t_env	*remove_list(t_env **env_list, t_env *remove)
 
 int	ft_unset(char **args, t_env *env_iter)
 {
-	int	i;
+	int		i;
 	t_env	*env;
 
 	i = 1;
@@ -47,16 +47,16 @@ int	ft_unset(char **args, t_env *env_iter)
 		return (g_global.exitstauts);
 	}
 	while (args[i])
-    {
+	{
 		env = env_iter;
-        while (env)
-        {
-            if (!ft_strcmp(args[i], env->key))
-                env_iter = remove_list(&env_iter, env);
-            env = env->next;
-        }
+		while (env)
+		{
+			if (!ft_strcmp(args[i], env->key))
+				env_iter = remove_list(&env_iter, env);
+			env = env->next;
+		}
 		i++;
-    }
+	}
 	g_global.exitstauts = 0;
 	return (g_global.exitstauts);
 }

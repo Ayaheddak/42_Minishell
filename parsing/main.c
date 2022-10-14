@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/14 04:23:42 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/14 23:50:24 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char *argv[], char *env[])
 				g_global.errorlexer = 0;
 				continue ;
 			}
+			
 		}
 		ctrl_d(inpt);
 		start_execution(g_global.exec, g_global.env_list);
