@@ -6,14 +6,14 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:36:21 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/12 08:07:57 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/14 04:02:38 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	signals(void)
+void	signals(int d)
 {
-	ctrlback(0);
-	ctrl_c();
+	ctrlback(d);
+	ctrl_c(NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 20:27:07 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/14 05:04:04 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,9 +167,11 @@ t_token	*lexer_string(lexer_t *lexer)//
 	t_token	*token;
 	int		a;
 	int		tmp;
+	int		d;
 
 	a = 0;
 	tmp = 0;
+	d = 0;
 	value = ft_strdup("");
 	if (g_global.last_token && g_global.last_token->type == TOKEN_DELIMITER)
 		tmp = 1;
@@ -185,6 +187,13 @@ t_token	*lexer_string(lexer_t *lexer)//
 			a = needs_splitting(token->value);
 			// free(token);
 		}
+
+		if (lexer->c == '"' && d == 1)
+		{
+			lexer_advance(lexer);
+			break ;
+		}
+		
 		if (lexer->c == '"')
 		{
 			token = lexer_double_quote(lexer);
@@ -202,6 +211,18 @@ t_token	*lexer_string(lexer_t *lexer)//
 		}
 		if (is_whitespace(lexer->c) || is_operator(lexer->c))
 			break ;
+		if (lexer->c == '$' && tmp == 1)
+		{
+			lexer_advance(lexer);
+			if (lexer->c == '"')
+			{
+				value = "";
+				lexer_advance(lexer);
+				d = 1;
+			}
+			else
+				value = ft_strdup("$");
+		}
 		s = lexer_get_current_char_as_string(lexer);
 		value = freejoin(value, s);
 		free(s);
@@ -216,7 +237,8 @@ t_token	*lexer_expanding(lexer_t *lexer)
 	char	*s;
 	int		tmp;
 
-	value = ft_strdup("");
+	//value = ft_strdup("");
+	value = NULL;
 	tmp = 0;
 	lexer_advance(lexer);
 	if(lexer->c == '?')
@@ -238,8 +260,7 @@ t_token	*lexer_expanding(lexer_t *lexer)
 	if (tmp == 0 && value == NULL)
 	{
 		value = ft_strdup("$");
-		return (init_token(TOKEN_STRING, value, 0));
-		
+		return (init_token(TOKEN_STRING, value, 0));	
 	}
 	return (init_token(TOKEN_STRING, get_expanded_test(value), 0));//
 }

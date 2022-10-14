@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:03:31 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/13 22:28:24 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/14 01:25:06 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	execute_command(t_execute *exec, t_exec *exec_list, t_env *env)
 		ft_error("Redirecting input error");
 	if (exec->output != 1 && dup2(exec->output, 1) == -1)
 		ft_error("Redirecting output error");
+	g_global.exitstauts = ft_call_builtins(exec_list, env, exec);
+	if (g_global.exitstauts != -1)
+		exit(g_global.exitstauts);
 	right_path = check_command(exec_list->args[0], env);
 	str_env = get_env_array(env);
 	if (!right_path)

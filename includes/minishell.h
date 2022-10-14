@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/12 08:44:47 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/14 04:16:36 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_global
 	int		exitstauts;
 	int		errorlexer;
 	int		errorparser;
+	int		hd;
 }		t_global;
  
 t_global	g_global;
@@ -165,6 +166,6 @@ void	ft_exit(void);
 */
 void	ctrl_d(char *input);
 void	ctrlback(int d);
-void	signals(void);
-void	ctrl_c(void);
+void	signals(int d);
+int		ctrl_c(char **line);
 #endif
