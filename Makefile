@@ -6,7 +6,7 @@
 #    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/10/12 20:29:07 by het-tale         ###   ########.fr        #
+#    Updated: 2022/10/15 02:18:09 by het-tale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,9 @@ UTILS	=	parsing/lexer_1.c parsing/main.c parsing/token.c parsing/utils_list.c pa
 			libft/ft_isalnum.c libft/ft_itoa.c libft/ft_lstsize_bonus.c libft/ft_memset.c libft/ft_split.c libft/ft_strlcat.c libft/ft_strnstr.c libft/ft_toupper.c \
 			get_next_line/get_next_line.c get_next_line/get_next_line_utils.c parsing/lexer_utils.c\
 			env_variables/env_list.c env_variables/env_list_utils.c parsing/parsing_utils.c\
-			execution/execute.c execution/start_exec.c execution/close.c execution/io_streams.c \
-			builtins/echo.c builtins/call_builtins.c builtins/change_dir.c builtins/env.c builtins/pwd.c builtins/unset.c builtins/export.c builtins/exit.c \
+			execution/execute.c execution/start_exec.c execution/close.c execution/io_streams.c execution/io_utils.c \
+			builtins/echo.c builtins/call_builtins.c builtins/change_dir.c builtins/env.c builtins/pwd.c builtins/unset.c builtins/export.c \
+			builtins/exit.c builtins/export_utils.c \
 			signals/ctrlc.c signals/ctrld.c signals/ctrlback.c signals/signals.c
 
 CFLAGS	=	 -Wall -Wextra -Werror -I /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/include/ #-fsanitize=address

@@ -6,10 +6,9 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/14 04:16:36 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 02:35:43 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -49,13 +48,13 @@ typedef struct s_global
 	t_exec	*exec;
 	char	**env;
 	t_env	*env_list;
-	t_token *last_token;
+	t_token	*last_token;
 	int		exitstauts;
 	int		errorlexer;
 	int		errorparser;
 	int		hd;
 }		t_global;
- 
+
 t_global	g_global;
 
 /*
@@ -133,6 +132,8 @@ void	execute_command(t_execute *exec, t_exec *exec_list, t_env *env);
 */
 void	start_execution(t_exec *exec_list, t_env *env);
 void	input_output(int i, t_execute *exec, t_exec *exec_list);
+void	read_from_hrdc(pid_t pd, t_exec *exec_list, int temp_fd);
+void	here_doc(int *d, t_execute *exec, t_exec *exec_list);
 void	ft_error(char *str);
 void	close_pipes(t_execute *exec, int n);
 void	close_and_free(t_execute exec, int n);
@@ -160,6 +161,9 @@ int		is_replaced(t_env *env_list, char *search, char *replace);
 int		is_valid_arg(char *str);
 int		ft_export_to_copy(t_env *env, char **args, t_execute *exec);
 void	ft_exit(void);
+char	**ft_is_contain_equal(t_env *env_list, char **args, int *d, int *i);
+void	loop_through_export(t_env *env_list, char **args, int *d, int i);
+int		ft_if_valid(char *str, int *d, int *i);
 
 /*
 ----------------------------------Signals---------------------

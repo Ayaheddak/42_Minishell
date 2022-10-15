@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:41:04 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/14 23:50:03 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 02:27:35 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ void	init_args(t_exec *exec_list, t_execute *exec)
 	}
 }
 
+void	ft_close_inside(t_execute *exec)
+{
+	if (exec->input != 0)
+		close(exec->input);
+	if (exec->output != 1)
+		close(exec->output);
+	exec->input = -2;
+	exec->output = -2;
+}
+
 void	start_execution(t_exec *exec_list, t_env *env)
 {
 	t_execute	*exec;
@@ -60,12 +70,7 @@ void	start_execution(t_exec *exec_list, t_env *env)
 			execute_command(exec, exec_list, env);
 		}
 		i++;
-		if (exec->input != 0)
-			close(exec->input);
-		if (exec->output != 1)
-			close(exec->output);
-		exec->input = -2;
-		exec->output = -2;
+		ft_close_inside(exec);
 		exec_list = exec_list->next;
 	}
 	close_and_free(*exec, exec->nb_cmd);

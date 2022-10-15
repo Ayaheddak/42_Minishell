@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 20:00:30 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/12 02:45:13 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/15 01:48:13 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	add_front_env(t_env **env_head, t_env *new)
 
 int	get_list_len(t_env	*list)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (list != NULL)
@@ -69,19 +69,4 @@ char	*get_env_value(t_env *env, char *key)
 		env = env->next;
 	}
 	return (NULL);
-}
-
-void	free_env(t_env *env)
-{
-	t_env	*tmp;
-
-	while (env != NULL)
-	{
-		tmp = env;
-		free(env->key);
-		free(env->value);
-		env = env->next;
-		free (tmp);
-	}
-	free (env);
 }
