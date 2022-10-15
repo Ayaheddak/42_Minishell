@@ -6,21 +6,11 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/14 00:03:06 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/15 05:41:32 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	*get_expanded_test(char *value)
-{
-	char	*str;
-
-	str = get_env_value(g_global.env_list, value);
-	if (str == NULL)
-		return (ft_strdup(""));
-	return (str);
-}
 
 lexer_t	*init_lexer(char *str)
 {

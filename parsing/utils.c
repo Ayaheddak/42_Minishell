@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_list.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 08:47:42 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 05:46:29 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/minishell.h"
 
@@ -27,7 +26,7 @@ char	*freejoin(char *s1, char *s2)
 		return (ft_strdup(s2));
 	if (!s2)
 		return (s1);
-	j = (ft_strlen(s1) + ft_strlen(s2) + 1);//
+	j = (ft_strlen(s1) + ft_strlen(s2) + 1);
 	rest = (char *)malloc(sizeof(char) * j);
 	if (!rest)
 		return (NULL);
@@ -38,8 +37,7 @@ char	*freejoin(char *s1, char *s2)
 	while (s2[i] != '\0')
 		rest[j++] = s2[i++];
 	rest[j] = '\0';
-	// free(s1);
-	// free(s2);
+	free(s1);
 	return (rest);
 }
 
@@ -84,44 +82,28 @@ void	addredirection(t_redir **head, int type, char *file)
 	tmp->next = new;
 }
 
-t_exec	*get_list(void)
+char	*conv_char(char c)
 {
-	t_exec	*t1;
-	t_exec	*t2;
-	//t_list	*t3;
-	char	**args;
-	t_redir	*file;
-	t_redir	*file1;
-	int len;
-	
-	file = NULL;//malloc(sizeof(t_redir));
-	len = 2;
-	args = malloc(sizeof(char *) * len);
-	args[0] = "cat";
-	args[1] = "out";
-	// file->type = TOKEN_OUT;
-	// file->name = "out";
-	t1 = alocate_exec();
-	t1->args = args;
-	//t1->redir = file;
-	file1 = malloc(sizeof(t_redir));
-	args = malloc(sizeof(char *) * len);
-	args[0] = "wc";
-	args[1] = "-l";
-	file1->type = TOKEN_OUT;
-	file1->name = "out";
-	//t2 = new_node(NULL, NULL, args, file1);
-	t2 = alocate_exec();
-	t2->args = args;
-	t2->redir = file1;
-	// len = 1;
-	// file->type = TOKEN_OUT;
-	// file->name = "f3";
-	// args = malloc(sizeof(char *) * len);
-	// args[0] = "wc";
-	// t3 = new_node(NULL, NULL, args, file);
-	t1->next = t2;
-	//t2->next = t3;
-	return (t1);
+	char	*res;
+
+	res = malloc(sizeof(char) * 2);
+	if (!res)
+		return (NULL);
+	res[0] = c;
+	res[1] = '\0';
+	return (res);
 }
 
+int	needs_splitting(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}

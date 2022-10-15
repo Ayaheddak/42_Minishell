@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/13 21:01:27 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/14 22:06:15 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char *argv[], char *env[])
 	(void)argc;
 	(void)argv;
 	g_global.env_list = get_env_list(env);
+	g_global.exitstauts = 0;
 	while (1)
 	{
 		inpt = readline("minishell$ ");
@@ -38,6 +39,7 @@ int	main(int argc, char *argv[], char *env[])
 			g_global.errorlexer = 0;
 			continue ;
 		}
+		//print_tokenizer(token);
 		if (g_global.errorparser == 1)
 		{
 			free_tokenizer(token);

@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 23:04:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/09 23:07:51 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/15 05:50:06 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_exec	*alocate_exec(void)
 	exec->redir = NULL;
 	return (exec);
 }
-//realloc function is used to resize a block of memory that was previously allocated.
+
 int	len_of_array(char **args)
 {
 	int	i;

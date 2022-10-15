@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/13 21:24:45 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/15 05:47:15 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	free_tokenizer(t_token *token);
 lexer_t	*init_lexer(char *contents);
 t_token	*redirection(lexer_t *lexer, int type1, int type2, char r);
 t_token	*lexer_double_quote(lexer_t *lexer);
-// t_token	*lexer_double_quote(lexer_t *lexer, t_token *token);//
 t_token	*lexer_string(lexer_t *lexer);
 t_token	*expanding(lexer_t *lexer);
 t_token	*lexer_advace_with_token(lexer_t *lexer, t_token *token);
@@ -88,7 +87,8 @@ void	addback(t_token **head, void *value, void *type, int split);
 char	*lexer_get_current_char_as_string(lexer_t *lexer);
 char	*get_path(char	**env);
 char	*freejoin(char *s1, char *s2);
-char	*get_expanded_test(char *value);
+char	*get_expanded(char *value);
+t_token	*expanding_before_heredoc(lexer_t *lexer);
 /*
 	========================== Utils ==========================
 */
@@ -97,7 +97,8 @@ int		is_whitespace(char c);
 int		is_operator_speciaux(char c);
 void	*ft_errer(int i);
 int		is_redir(t_token *token);
-
+int		needs_splitting(char *str);
+char	*conv_char(char c);
 /*
 	========================== Parser ==========================
 */

@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 20:30:20 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/14 00:02:36 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/15 05:50:45 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,26 @@ void	*check_parse_errors(t_token *head)
 	return ((void *)0);
 }
 
-void	free_tab(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free (str);
-}
+// int	cond_parsing(t_token *token, t_exec *exec)
+// {
+// 	if (token == NULL)
+// 	{
+// 		exec->next = NULL;
+// 		return (1);
+// 	}
+// 	if (token->type == TOKEN_PIPE)
+// 	{
+// 		exec->next = parser(token->next);
+// 		return (2);
+// 	}
+// 	return (0);
+// 	// if (is_redir(token) != 0 && token->next)
+// 	// {
+// 	// 	addredirection(&exec->redir, is_redir(token), token->next->value);
+// 	// 	token = token->next;
+// 	// }
+// 	// return (3);
+// }
 
 t_exec	*parser(t_token *head)
 {
@@ -92,3 +100,15 @@ t_exec	*parser(t_token *head)
 	return (exec);
 }
 
+void	free_tab(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free (str);
+}
