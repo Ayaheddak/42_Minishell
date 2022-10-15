@@ -6,11 +6,16 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:29:48 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/14 22:22:03 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:08:52 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+//TODO print error msg when directory is deleted 
+/**
+ * * TODO: !test this case : << here cat file1 > f2 | grep l > f2 
+ */
 
 t_env	*change_pwd(t_env *env_list, char *key)
 {

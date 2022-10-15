@@ -6,11 +6,13 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:03:47 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 01:42:44 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 21:57:39 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+//TODO export += join
 
 int	is_valid_arg(char *str)
 {
@@ -24,6 +26,8 @@ int	is_valid_arg(char *str)
 	}
 	while (str[i])
 	{
+		if (i == ft_strlen(str) - 1 && str[i] == '+')
+			return (1);
 		if (!ft_isalnum(str[i]))
 		{
 			ft_putstr_fd("not valid in this context\n", 2);
@@ -72,6 +76,7 @@ int	ft_export_to_env(t_env *env_list, char **args, t_execute *exec)
 	if (!args[i])
 		print_env(env_list, exec, 0);
 	loop_through_export(env_list, args, &d, i);
+	ft_sort_env(env_list);
 	if (!d)
 		g_global.exitstauts = 0;
 	else

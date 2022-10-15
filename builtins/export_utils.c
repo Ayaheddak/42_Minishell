@@ -6,15 +6,31 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 01:42:03 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 01:43:34 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 21:54:03 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+char	*ft_join_vars(char **split, t_env *env)
+{
+	char	*join;
+	char	*value;
+
+	if (split[0][ft_strlen(split[0]) - 1] == '+')
+	{
+		value = get_env_value(env, ft_substr(split[0], 0, ft_strlen(split[0]) - 1));
+		join = freejoin(value, split[1]);
+		return (join);
+	}
+	return (NULL);
+}
+
 char	**ft_is_contain_equal(t_env *env_list, char **args, int *d, int *i)
 {
 	char	**split;
+	char	*substr;
+	char	*join;
 
 	split = ft_split(args[*i], '=');
 	if (!split[1])
@@ -25,6 +41,23 @@ char	**ft_is_contain_equal(t_env *env_list, char **args, int *d, int *i)
 		*d = 1;
 		(*i)++;
 		return (NULL);
+	}
+	join = ft_join_vars(split, env_list);
+	if (join)
+	{
+		substr = ft_substr(split[0], 0, ft_strlen(split[0]) - 1);
+		if (is_replaced(env_list, substr, join))
+		{
+			(*i)++;
+			return (NULL);
+		}
+		else
+		{
+			add_back_env(&env_list, create_node(substr, join));
+			(*i)++;
+			return (NULL);
+		}
+			
 	}
 	if (is_replaced(env_list, split[0], split[1]))
 	{
@@ -46,7 +79,10 @@ void	loop_through_export(t_env *env_list, char **args, int *d, int i)
 		{
 			split = ft_is_contain_equal(env_list, args, d, &i);
 			if (!split)
+			{
 				continue ;
+				i++;
+			}
 			add_back_env(&env_list, create_node(split[0], split[1]));
 		}
 		else

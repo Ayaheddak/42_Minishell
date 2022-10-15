@@ -6,7 +6,7 @@
 #    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/10/15 03:31:17 by het-tale         ###   ########.fr        #
+#    Updated: 2022/10/15 04:58:27 by het-tale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,11 @@ UTILS	=	parsing/lexer_1.c parsing/main.c parsing/token.c parsing/utils_list.c pa
 			builtins/exit.c builtins/export_utils.c \
 			signals/ctrlc.c signals/ctrld.c signals/ctrlback.c signals/signals.c
 
-CFLAGS	=	 -Wall -Wextra -Werror -I /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/include/ #-fsanitize=address
+INDE =  -I /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/include/
+
+LIB = -L /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/lib
+
+CFLAGS	=	 -Wall -Wextra -Werror #-fsanitize=address
 
 
 # OBJCT	=	${UTILS:.c=.o}
@@ -38,7 +42,7 @@ CC		=	gcc
 all		:	$(NAME)
 
 $(NAME)	:	$(UTILS)	
-	@$(CC) $(CFLAGS) $(UTILS) -o $(NAME) -lreadline -L /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/lib
+	@$(CC) $(CFLAGS) $(UTILS) -o $(NAME) -lreadline $(INDE) $(LIB) -g
 	
 clean :
 	@${RM} $(OBJCT)

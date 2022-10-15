@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 20:37:58 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/14 22:18:28 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 04:54:01 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_call_builtins(t_exec *head, t_env *env_list, t_execute *exec)
 		if (!ft_strcmp(head->args[0], "echo"))
 			return (ft_echo(head->args, exec));
 		else if (!ft_strcmp(head->args[0], "pwd"))
-			return (ft_pwd(head->args, exec));
+			return (ft_pwd(head->args, exec, env_list));
 		else if (!ft_strcmp(head->args[0], "env"))
 			return (ft_env(env_list, head->args, exec));
 		else if (!ft_strcmp(head->args[0], "cd"))

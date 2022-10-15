@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:56:10 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 01:48:18 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 21:56:00 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,38 @@ void	free_env(t_env *env)
 		free (tmp);
 	}
 	free (env);
+}
+
+t_env	*ft_sort_env(t_env *env_list)
+{
+	char	*temp_key;
+	char	*temp_value;
+	t_env	*env;
+	int		i;
+	int		j;
+	int		len;
+
+	i = 0;
+	len = get_list_len(env_list);
+	while (i < len)
+	{
+		env = env_list;
+		j = 0;
+		while (j < len - 1 - i)
+		{
+			if (ft_strcmp(env->key, env->next->key) > 0)
+			{
+				temp_key = ft_strdup(env->key);
+				temp_value = ft_strdup(env->value);
+				env->key = ft_strdup(env->next->key);
+				env->value = ft_strdup(env->next->value);
+				env->next->key = ft_strdup(temp_key);
+				env->next->value = ft_strdup(temp_value);
+			}
+			env = env->next;
+			j++;
+		}
+		i++;
+	}
+	return (env);
 }

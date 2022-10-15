@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/15 03:27:15 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 21:40:49 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ int	lexer_condition(lexer_t *lexer, t_token *token, char *inpt)
 	return (0);
 }
 
+void	remove_env(t_env **env_list)
+{
+	t_env	*env;
+
+	env = *env_list;
+	while (env)
+	{
+		remove_list(env_list, env);
+		env = env->next;
+	}
+}
+
 int	main(int argc, char *argv[], char *env[])
 {
 	char	*inpt;
@@ -59,6 +71,7 @@ int	main(int argc, char *argv[], char *env[])
 		if (lexer_condition(lexer, token, inpt))
 			continue ;
 		ctrl_d(inpt);
+		//remove_env(&g_global.env_list);
 		start_execution(g_global.exec, g_global.env_list);
 	}
 	return (0);
