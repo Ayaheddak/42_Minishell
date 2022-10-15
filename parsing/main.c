@@ -6,12 +6,37 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/14 23:50:24 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 03:27:15 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/minishell.h"
+
+int	lexer_condition(lexer_t *lexer, t_token *token, char *inpt)
+{
+	if (lexer)
+	{
+		token = tokenizer(lexer);
+		free(lexer);
+		free(inpt);
+		check_parse_errors(token);
+		g_global.exec = parser(token);
+		if (g_global.errorlexer == 1)
+		{
+			free_tokenizer(token);
+			g_global.errorlexer = 0;
+			return (1);
+		}
+		if (g_global.errorparser == 1)
+		{
+			free_tokenizer(token);
+			free_exec(g_global.exec);
+			g_global.errorparser = 0;
+			return (1);
+		}
+	}
+	return (0);
+}
 
 int	main(int argc, char *argv[], char *env[])
 {
@@ -23,6 +48,7 @@ int	main(int argc, char *argv[], char *env[])
 	(void)argv;
 	g_global.env_list = get_env_list(env);
 	g_global.exitstauts = 0;
+	token = NULL;
 	signals(0);
 	while (1)
 	{
@@ -30,22 +56,8 @@ int	main(int argc, char *argv[], char *env[])
 		inpt = readline("minishell$ ");
 		lexer = init_lexer(inpt);
 		add_history(inpt);
-		if (lexer)
-		{
-			token = tokenizer(lexer);//
-			free(lexer);
-			free(inpt);
-			
-			check_parse_errors(token);
-			g_global.exec = parser(token);
-			if (g_global.errorlexer == 1)
-			{
-				free_tokenizer(token);
-				g_global.errorlexer = 0;
-				continue ;
-			}
-			
-		}
+		if (lexer_condition(lexer, token, inpt))
+			continue ;
 		ctrl_d(inpt);
 		start_execution(g_global.exec, g_global.env_list);
 	}

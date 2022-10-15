@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/20 13:13:54 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/30 20:04:08 by aheddak          ###   ########.fr       */
+/*   Created: 2022/10/15 03:29:55 by het-tale          #+#    #+#             */
+/*   Updated: 2022/10/15 03:33:55 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_list *ft_lstnew(void *content)
+int	get_size(t_exec *lst)
 {
-	t_list *new;
+	int	i;
 
-	new = (t_list*) malloc (sizeof(t_list));
-	if (!new)
-		return (NULL);
-	new->content = content;
-	new->next  = NULL;
-	return (new);
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
