@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:29:48 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 22:08:52 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 00:06:45 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //TODO print error msg when directory is deleted 
 /**
- * * TODO: !test this case : << here cat file1 > f2 | grep l > f2 
+ * * TODO: test this case : << here cat file1 > f2 | grep l > f2 
  */
 
 t_env	*change_pwd(t_env *env_list, char *key)
@@ -41,10 +41,12 @@ void	ft_conditions(char **args, t_env *env, int *change)
 	i = 1;
 	if (args[i])
 	{
-		env = change_pwd(env, "OLDPWD");
-		if (ft_strcmp(args[i], ""))
+		if (getcwd(NULL, 0))
+		{
+			env = change_pwd(env, "OLDPWD");
 			*change = chdir(args[i]);
-		env = change_pwd(env, "PWD");
+			env = change_pwd(env, "PWD");
+		}
 	}
 	else
 	{

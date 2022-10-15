@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/15 21:40:49 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 00:09:34 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int	main(int argc, char *argv[], char *env[])
 		if (lexer_condition(lexer, token, inpt))
 			continue ;
 		ctrl_d(inpt);
-		//remove_env(&g_global.env_list);
+		if (ft_save_pwd())
+			g_global.pwd = ft_save_pwd();
 		start_execution(g_global.exec, g_global.env_list);
 	}
 	return (0);

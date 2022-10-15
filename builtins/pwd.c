@@ -6,13 +6,21 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:47:09 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 21:40:22 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 23:47:10 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //TODO pwd removed path
 
 #include "../includes/minishell.h"
+
+char	*ft_save_pwd(void)
+{
+	char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	return (pwd);
+}
 
 int	ft_pwd(char **args, t_execute *exec, t_env *env)
 {
@@ -34,7 +42,7 @@ int	ft_pwd(char **args, t_execute *exec, t_env *env)
 		}
 		else
 		{
-			value = get_env_value(env, "PWD");
+			value = g_global.pwd;
 			ft_putstr_fd(value, exec->output);
 			ft_putstr_fd("\n", exec->output);
 		}

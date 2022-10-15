@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 21:57:07 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 23:45:39 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <signal.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <dirent.h>
 # include "libft.h"
 # include "token.h"
 # include "lexer.h"
@@ -53,6 +54,7 @@ typedef struct s_global
 	int		errorlexer;
 	int		errorparser;
 	int		hd;
+	char	*pwd;
 }		t_global;
 
 t_global	g_global;
@@ -165,6 +167,7 @@ char	**ft_is_contain_equal(t_env *env_list, char **args, int *d, int *i);
 void	loop_through_export(t_env *env_list, char **args, int *d, int i);
 int		ft_if_valid(char *str, int *d, int *i);
 t_env	*ft_sort_env(t_env *env_list);
+char	*ft_save_pwd(void);
 
 /*
 ----------------------------------Signals---------------------

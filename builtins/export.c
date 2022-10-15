@@ -6,13 +6,13 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:03:47 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 21:57:39 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/15 23:50:22 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//TODO export += join
+//TODO check if local variables added  in env
 
 int	is_valid_arg(char *str)
 {
