@@ -6,22 +6,13 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:47:09 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 04:23:36 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:06:52 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //TODO pwd removed path
 
 #include "../includes/minishell.h"
-
-char	*ft_save_pwd(void)
-{
-	char	*pwd;
-
-	pwd = getcwd(NULL, 0);
-	leaks_removal(&g_global.g, pwd);
-	return (pwd);
-}
 
 int	ft_pwd(char **args, t_execute *exec, t_env *env)
 {

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:29:48 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 09:03:55 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:04:39 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,21 @@ t_env	*change_pwd(t_env *env_list, char *key)
 	return (env_list);
 }
 
+void	if_no_arguments(t_env *env, int *change)
+{
+	env = change_pwd(env, "OLDPWD");
+	while (env)
+	{
+		if (!ft_strcmp(env->key, "HOME"))
+		{
+			*change = chdir(env->value);
+			break ;
+		}
+		env = env->next;
+	}
+	env = change_pwd(env, "PWD");
+}
+
 void	ft_conditions(char **args, t_env *env, int *change)
 {
 	int		i;
@@ -52,19 +67,7 @@ void	ft_conditions(char **args, t_env *env, int *change)
 			env = change_pwd(env, "PWD");
 	}
 	else
-	{
-		env = change_pwd(env, "OLDPWD");
-		while (env)
-		{
-			if (!ft_strcmp(env->key, "HOME"))
-			{
-				*change = chdir(env->value);
-				break ;
-			}
-			env = env->next;
-		}
-		env = change_pwd(env, "PWD");
-	}
+		if_no_arguments(env, change);
 }
 
 int	ft_change_dir(char **args, t_env *env)

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 01:15:25 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 05:09:59 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:08:37 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_token
 		TOKEN_APPEND,
 		TOKEN_DELIMITER,
 		AMBIGUOUS_REDIR,
-		
 	}	type;
 	char			*value;
 	int				split;

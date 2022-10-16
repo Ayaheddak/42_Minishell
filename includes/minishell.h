@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 09:21:24 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:08:06 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,25 @@ typedef struct s_exec
 {
 	char			**args;
 	t_redir			*redir;
-	//char			*line;
 	struct s_exec	*next;
 }				t_exec;
 
 typedef struct s_leaks
 {
-	void	*leak;
-	struct s_leaks *next;
+	void			*leak;
+	struct s_leaks	*next;
 }	t_leaks;
 
 typedef struct s_global
 {
 	t_exec	*exec;
-	char	**env;//
 	t_env	*env_list;
 	t_token	*last_token;
-	int		exitstauts;//
+	int		exitstauts;
 	int		errorlexer;
 	int		errorparser;
 	int		hd;
-	char	*pwd;//
 	t_leaks	*g;
-	
 }		t_global;
 
 t_global	g_global;
@@ -83,9 +79,8 @@ t_token	*init_token(int type, char *value, int split);
 void	print_tokenizer(t_token *token);
 t_token	*tokenizer(lexer_t *lexer);
 t_token	*lexer_get_next_token(lexer_t *lexer);
-// t_token	*lexer_get_next_token(lexer_t *lexer, t_token *token);
 void	free_tokenizer(t_token *token);
-int rd(t_token *token);//
+int		rd(t_token *token);
 
 /*
 	========================== lexer ==========================
@@ -175,7 +170,6 @@ char	**ft_is_contain_equal(t_env *env_list, char **args, int *d, int *i);
 void	loop_through_export(t_env *env_list, char **args, int *d, int i);
 int		ft_if_valid(char *str, int *d, int *i);
 t_env	*ft_sort_env(t_env *env_list);
-char	*ft_save_pwd(void);
 
 /*
 ----------------------------------Signals---------------------
