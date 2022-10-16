@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 11:35:29 by aheddak           #+#    #+#             */
-/*   Updated: 2022/09/23 22:23:06 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 04:23:36 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char	**ft_split(char const *s, char c)
 		return (0);
 	count = ft_count_parts(s, c);
 	str = (char **)malloc((count + 1) * sizeof(char *));
+	leaks_removal(&g_global.g, str);
 	if (!str)
 		return (0);
 	str = fill_array(str, s, c);

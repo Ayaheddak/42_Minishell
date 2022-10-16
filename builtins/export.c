@@ -6,22 +6,29 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:03:47 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/12 07:50:23 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:25:10 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//to edit
+//TODO check if local variables added  in env
+
 int	is_valid_arg(char *str)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+	{
+		ft_putstr_fd("not valid in this context\n", 2);
+		return (0);
+	}
 	while (str[i])
 	{
-		if (!((str[i] >= '0' && str[i] <= '9') || (str[i] >= 'a' && str[i] <= 'z')
-			|| (str[i] >= 'A' && str[i] <= 'Z') || (str[i] == '_') || (str[i] == '=')))
+		if (i == ft_strlen(str) - 1 && str[i] == '+')
+			return (1);
+		if (!ft_isalnum(str[i]))
 		{
 			ft_putstr_fd("not valid in this context\n", 2);
 			return (0);
@@ -48,49 +55,30 @@ int	is_replaced(t_env *env_list, char *search, char *replace)
 	return (0);
 }
 
+int	ft_if_valid(char *str, int *d, int *i)
+{
+	if (!is_valid_arg(str))
+	{
+		*d = 1;
+		(*i)++;
+		return (1);
+	}
+	return (0);
+}
+
 int	ft_export_to_env(t_env *env_list, char **args, t_execute *exec)
 {
-	char	**split;
 	int		i;
 	int		d;
 
 	i = 1;
 	d = 0;
 	if (!args[i])
-		print_env(env_list, exec, 0);
-	while (args[i])
 	{
-		if (ft_strchr(args[i], '='))
-		{
-			split = ft_split(args[i], '=');
-			if(!split[1])
-				split[1] = "";
-			if(!split[0])
-			{
-				ft_putstr_fd("`=': not a valid identifier\n", 2);
-				d = 1;
-				i++;
-				continue ;
-			}
-			if (is_replaced(env_list, split[0], split[1]))
-			{
-				i++;
-				continue ;
-			}
-			add_back_env(&env_list, create_node(split[0], split[1]));
-		}
-		else
-		{
-			if (!is_valid_arg(args[i]))
-			{
-				d = 1;
-				i++;
-				continue ;
-			}
-			add_back_env(&env_list, create_node(args[i], NULL));
-		}
-		i++;
+		ft_sort_env(env_list);
+		print_env(env_list, exec, 0);
 	}
+	loop_through_export(env_list, args, &d, i);
 	if (!d)
 		g_global.exitstauts = 0;
 	else

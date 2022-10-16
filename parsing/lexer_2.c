@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 04:43:20 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 05:11:13 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,9 +161,11 @@ t_token	*lexer_string(lexer_t *lexer)
 	char	*s;
 	int		a;
 	int		tmp;
+	int		d;
 
 	a = 0;
 	tmp = 0;
+	d = 0;
 	value = ft_strdup("");
 	// if (g_global.last_token && is_redir(g_global.last_token) == TOKEN_DELIMITER)
 	// 	tmp = 1;;
@@ -206,6 +208,18 @@ t_token	*lexer_string(lexer_t *lexer)
 		conditions(lexer, token, &value);
 		if (is_whitespace(lexer->c) || is_operator(lexer->c))
 			break ;
+		if (lexer->c == '$' && tmp == 1)
+		{
+			lexer_advance(lexer);
+			if (lexer->c == '"')
+			{
+				value = "";
+				lexer_advance(lexer);
+				d = 1;
+			}
+			else
+				value = ft_strdup("$");
+		}
 		s = lexer_get_current_char_as_string(lexer);
 		value = freejoin(value, s);
 		free(s);

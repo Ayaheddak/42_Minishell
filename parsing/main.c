@@ -3,14 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 04:43:31 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 05:24:06 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+//TODO : store local variables in linked list
+
+int	lexer_condition(lexer_t *lexer, t_token *token, char *inpt)
+{
+	if (lexer)
+	{
+		token = tokenizer(lexer);
+		free(lexer);
+		free(inpt);
+		check_parse_errors(token);
+		g_global.exec = parser(token);
+		if (g_global.errorlexer == 1)
+		{
+			free_tokenizer(token);
+			g_global.errorlexer = 0;
+			return (1);
+		}
+		if (g_global.errorparser == 1)
+		{
+			free_tokenizer(token);
+			free_exec(g_global.exec);
+			g_global.errorparser = 0;
+			return (1);
+		}
+	}
+	return (0);
+}
+
+void	remove_env(t_env **env_list)
+{
+	t_env	*env;
+
+	env = *env_list;
+	while (env)
+	{
+		remove_list(env_list, env);
+		env = env->next;
+	}
+}
+
+void	leaks_removal(t_leaks **leaks, void *ptr)
+{
+	t_leaks	*garbage;
+
+	garbage = malloc(sizeof(t_leaks));
+	garbage->leak = ptr;
+	garbage->next = *(leaks);
+	*leaks = garbage;
+}
 
 int	main(int argc, char *argv[], char *env[])
 {
@@ -22,101 +72,18 @@ int	main(int argc, char *argv[], char *env[])
 	(void)argv;
 	g_global.env_list = get_env_list(env);
 	g_global.exitstauts = 0;
+	token = NULL;
+	signals(0);
 	while (1)
 	{
+		g_global.hd = 1;
 		inpt = readline("minishell$ ");
 		lexer = init_lexer(inpt);
 		add_history(inpt);
-		if (lexer)
-		token = tokenizer(lexer);//
-		free(lexer);
-		free(inpt);
-		check_parse_errors(token);
-		g_global.exec = parser(token);
-		if (g_global.errorlexer == 1)
-		{
-			free_tokenizer(token);
-			g_global.errorlexer = 0;
+		if (lexer_condition(lexer, token, inpt))
 			continue ;
-		}
-		//print_tokenizer(token);
-		if (g_global.errorparser == 1)
-		{
-			free_tokenizer(token);
-			free_exec(g_global.exec);
-			g_global.errorparser = 0;
-			continue ;
-		}
-		//print_redir(g_global.exec->redir);
+		ctrl_d(inpt);
 		start_execution(g_global.exec, g_global.env_list);
-		//system("leaks minishell");
 	}
 	return (0);
 }
-
-// int	main(int argc, char *argv[], char *env[])
-// {
-// 	char	*inpt;
-// 	t_token	*token;
-// 	lexer_t	*lexer;
-
-// 	(void)argc;
-// 	(void)argv;
-// 	g_global.env_list = get_env_list(env);
-// 	g_global.exitstauts = 0;
-// 	signals();
-// 	while (1)
-// 	{
-// 		inpt = readline("minishell$ ");
-// 		lexer = init_lexer(inpt);
-// 		add_history(inpt);
-// 		if (lexer)
-// 		token = tokenizer(lexer);//
-// 		free(lexer);
-// 		free(inpt);
-// 		check_parse_errors(token);
-// 		g_global.exec = parser(token);
-// 		if (g_global.errorlexer == 1)
-// 		{
-// 			free_tokenizer(token);
-// 			g_global.errorlexer = 0;
-// 			continue ;
-// 		}
-// 		// print_tokenizer(token);
-// 		if (g_global.errorparser == 1)
-// 		{
-// 			token = tokenizer(lexer);
-// 			//free(lexer);
-// 			free(inpt);
-// 			check_parse_errors(token);
-// 			g_global.exec = parser(token);
-// 			if (g_global.errorlexer == 1)
-// 			{
-// 				free_tokenizer(token);
-// 				g_global.errorlexer = 0;
-// 				continue ;
-// 			}
-// 			if (g_global.errorparser == 1)
-// 			{
-// 				free_tokenizer(token);
-// 				free_exec(g_global.exec);
-// 				g_global.errorparser = 0;
-// 				continue ;
-// 			}
-// 			start_execution(g_global.exec, g_global.env_list);
-// 		}
-// 		ctrl_d(inpt);
-// 		start_execution(g_global.exec, g_global.env_list);
-// 		//printf("The status is: %d\n", g_global.exitstauts);
-// 		//signal(SIGINT, ctrl_c);
-// 		// if (g_global.errorparser == 1)
-// 		// {
-// 		// 	free_tokenizer(token);
-// 		// 	g_global.errorparser = 0;
-// 		// 	continue ;
-// 		// }
-// 		//start_execution(g_global.exec, g_global.env_list);
-
-// 	}
-// 	return (0);
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 23:04:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/15 05:50:06 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 05:25:04 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_exec	*alocate_exec(void)
 	t_exec	*exec;
 
 	exec = malloc(sizeof(t_exec));
+	leaks_removal(&g_global.g, exec);
 	exec->args = NULL;
 	exec->next = NULL;
 	exec->redir = NULL;
@@ -56,6 +57,7 @@ char	**ft_realloc(char **args, char *str)
 	i = 0;
 	len = len_of_array(args);
 	res = (char **)malloc(sizeof(char *) * (len + 2));
+	leaks_removal(&g_global.g, res);
 	if (!res)
 		return (NULL);
 	while (i < len)

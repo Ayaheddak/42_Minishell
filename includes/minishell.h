@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 04:33:52 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 05:09:49 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -23,6 +22,7 @@
 # include <signal.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <dirent.h>
 # include "libft.h"
 # include "token.h"
 # include "lexer.h"
@@ -45,18 +45,35 @@ typedef struct s_exec
 	struct s_exec	*next;
 }				t_exec;
 
+typedef struct s_leaks
+{
+	void	*leak;
+	struct s_leaks *next;
+}	t_leaks;
+
 typedef struct s_global
 {
 	t_exec	*exec;
 	char	**env;
 	t_env	*env_list;
-	t_token *last_token;
+	t_token	*last_token;
 	int		exitstauts;
 	int		errorlexer;
 	int		errorparser;
+	int		hd;
+	char	*pwd;
+	t_leaks	*g;
+	
 }		t_global;
- 
+
 t_global	g_global;
+
+typedef struct s_sort_list
+{
+	char	*key;
+	char	*val;
+	int		len;
+}	t_sort_list;
 
 /*
 	========================== Token ==========================
@@ -114,16 +131,6 @@ char	**ft_realloc(char **args, char *str);
 int		len_of_array(char **args);
 
 /*
-	---------------get_next_line------------------------
-*/
-char	*get_next_line(int fd);
-char	*extract_line(char *str);
-char	*extract_after_line(char *str);
-char	*ft_read(int *rb, char *temp, char *buf, int fd);
-char	*ft_cpy(char *str, int *i, int *j);
-void	skip_line(char *str, int *j);
-
-/*
 	--------------------Check commands------------
 */
 char	*check_command(char *cmd, t_env *env);
@@ -135,6 +142,8 @@ void	execute_command(t_execute *exec, t_exec *exec_list, t_env *env);
 */
 void	start_execution(t_exec *exec_list, t_env *env);
 void	input_output(int i, t_execute *exec, t_exec *exec_list);
+void	read_from_hrdc(pid_t pd, t_exec *exec_list, int temp_fd);
+void	here_doc(int *d, t_execute *exec, t_exec *exec_list);
 void	ft_error(char *str);
 void	close_pipes(t_execute *exec, int n);
 void	close_and_free(t_execute exec, int n);
@@ -154,20 +163,27 @@ int		ft_change_dir(char **args, t_env *env);
 int		ft_env(t_env *env, char **args, t_execute *exec);
 void	print_env(t_env *env, t_execute *exec, int d);
 char	*join_key_value(char *key, char *value);
-int		ft_pwd(char **args, t_execute *exec);
+int		ft_pwd(char **args, t_execute *exec, t_env *env);
 t_env	*remove_list(t_env **env_list, t_env *remove);
 int		ft_unset(char **args, t_env *env_iter);
 int		ft_export_to_env(t_env *env_list, char **args, t_execute *exec);
 int		is_replaced(t_env *env_list, char *search, char *replace);
 int		is_valid_arg(char *str);
 int		ft_export_to_copy(t_env *env, char **args, t_execute *exec);
-void	ft_exit(void);
+int		ft_exit(char **args);
+char	**ft_is_contain_equal(t_env *env_list, char **args, int *d, int *i);
+void	loop_through_export(t_env *env_list, char **args, int *d, int i);
+int		ft_if_valid(char *str, int *d, int *i);
+t_env	*ft_sort_env(t_env *env_list);
+char	*ft_save_pwd(void);
 
 /*
 ----------------------------------Signals---------------------
 */
 void	ctrl_d(char *input);
 void	ctrlback(int d);
-void	signals(void);
-void	ctrl_c(void);
+void	signals(int d);
+int		ctrl_c(char **line);
+
+void	leaks_removal(t_leaks **leaks, void *ptr);
 #endif

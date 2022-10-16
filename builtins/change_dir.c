@@ -6,11 +6,16 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:29:48 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/12 04:39:58 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 04:15:57 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+//TODO print error msg when directory is deleted 
+/**
+ * * TODO: test this case : << here cat file1 > f2 | grep l > f2 
+ */
 
 t_env	*change_pwd(t_env *env_list, char *key)
 {
@@ -29,19 +34,18 @@ t_env	*change_pwd(t_env *env_list, char *key)
 	return (env_list);
 }
 
-int	ft_change_dir(char **args, t_env *env)
+void	ft_conditions(char **args, t_env *env, int *change)
 {
 	int	i;
-	int	change;
 
 	i = 1;
-	change = 0;
 	if (args[i])
 	{
-		env = change_pwd(env, "OLDPWD");
-		if (ft_strcmp(args[i], ""))
-			change = chdir(args[i]);
-		env = change_pwd(env, "PWD");
+		if (getcwd(NULL, 0))
+			env = change_pwd(env, "OLDPWD");
+		*change = chdir(args[i]);
+		if (getcwd(NULL, 0))
+			env = change_pwd(env, "PWD");
 	}
 	else
 	{
@@ -50,13 +54,21 @@ int	ft_change_dir(char **args, t_env *env)
 		{
 			if (!ft_strcmp(env->key, "HOME"))
 			{
-				change = chdir(env->value);
+				*change = chdir(env->value);
 				break ;
 			}
 			env = env->next;
 		}
 		env = change_pwd(env, "PWD");
 	}
+}
+
+int	ft_change_dir(char **args, t_env *env)
+{
+	int	change;
+
+	change = 0;
+	ft_conditions(args, env, &change);
 	if (change == -1)
 	{
 		perror("cd");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/15 22:49:52 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 05:25:17 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_token	*init_token(int type, char *value, int split)
 	t_token	*token;
 
 	token = malloc (sizeof(t_token));
+	leaks_removal(&g_global.g, token);
 	token->type = type;
 	token->value = value;
 	token->split = split;

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:56:10 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/12 09:21:48 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 04:47:39 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 //to free
+//TODO expande variables in here_doc; ignore first digit in expansion
 t_env	*get_env_list(char *env[])
 {
 	int		i;
@@ -22,13 +23,11 @@ t_env	*get_env_list(char *env[])
 	head = NULL;
 	while (env[i])
 	{
-		split = ft_split(env[i],'=');
+		split = ft_split(env[i], '=');
 		add_back_env(&head, create_node(split[0], split[1]));
 		i++;
 	}
-	// for (int i = 0; split[i]; i++)
-	// 	free(split[i]);
-	// free(split);
+	add_back_env(&head, create_node("0", "minishell"));
 	return (head);
 }
 
@@ -40,6 +39,7 @@ char	**get_env_array(t_env *env)
 
 	len = get_list_len(env);
 	str_env = malloc(sizeof(char *) * (len + 1));
+	leaks_removal(&g_global.g, str_env);
 	i = 0;
 	while (env)
 	{
@@ -57,7 +57,7 @@ t_env	*ft_copy_env(t_env *env)
 	t_env	*env_copy;
 
 	env_copy = NULL;
-	while(env)
+	while (env)
 	{
 		add_back_env(&env_copy, create_node(env->key, env->value));
 		env = env->next;
@@ -65,32 +65,33 @@ t_env	*ft_copy_env(t_env *env)
 	return (env_copy);
 }
 
+void	switch_values(char *temp_key, char *temp_value, t_env *env)
+{
+	temp_key = ft_strdup(env->key);
+	temp_value = ft_strdup(env->value);
+	env->key = ft_strdup(env->next->key);
+	env->value = ft_strdup(env->next->value);
+	env->next->key = ft_strdup(temp_key);
+	env->next->value = ft_strdup(temp_value);
+}
+
 t_env	*ft_sort_env(t_env *env_list)
 {
-	char	*temp_key;
-	char	*temp_value;
-	t_env	*env;
-	int		i;
-	int		j;
-	int		len;
+	t_sort_list	sort;
+	t_env		*env;
+	int			i;
+	int			j;
 
 	i = 0;
-	len = get_list_len(env_list);
-	while (i < len)
+	sort.len = get_list_len(env_list);
+	while (i < sort.len)
 	{
 		env = env_list;
 		j = 0;
-		while (j < len - 1 - i)
+		while (j < sort.len - 1 - i)
 		{
 			if (ft_strcmp(env->key, env->next->key) > 0)
-			{
-				temp_key = ft_strdup(env->key);
-				temp_value = ft_strdup(env->value);
-				env->key = ft_strdup(env->next->key);
-				env->value = ft_strdup(env->next->value);
-				env->next->key = ft_strdup(temp_key);
-				env->next->value = ft_strdup(temp_value);
-			}
+				switch_values(sort.key, sort.val, env);
 			env = env->next;
 			j++;
 		}
