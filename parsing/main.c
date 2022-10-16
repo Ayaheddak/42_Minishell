@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 08:31:47 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 08:33:19 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	main(int argc, char *argv[], char *env[])
 		if (lexer_condition(lexer, token, inpt))
 			continue ;
 		ctrl_d(inpt);
+		print_redir(g_global.exec->redir);
 		start_execution(g_global.exec, g_global.env_list);
 	}
 	return (0);
