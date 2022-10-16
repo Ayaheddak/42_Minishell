@@ -6,7 +6,7 @@
 #    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/10/15 04:58:27 by het-tale         ###   ########.fr        #
+#    Updated: 2022/10/16 04:25:22 by het-tale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ CC		=	gcc
 all		:	$(NAME)
 
 $(NAME)	:	$(UTILS)	
-	@$(CC) $(CFLAGS) $(UTILS) -o $(NAME) -lreadline $(INDE) $(LIB) -g
+	@$(CC) $(CFLAGS) $(UTILS) -o $(NAME) -lreadline $(INDE) $(LIB)
 	
 clean :
 	@${RM} $(OBJCT)

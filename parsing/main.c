@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 01:37:22 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 04:26:47 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,16 @@ void	remove_env(t_env **env_list)
 	}
 }
 
+void	leaks_removal(t_leaks **leaks, void *ptr)
+{
+	t_leaks	*garbage;
+
+	garbage = malloc(sizeof(t_leaks));
+	garbage->leak = ptr;
+	garbage->next = *(leaks);
+	*leaks = garbage;
+}
+
 int	main(int argc, char *argv[], char *env[])
 {
 	char	*inpt;
@@ -73,8 +83,6 @@ int	main(int argc, char *argv[], char *env[])
 		if (lexer_condition(lexer, token, inpt))
 			continue ;
 		ctrl_d(inpt);
-		if (ft_save_pwd())
-			g_global.pwd = ft_save_pwd();
 		start_execution(g_global.exec, g_global.env_list);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/14 05:04:04 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 04:23:36 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char *conv_char(char c)
 	char *res;
 
 	res = malloc(sizeof(char)* 2);
+	leaks_removal(&g_global.g, res);
 	if(!res)
 		return(NULL);
 	res[0] = c;

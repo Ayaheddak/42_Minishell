@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 21:16:01 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 08:10:32 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 04:23:36 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (ft_strdup(s1));
 	count = ft_strlen(s1) + ft_strlen(s2) + 1;
 	rest = (char *)malloc(sizeof(char) * count);
+	leaks_removal(&g_global.g, rest);
 	if (!rest)
 		return (NULL);
 	while (s1[i] != '\0')

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/15 03:15:14 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 04:23:36 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*freejoin(char *s1, char *s2)
 		return (s1);
 	j = (ft_strlen(s1) + ft_strlen(s2) + 1);//
 	rest = (char *)malloc(sizeof(char) * j);
+	leaks_removal(&g_global.g, rest);
 	if (!rest)
 		return (NULL);
 	j = 0;
@@ -47,6 +48,7 @@ void	addback(t_token **head, void *value, void *type, int split)
 	t_token	*temp;
 
 	new = malloc(sizeof(t_token));
+	leaks_removal(&g_global.g, new);
 	new->value = value;
 	new->split = split;
 	new->type = *(int *)type;
@@ -68,6 +70,7 @@ void	addredirection(t_redir **head, int type, char *file)
 	t_redir	*new;
 
 	new = malloc(sizeof(t_redir));
+	leaks_removal(&g_global.g, new);
 	new->name = file;
 	new->type = type;
 	new->next = NULL;

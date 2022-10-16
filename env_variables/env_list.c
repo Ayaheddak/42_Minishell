@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:56:10 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 01:27:35 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 04:23:36 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	**get_env_array(t_env *env)
 
 	len = get_list_len(env);
 	str_env = malloc(sizeof(char *) * (len + 1));
+	leaks_removal(&g_global.g, str_env);
 	i = 0;
 	while (env)
 	{

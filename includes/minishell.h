@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 02:27:38 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 04:24:38 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ typedef struct s_exec
 	struct s_exec	*next;
 }				t_exec;
 
+typedef struct s_leaks
+{
+	void	*leak;
+	struct s_leaks *next;
+}	t_leaks;
+
 typedef struct s_global
 {
 	t_exec	*exec;
@@ -55,6 +61,8 @@ typedef struct s_global
 	int		errorparser;
 	int		hd;
 	char	*pwd;
+	t_leaks	*g;
+	
 }		t_global;
 
 t_global	g_global;
@@ -183,4 +191,6 @@ void	ctrl_d(char *input);
 void	ctrlback(int d);
 void	signals(int d);
 int		ctrl_c(char **line);
+
+void	leaks_removal(t_leaks **leaks, void *ptr);
 #endif

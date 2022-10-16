@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 21:43:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 08:29:26 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 04:23:36 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*ft_strdup(char *s1)
 	i = 0;
 	len = ft_strlen(s1);
 	p = (char *)malloc((len + 1) * sizeof(char));
+	leaks_removal(&g_global.g, p);
 	if (!p)
 		return (NULL);
 	while (i < len)

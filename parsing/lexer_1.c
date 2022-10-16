@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 05:19:02 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/12 20:28:23 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 04:23:36 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ lexer_t	*init_lexer(char *str)
 	if (!str)
 		return (NULL);
 	lexer = malloc(sizeof(lexer_t));//
+	leaks_removal(&g_global.g, lexer);
 	lexer->contents = str;
 	lexer->i = 0;
 	lexer->c = str[lexer->i];
@@ -65,6 +66,7 @@ char	*lexer_get_current_char_as_string(lexer_t *lexer)
 	char	*str;
 
 	str = malloc(sizeof(char) * 2);
+	leaks_removal(&g_global.g, str);
 	str[0] = lexer->c;
 	str[1] = '\0';
 	return (str);
