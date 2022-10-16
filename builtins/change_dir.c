@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:29:48 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 00:06:45 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 00:45:22 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,11 @@ void	ft_conditions(char **args, t_env *env, int *change)
 	int	i;
 
 	i = 1;
-	if (args[i])
+	if (args[i] && getcwd(NULL, 0))
 	{
-		if (getcwd(NULL, 0))
-		{
-			env = change_pwd(env, "OLDPWD");
-			*change = chdir(args[i]);
-			env = change_pwd(env, "PWD");
-		}
+		env = change_pwd(env, "OLDPWD");
+		*change = chdir(args[i]);
+		env = change_pwd(env, "PWD");
 	}
 	else
 	{

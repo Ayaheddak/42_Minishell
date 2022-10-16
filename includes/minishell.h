@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 23:45:39 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:28:42 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ typedef struct s_global
 }		t_global;
 
 t_global	g_global;
+
+typedef struct s_sort_list
+{
+	char	*key;
+	char	*val;
+	int		len;
+}	t_sort_list;
 
 /*
 	========================== Token ==========================

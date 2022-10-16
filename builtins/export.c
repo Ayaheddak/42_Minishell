@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:03:47 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 23:50:22 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:25:10 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,11 @@ int	ft_export_to_env(t_env *env_list, char **args, t_execute *exec)
 	i = 1;
 	d = 0;
 	if (!args[i])
+	{
+		ft_sort_env(env_list);
 		print_env(env_list, exec, 0);
+	}
 	loop_through_export(env_list, args, &d, i);
-	ft_sort_env(env_list);
 	if (!d)
 		g_global.exitstauts = 0;
 	else

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 20:00:30 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 01:48:13 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:20:02 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ void	add_back_env(t_env **env_head, t_env *new)
 	}
 }
 
-void	add_front_env(t_env **env_head, t_env *new)
-{
-	new->next = *env_head;
-	*env_head = new;
-}
-
 int	get_list_len(t_env	*list)
 {
 	int	i;
@@ -69,4 +63,19 @@ char	*get_env_value(t_env *env, char *key)
 		env = env->next;
 	}
 	return (NULL);
+}
+
+void	free_env(t_env *env)
+{
+	t_env	*tmp;
+
+	while (env != NULL)
+	{
+		tmp = env;
+		free(env->key);
+		free(env->value);
+		env = env->next;
+		free (tmp);
+	}
+	free (env);
 }
