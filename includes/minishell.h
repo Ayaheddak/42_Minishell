@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 05:47:15 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 04:33:52 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_token	*tokenizer(lexer_t *lexer);
 t_token	*lexer_get_next_token(lexer_t *lexer);
 // t_token	*lexer_get_next_token(lexer_t *lexer, t_token *token);
 void	free_tokenizer(t_token *token);
+int rd(t_token *token);//
 
 /*
 	========================== lexer ==========================
@@ -107,7 +108,7 @@ void	*check_parse_errors(t_token *head);
 t_exec	*alocate_exec(void);
 t_exec	*parser(t_token *head);
 void	addredirection(t_redir **head, int type, char *file);
-void	print_redir(t_redir *redir);
+void	print_redir(t_redir *redir);//
 void	free_exec(t_exec *exec);
 char	**ft_realloc(char **args, char *str);
 int		len_of_array(char **args);

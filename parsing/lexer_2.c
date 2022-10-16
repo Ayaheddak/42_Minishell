@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/15 05:46:22 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 04:43:20 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,17 @@ char	*after_quote(lexer_t *lexer, char *s, char **value)
 	}
 	return (*value);
 }
-
+int rd(t_token *token)
+{
+	if (token->type == TOKEN_APPEND || token->type == TOKEN_IN || token->type == TOKEN_OUT)
+		return (1);
+	return (0);
+}
 int	check_redir(void)
 {
 	if (g_global.last_token && is_redir(g_global.last_token) == 5)
 		return (1);
-	else if (g_global.last_token && is_redir(g_global.last_token) > 0)
+	else if (g_global.last_token && rd(g_global.last_token) == 1)
 		return (2);
 	else
 		return (0);
@@ -164,8 +169,8 @@ t_token	*lexer_string(lexer_t *lexer)
 	// 	tmp = 1;;
 	if (check_redir() == 1)//
 		tmp = 1;
-	// if (check_redir()== 2)
-	// 	tmp = 2;
+	if (check_redir()== 2)
+		tmp = 2;
 	while (lexer->c != '\0' && !is_whitespace(lexer->c) && !is_operator(lexer->c))
 	{
 		if (lexer->c == '$' && tmp == 0)
@@ -185,17 +190,19 @@ t_token	*lexer_string(lexer_t *lexer)
 				value = freejoin(value, token->value);
 			}
 		}
-		// else if (lexer->c == '$' && tmp == 2)
-		// {
-		// 	while (lexer->c == '$')
-		// 	{
-		// 		token = lexer_expanding(lexer);
-		// 		value = freejoin(value, token->value);
-		// 	}
-		// 	a = needs_splitting(token->value);
-		// 	if (a == 1)
-		// 		value = strdup("");
-		// }
+		if (lexer->c == '$' && tmp == 2)
+		{
+			// printf("Hi\n\n");
+			while (lexer->c == '$')
+			{
+				token = lexer_expanding(lexer);
+				value = freejoin(value, token->value);
+			}
+			// printf("valuue ----> %s\n", token->value);
+			a = needs_splitting(token->value);
+			// if (a == 1)
+			// 	a = 2;
+		}
 		conditions(lexer, token, &value);
 		if (is_whitespace(lexer->c) || is_operator(lexer->c))
 			break ;
@@ -204,5 +211,20 @@ t_token	*lexer_string(lexer_t *lexer)
 		free(s);
 		lexer_advance(lexer);
 	}
+	// printf("a-->%d\n",a);
 	return (init_token(TOKEN_STRING, value, a));
+}
+void	print_redir(t_redir *redir)
+{
+	int		i;
+
+	i = 0;
+	while (redir != NULL)
+	{
+		printf("------------- Node numbre %d  = -------------\n", i);
+		printf("ur value = %s\n",redir->name);
+		printf("ur type = %d\n", redir->type);
+		redir = redir->next;
+		i++;
+	}
 }

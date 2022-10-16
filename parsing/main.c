@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/14 22:06:15 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 04:43:31 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int	main(int argc, char *argv[], char *env[])
 			g_global.errorparser = 0;
 			continue ;
 		}
+		//print_redir(g_global.exec->redir);
 		start_execution(g_global.exec, g_global.env_list);
+		//system("leaks minishell");
 	}
 	return (0);
 }
