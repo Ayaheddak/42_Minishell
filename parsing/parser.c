@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 20:30:20 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 04:57:15 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/16 06:06:13 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,22 +116,67 @@ void	cond_parsing(t_token **token, t_exec **exec, int *ret)
 	if (*token)
 		*token = (*token)->next;
 }
+// t_exec	*parser(t_token *head)
+// {
+// 	t_token	*token;
+// 	t_exec	*exec;
+// 	int		ret;
+
+// 	ret = 0;
+// 	token = head;
+// 	exec = alocate_exec();
+// 	while (token)
+// 	{
+// 		cond_parsing(&token, &exec, &ret);
+// 		if (ret == 1)
+// 			break ;
+// 	}
+// 	///printf("args[0]--> %s\n", exec->args[0]);
+// 	return (exec);
+// 	// print_redir(exec->redir);
+//}
 t_exec	*parser(t_token *head)
 {
 	t_token	*token;
 	t_exec	*exec;
-	int		ret;
+	char	**split;
+	int		i;
 
-	ret = 0;
+	i = 0;
 	token = head;
 	exec = alocate_exec();
 	while (token)
 	{
-		cond_parsing(&token, &exec, &ret);
-		if (ret == 1)
+		if (token == NULL)
+		{
+			exec->next = NULL;
 			break ;
+		}
+		if (token->type == TOKEN_PIPE)
+		{
+			exec->next = parser(token->next);
+			break ;
+		}
+		if (token->type == TOKEN_STRING)
+		{
+			if (!token->split)
+				exec->args = ft_realloc(exec->args, token->value);
+			else
+			{
+				split = ft_split(token->value, ' ');
+				while (split[i])
+					exec->args = ft_realloc(exec->args, split[i++]);
+				free_tab(split);
+			}
+		}
+		if (is_redir(token) != 0 && token->next)
+		{
+			addredirection(&exec->redir, is_redir(token), token->next->value);
+			token = token->next;
+		}
+		if (token)
+			token = token->next;
 	}
 	return (exec);
-	// print_redir(exec->redir);
 }
 
