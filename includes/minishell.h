@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 05:09:49 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 09:21:24 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ typedef struct s_leaks
 typedef struct s_global
 {
 	t_exec	*exec;
-	char	**env;
+	char	**env;//
 	t_env	*env_list;
 	t_token	*last_token;
-	int		exitstauts;
+	int		exitstauts;//
 	int		errorlexer;
 	int		errorparser;
 	int		hd;
-	char	*pwd;
+	char	*pwd;//
 	t_leaks	*g;
 	
 }		t_global;

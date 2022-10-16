@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:29:48 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 04:15:57 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 09:03:55 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_env	*change_pwd(t_env *env_list, char *key)
 		if (!ft_strcmp(env->key, key))
 		{
 			env->value = getcwd(NULL, 0);
+			leaks_removal(&g_global.g, env->value);
 			break ;
 		}
 		env = env->next;
@@ -36,15 +37,18 @@ t_env	*change_pwd(t_env *env_list, char *key)
 
 void	ft_conditions(char **args, t_env *env, int *change)
 {
-	int	i;
+	int		i;
+	char	*buf;
 
 	i = 1;
 	if (args[i])
 	{
-		if (getcwd(NULL, 0))
+		buf = getcwd(NULL, 0);
+		leaks_removal(&g_global.g, buf);
+		if (buf)
 			env = change_pwd(env, "OLDPWD");
 		*change = chdir(args[i]);
-		if (getcwd(NULL, 0))
+		if (buf)
 			env = change_pwd(env, "PWD");
 	}
 	else
