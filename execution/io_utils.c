@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 02:15:52 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 04:41:11 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 08:35:25 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	read_from_hrdc(pid_t pd, t_exec *exec_list, int temp_fd)
 {
 	char	*line;
+	char	*tmp;
 
 	line = "";
 	if (!pd)
@@ -30,8 +31,14 @@ void	read_from_hrdc(pid_t pd, t_exec *exec_list, int temp_fd)
 				free(line);
 				exit(0);
 			}
-			// line = expand_dollar(line);
-			write(temp_fd, line, ft_strlen(line));
+			if (line[0] == '$')
+			{
+				tmp = get_expanded(ft_substr(line, 1, ft_strlen(line) - 1));
+				if (tmp)
+					write(temp_fd, tmp, ft_strlen(tmp));
+			}
+			else
+				write(temp_fd, line, ft_strlen(line));
 			write(temp_fd, "\n", 1);
 			free(line);
 		}

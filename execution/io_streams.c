@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:00:58 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 05:05:43 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 08:41:12 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ int	file_utils(int *d, t_execute *exec, t_exec *exec_list, char *name)
 			g_global.hd = 0;
 			return (1);
 		}
+	}
+	else if (exec_list->redir->type == AMBIGUOUS_REDIR)
+	{
+		ft_putstr_fd(exec_list->args[0], 2);
+		ft_putstr_fd(": ambiguous redirect\n");
+		return (1);
 	}
 	else if (exec_list->redir->type == TOKEN_IN)
 	{
