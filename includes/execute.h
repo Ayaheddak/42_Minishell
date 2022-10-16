@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:37:01 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 01:10:12 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 02:33:30 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ struct s_execute
 	int	output;
 	int	nb_cmd;
 	int	cmd_index;
+	int	created_process;
 };
 
 struct s_path

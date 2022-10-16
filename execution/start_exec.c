@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:41:04 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 02:27:35 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 02:35:06 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,12 @@ void	start_execution(t_exec *exec_list, t_env *env)
 		if (!g_global.hd)
 			break ;
 		if (exec->nb_cmd == 1 && ft_call_builtins(exec_list, env, exec) != -1)
+		{
+			exec->created_process = 0;
 			break ;
+		}
 		exec->child_pid[i] = fork();
+		exec->created_process = 1;
 		if (exec->child_pid[i] == 0)
 		{
 			signals(1);

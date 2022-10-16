@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:05:25 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 06:01:31 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 03:00:05 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,16 @@ void	close_and_free(t_execute exec, int n)
 		i++;
 	}
 	i = -1;
-	while (++i < n)
-		waitpid(-1, &(exec.status), 0);
-	if (WIFEXITED(exec.status))
-		g_global.exitstauts = WEXITSTATUS(exec.status);
+	if (exec.created_process)
+	{
+		waitpid(exec.child_pid[n - 1], &(exec.status), 0);
+		while (++i < n - 1)
+			waitpid(-1, NULL, 0);
+		if (WIFEXITED(exec.status))
+			g_global.exitstauts = WEXITSTATUS(exec.status);
+		if (WIFSIGNALED(exec.status))
+			g_global.exitstauts = WTERMSIG(exec.status) + 128;	
+	}
 	if (exec.nb_cmd > 1)
 	{
 		free(exec.child_pid);

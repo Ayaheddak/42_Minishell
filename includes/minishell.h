@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 01:28:42 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 02:27:38 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ int		ft_export_to_env(t_env *env_list, char **args, t_execute *exec);
 int		is_replaced(t_env *env_list, char *search, char *replace);
 int		is_valid_arg(char *str);
 int		ft_export_to_copy(t_env *env, char **args, t_execute *exec);
-void	ft_exit(void);
+int		ft_exit(char **args);
 char	**ft_is_contain_equal(t_env *env_list, char **args, int *d, int *i);
 void	loop_through_export(t_env *env_list, char **args, int *d, int i);
 int		ft_if_valid(char *str, int *d, int *i);

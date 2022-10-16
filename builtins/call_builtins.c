@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 20:37:58 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 04:54:01 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 02:27:07 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_call_builtins(t_exec *head, t_env *env_list, t_execute *exec)
 		else if (!ft_strcmp(head->args[0], "export"))
 			return (ft_export_to_env(env_list, head->args, exec));
 		else if (!ft_strcmp(head->args[0], "exit"))
-			ft_exit();
+			return (ft_exit(head->args));
 	}
 	return (-1);
 }
