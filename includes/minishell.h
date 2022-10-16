@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 04:24:38 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 04:32:30 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,16 +126,6 @@ void	print_redir(t_redir *redir);
 void	free_exec(t_exec *exec);
 char	**ft_realloc(char **args, char *str);
 int		len_of_array(char **args);
-
-/*
-	---------------get_next_line------------------------
-*/
-char	*get_next_line(int fd);
-char	*extract_line(char *str);
-char	*extract_after_line(char *str);
-char	*ft_read(int *rb, char *temp, char *buf, int fd);
-char	*ft_cpy(char *str, int *i, int *j);
-void	skip_line(char *str, int *j);
 
 /*
 	--------------------Check commands------------

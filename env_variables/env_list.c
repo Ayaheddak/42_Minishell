@@ -6,12 +6,13 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:56:10 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 04:23:36 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 04:47:39 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 //to free
+//TODO expande variables in here_doc; ignore first digit in expansion
 t_env	*get_env_list(char *env[])
 {
 	int		i;
@@ -26,6 +27,7 @@ t_env	*get_env_list(char *env[])
 		add_back_env(&head, create_node(split[0], split[1]));
 		i++;
 	}
+	add_back_env(&head, create_node("0", "minishell"));
 	return (head);
 }
 

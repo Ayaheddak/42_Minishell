@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:00:58 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/15 02:20:40 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 05:05:43 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	file_utils(int *d, t_execute *exec, t_exec *exec_list, char *name)
 	{
 		exec->input = open(name, O_RDONLY, 0444);
 		*d = 0;
+		if (access(name, F_OK) == -1)
+			return (1);
 	}
 	else if (exec_list->redir->type == TOKEN_OUT)
 	{
