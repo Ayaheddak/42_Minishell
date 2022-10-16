@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 20:30:20 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 06:06:13 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 08:31:00 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,10 @@ t_exec	*parser(t_token *head)
 		}
 		if (is_redir(token) != 0 && token->next)
 		{
-			addredirection(&exec->redir, is_redir(token), token->next->value);
+			if (!token->next->split)
+				addredirection(&exec->redir, is_redir(token), token->next->value);
+			else
+				addredirection(&exec->redir, AMBIGUOUS_REDIR, token->next->value);
 			token = token->next;
 		}
 		if (token)
