@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 05:25:17 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/16 08:28:32 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ t_token	*tokenizer(lexer_t *lexer)
 	// token = lexer_get_next_token(lexer);
 	while ((token = lexer_get_next_token(lexer)) != (void *)0)
 	{
-		// free(g_global.last_token);
 		addback(&head, token->value, &token->type, token->split);
 		g_global.last_token = token;
 	}

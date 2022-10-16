@@ -6,7 +6,7 @@
 #    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/10/16 05:34:01 by het-tale         ###   ########.fr        #
+#    Updated: 2022/10/16 08:46:07 by het-tale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,11 @@ UTILS	=	parsing/lexer_1.c parsing/main.c parsing/token.c parsing/utils.c parsing
 			signals/ctrlc.c signals/ctrld.c signals/ctrlback.c signals/signals.c
 
 INDE =  -I /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/include/
-#INDE = -I /Users/aheddak/goinfre/homebrew/Cellar/readline/8.2.1/lib/include/
+#INDE = -I /Users/aheddak/goinfre/homebrew/Cellar/readline/8.2.1/include
 
 
 LIB = -L /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/lib
 #LIB = -L /Users/aheddak/goinfre/homebrew/Cellar/readline/8.2.1/lib
-
 CFLAGS	=	 -Wall -Wextra -Werror #-fsanitize=address
 
 
@@ -45,7 +44,7 @@ CC		=	gcc
 all		:	$(NAME)
 
 $(NAME)	:	$(UTILS)	
-	@$(CC) $(CFLAGS) $(UTILS) -o $(NAME) -lreadline $(INDE) $(LIB)
+	@$(CC) $(CFLAGS) $(UTILS) -o $(NAME) -lreadline $(INDE) $(LIB) -g
 	
 clean :
 	@${RM} $(OBJCT)
