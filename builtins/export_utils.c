@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 01:42:03 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 00:58:07 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 23:36:21 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,9 @@ void	loop_through_export(t_env *env_list, char **args, int *d, int i)
 		}
 		else
 		{
-			if (!ft_isnt_contain_equal(args[i], d, &i))
+			if (get_env_value(env_list, args[i++]))
+				continue ;
+			if (!ft_isnt_contain_equal(args[--i], d, &i))
 				continue ;
 			add_back_env(&env_list, create_node(args[i], NULL));
 		}
