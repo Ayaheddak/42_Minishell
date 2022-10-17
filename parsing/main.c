@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 08:56:47 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 03:48:28 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //TODO : Break inside recursive
 //TODO : Signals understand them
 
-int	lexer_condition(lexer_t *lexer, t_token *token, char *inpt)
+int	lexer_condition(t_lexer *lexer, t_token *token, char *inpt)
 {
 	if (lexer)
 	{
@@ -68,7 +68,7 @@ int	main(int argc, char *argv[], char *env[])
 {
 	char	*inpt;
 	t_token	*token;
-	lexer_t	*lexer;
+	t_lexer	*lexer;
 
 	(void)argc;
 	(void)argv;

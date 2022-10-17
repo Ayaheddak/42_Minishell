@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/17 04:19:35 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/17 05:34:58 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ typedef struct s_sort_list
 
 t_token	*init_token(int type, char *value, int split);
 void	print_tokenizer(t_token *token);
-t_token	*tokenizer(lexer_t *lexer);
-t_token	*lexer_get_next_token(lexer_t *lexer);
+t_token	*tokenizer(t_lexer *lexer);
+t_token	*lexer_get_next_token(t_lexer *lexer);
 void	free_tokenizer(t_token *token);
 int		rd(t_token *token);
 
@@ -86,23 +86,23 @@ int		rd(t_token *token);
 	========================== lexer ==========================
 */
 
-lexer_t	*init_lexer(char *contents);
-t_token	*redirection(lexer_t *lexer, int type1, int type2, char r);
-t_token	*lexer_double_quote(lexer_t *lexer);
-t_token	*lexer_string(lexer_t *lexer);
-t_token	*expanding(lexer_t *lexer);
-t_token	*lexer_advace_with_token(lexer_t *lexer, t_token *token);
-t_token	*lexer_single_quote(lexer_t *lexer);
-t_token	*lexer_expanding(lexer_t *lexer);
-void	lexer_advance(lexer_t *lexer);
-void	lexer_skip_whitespace(lexer_t *lexer);
+t_lexer	*init_lexer(char *contents);
+t_token	*redirection(t_lexer *lexer, int type1, int type2, char r);
+t_token	*lexer_double_quote(t_lexer *lexer);
+t_token	*lexer_string(t_lexer *lexer);
+t_token	*expanding(t_lexer *lexer);
+t_token	*lexer_advace_with_token(t_lexer *lexer, t_token *token);
+t_token	*lexer_single_quote(t_lexer *lexer);
+t_token	*lexer_expanding(t_lexer *lexer);
+void	lexer_advance(t_lexer *lexer);
+void	lexer_skip_whitespace(t_lexer *lexer);
 void	addback(t_token **head, void *value, void *type, int split);
-char	*lexer_get_current_char_as_string(lexer_t *lexer);
+char	*lexer_get_current_char_as_string(t_lexer *lexer);
 char	*get_path(char	**env);
 char	*freejoin(char *s1, char *s2);
 char	*get_expanded(char *value);
-t_token	*expanding_before_heredoc(lexer_t *lexer);
-void	conditions(lexer_t *lexer, t_token *token, char **value);
+t_token	*expanding_before_heredoc(t_lexer *lexer);
+void	conditions(t_lexer *lexer, t_token *token, char **value);
 /*
 	========================== Utils ==========================
 */

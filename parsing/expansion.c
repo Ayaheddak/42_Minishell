@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 05:41:04 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/15 05:43:08 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/17 03:48:28 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_expanded(char *value)
 	return (str);
 }
 
-void	check_err_expanding(lexer_t *lexer, char **value, int tmp)
+void	check_err_expanding(t_lexer *lexer, char **value, int tmp)
 {
 	char	*s;
 
@@ -41,7 +41,7 @@ void	check_err_expanding(lexer_t *lexer, char **value, int tmp)
 	}
 }
 
-t_token	*lexer_expanding(lexer_t *lexer)
+t_token	*lexer_expanding(t_lexer *lexer)
 {
 	char	*value;
 	int		tmp;
@@ -63,7 +63,7 @@ t_token	*lexer_expanding(lexer_t *lexer)
 	return (init_token(TOKEN_STRING, get_expanded(value), 0));
 }
 
-t_token	*expanding_before_heredoc(lexer_t *lexer)
+t_token	*expanding_before_heredoc(t_lexer *lexer)
 {
 	char	*value;
 	char	*s;

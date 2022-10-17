@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 01:10:42 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/09 01:11:18 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 03:47:47 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ typedef struct lexer_s
 	char			c;
 	unsigned int	i;
 	char			*contents;
-}	lexer_t;
+}	t_lexer;
 
 #endif

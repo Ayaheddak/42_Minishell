@@ -6,13 +6,13 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 04:18:12 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/17 05:28:50 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/17 05:34:13 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*after_quote(lexer_t *lexer, char *s, char **value)
+char	*after_quote(t_lexer *lexer, char *s, char **value)
 {
 	t_token	*token;
 
@@ -40,7 +40,7 @@ char	*after_quote(lexer_t *lexer, char *s, char **value)
 	return (*value);
 }
 
-t_token	*lexer_double_quote(lexer_t *lexer)
+t_token	*lexer_double_quote(t_lexer *lexer)
 {
 	char	*value;
 	char	*s;
@@ -69,7 +69,7 @@ t_token	*lexer_double_quote(lexer_t *lexer)
 	return (init_token(TOKEN_STRING, value, 0));
 }
 
-t_token	*lexer_single_quote(lexer_t *lexer)
+t_token	*lexer_single_quote(t_lexer *lexer)
 {
 	char	*value;
 	char	*s;

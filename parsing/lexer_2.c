@@ -6,13 +6,13 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/17 04:18:58 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/17 05:33:36 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_token	*redirection(lexer_t *lexer, int type1, int type2, char r)
+t_token	*redirection(t_lexer *lexer, int type1, int type2, char r)
 {
 	char	*value;
 	char	*s;
@@ -40,7 +40,7 @@ t_token	*redirection(lexer_t *lexer, int type1, int type2, char r)
 	return ((void *)0);
 }
 
-void	conditions(lexer_t *lexer, t_token *token, char **value)
+void	conditions(t_lexer *lexer, t_token *token, char **value)
 {
 	if (lexer->c == '"')
 	{
@@ -70,7 +70,7 @@ int	check_redir(void)
 		return (0);
 }
 
-void	lexer_string_conds(lexer_t *lexer, t_token *token, char **value, int *a)
+void	lexer_string_conds(t_lexer *lexer, t_token *token, char **value, int *a)
 {
 	int	tmp;
 
@@ -98,7 +98,7 @@ void	lexer_string_conds(lexer_t *lexer, t_token *token, char **value, int *a)
 	}
 }
 
-t_token	*lexer_string(lexer_t *lexer)
+t_token	*lexer_string(t_lexer *lexer)
 {
 	t_token	*token;
 	char	*value;

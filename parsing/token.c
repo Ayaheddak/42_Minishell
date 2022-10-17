@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/17 04:35:15 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/17 05:30:34 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_token	*init_token(int type, char *value, int split)
 	return (token);
 }
 
-t_token	*lexer_get_next_token(lexer_t *lexer)
+t_token	*lexer_get_next_token(t_lexer *lexer)
 {
 	while (lexer->c != '\0')
 	{
@@ -50,18 +50,19 @@ t_token	*lexer_get_next_token(lexer_t *lexer)
 	return ((void *)0);
 }
 
-t_token	*tokenizer(lexer_t *lexer)
+t_token	*tokenizer(t_lexer *lexer)
 {
 	t_token	*head;
 	t_token	*token;
 
 	head = NULL;
 	g_global.last_token = 0;
-	//token = lexer_get_next_token(lexer);
-	while ((token = lexer_get_next_token(lexer)) != (void *)0)
+	token = lexer_get_next_token(lexer);
+	while (token != (void *)0)
 	{
 		addback(&head, token->value, &token->e_type, token->split);
 		g_global.last_token = token;
+		token = lexer_get_next_token(lexer);
 	}
 	free(g_global.last_token);
 	free(token);
