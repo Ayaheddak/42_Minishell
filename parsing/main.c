@@ -6,15 +6,11 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/17 03:48:28 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 23:06:40 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-//TODO : store local variables in linked list
-//TODO : Break inside recursive
-//TODO : Signals understand them
 
 int	lexer_condition(t_lexer *lexer, t_token *token, char *inpt)
 {

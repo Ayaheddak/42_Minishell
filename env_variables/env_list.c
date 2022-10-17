@@ -6,13 +6,12 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:56:10 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 04:47:39 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 23:06:33 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-//to free
-//TODO expande variables in here_doc; ignore first digit in expansion
+
 t_env	*get_env_list(char *env[])
 {
 	int		i;

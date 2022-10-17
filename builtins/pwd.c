@@ -6,11 +6,9 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:47:09 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 11:06:52 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 23:06:22 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//TODO pwd removed path
 
 #include "../includes/minishell.h"
 

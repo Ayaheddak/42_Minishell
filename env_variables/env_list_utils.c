@@ -6,13 +6,12 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 20:00:30 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 04:23:36 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 23:06:26 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//to free
 t_env	*create_node(char *key, char *value)
 {
 	t_env	*env_node;

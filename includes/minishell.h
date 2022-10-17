@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/17 05:34:58 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/17 23:06:47 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	*check_parse_errors(t_token *head);
 t_exec	*alocate_exec(void);
 t_exec	*parser(t_token *head);
 void	addredirection(t_redir **head, int type, char *file);
-void	print_redir(t_redir *redir);//
+void	print_redir(t_redir *redir);
 void	free_exec(t_exec *exec);
 char	**ft_realloc(char **args, char *str);
 int		len_of_array(char **args);
@@ -178,7 +178,7 @@ t_env	*ft_sort_env(t_env *env_list);
 void	ctrl_d(char *input);
 void	ctrlback(int d);
 void	signals(int d);
-int		ctrl_c(char **line);
+int		ctrl_c(void);
 
 void	leaks_removal(t_leaks **leaks, void *ptr);
 #endif
