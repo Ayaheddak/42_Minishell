@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 20:30:20 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 08:33:45 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/17 03:50:34 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	free_tab(char **str)
 // 		exec->next = NULL;
 // 		return (1);
 // 	}
-// 	if (token->type == TOKEN_PIPE)
+// 	if (token->e_type == TOKEN_PIPE)
 // 	{
 // 		exec->next = parser(token->next);
 // 		return (1);
@@ -126,12 +126,12 @@ t_exec	*parser(t_token *head)
 			exec->next = NULL;
 			break ;
 		}
-		if (token->type == TOKEN_PIPE)
+		if (token->e_type == TOKEN_PIPE)
 		{
 			exec->next = parser(token->next);
 			break ;
 		}
-		if (token->type == TOKEN_STRING)
+		if (token->e_type == TOKEN_STRING)
 		{
 			if (!token->split)
 				exec->args = ft_realloc(exec->args, token->value);

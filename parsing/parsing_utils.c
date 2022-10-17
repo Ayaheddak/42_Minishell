@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 23:04:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 05:25:04 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 03:50:34 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	is_op(t_token *token)
 		return (0);
 	if (is_redir(token) != 0)
 		return (1);
-	else if (token->type == TOKEN_PIPE)
+	else if (token->e_type == TOKEN_PIPE)
 		return (2);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 08:28:32 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/17 03:50:34 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ t_token	*init_token(int type, char *value, int split)
 
 	token = malloc (sizeof(t_token));
 	leaks_removal(&g_global.g, token);
-	token->type = type;
+	token->e_type = type;
 	token->value = value;
 	token->split = split;
 	return (token);
 }
 
-t_token	*lexer_get_next_token(lexer_t *lexer)
+t_token	*lexer_get_next_token(t_lexer *lexer)
 {
 	while (lexer->c != '\0')
 	{
@@ -50,7 +50,7 @@ t_token	*lexer_get_next_token(lexer_t *lexer)
 	return ((void *)0);
 }
 
-t_token	*tokenizer(lexer_t *lexer)
+t_token	*tokenizer(t_lexer *lexer)
 {
 	t_token	*head;
 	t_token	*token;
@@ -60,7 +60,7 @@ t_token	*tokenizer(lexer_t *lexer)
 	// token = lexer_get_next_token(lexer);
 	while ((token = lexer_get_next_token(lexer)) != (void *)0)
 	{
-		addback(&head, token->value, &token->type, token->split);
+		addback(&head, token->value, &token->e_type, token->split);
 		g_global.last_token = token;
 	}
 	free(g_global.last_token);
@@ -77,7 +77,7 @@ void	print_tokenizer(t_token *token)//just for test
 	{
 		printf("------------- Node numbre %d  = -------------\n", i);
 		printf("ur value = %s\n", (char *)token->value);
-		printf("ur type = %d\n", token->type);
+		printf("ur type = %d\n", token->e_type);
 		token = token->next;
 		i++;
 	}

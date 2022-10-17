@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:29:40 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 08:35:32 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/17 03:50:34 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_token	*redirection(lexer_t *lexer, int type1, int type2, char r)
+t_token	*redirection(t_lexer *lexer, int type1, int type2, char r)
 {
 	char	*value;
 	char	*s;
@@ -40,7 +40,7 @@ t_token	*redirection(lexer_t *lexer, int type1, int type2, char r)
 	return ((void *)0);
 }
 
-void	conditions(lexer_t *lexer, t_token *token, char **value)
+void	conditions(t_lexer *lexer, t_token *token, char **value)
 {
 	if (lexer->c == '"')
 	{
@@ -60,7 +60,7 @@ void	conditions(lexer_t *lexer, t_token *token, char **value)
 	}
 }
 
-char	*after_quote(lexer_t *lexer, char *s, char **value)
+char	*after_quote(t_lexer *lexer, char *s, char **value)
 {
 	t_token	*token;
 
@@ -100,7 +100,7 @@ int	check_redir(void)
 		return (0);
 }
 
-t_token	*lexer_double_quote(lexer_t *lexer)
+t_token	*lexer_double_quote(t_lexer *lexer)
 {
 	char	*value;
 	char	*s;
@@ -108,7 +108,7 @@ t_token	*lexer_double_quote(lexer_t *lexer)
 
 	value = ft_strdup("");
 	tmp = 0;
-	if (g_global.last_token && g_global.last_token->type == TOKEN_DELIMITER)
+	if (g_global.last_token && g_global.last_token->e_type == TOKEN_DELIMITER)
 		tmp = 1;
 	lexer_advance(lexer);
 	while (lexer->c != '"' && lexer->c != '\0')
@@ -129,7 +129,7 @@ t_token	*lexer_double_quote(lexer_t *lexer)
 	return (init_token(TOKEN_STRING, value, 0));
 }
 
-t_token	*lexer_single_quote(lexer_t *lexer)
+t_token	*lexer_single_quote(t_lexer *lexer)
 {
 	char	*value;
 	char	*s;
@@ -149,7 +149,7 @@ t_token	*lexer_single_quote(lexer_t *lexer)
 	return (init_token(TOKEN_STRING, value, 0));
 }
 
-t_token	*lexer_string(lexer_t *lexer)
+t_token	*lexer_string(t_lexer *lexer)
 {
 	t_token	*token;
 	char	*value;
