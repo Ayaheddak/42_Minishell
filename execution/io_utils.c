@@ -6,11 +6,62 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 02:15:52 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 08:35:25 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 07:36:14 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	remove_specials(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (is_operator_speciaux(str[i]) || is_whitespace(str[i]))
+			return (i);
+	}
+	return (-1);
+}
+
+void	expansion_utils(int temp_fd, char *line, char *tmp)
+{
+	char	*substr;
+	int		rmv;
+	int		i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '$')
+		{
+			rmv = remove_specials(line + i + 1);
+			if (rmv != -1)
+				substr = ft_substr(line + i, 1, rmv);
+			else
+				substr = ft_substr(line + i, 1, ft_strlen(line));
+			tmp = get_expanded(substr);
+			if (tmp)
+				write(temp_fd, tmp, ft_strlen(tmp));
+			i += ft_strlen(substr);
+		}
+		else
+			write(temp_fd, &line[i], 1);
+		i++;
+	}
+}
+
+void	expansion_inside_hrdc(int temp_fd, char *line, char *tmp)
+{
+	char	*str;
+
+	str = ft_strchr(line, '$');
+	if (str)
+		expansion_utils(temp_fd, line, tmp);
+	else
+		write(temp_fd, line, ft_strlen(line));
+}
 
 void	read_from_hrdc(pid_t pd, t_exec *exec_list, int temp_fd)
 {
@@ -18,6 +69,7 @@ void	read_from_hrdc(pid_t pd, t_exec *exec_list, int temp_fd)
 	char	*tmp;
 
 	line = "";
+	tmp = NULL;
 	if (!pd)
 	{
 		signal(SIGINT, SIG_DFL);
@@ -31,14 +83,7 @@ void	read_from_hrdc(pid_t pd, t_exec *exec_list, int temp_fd)
 				free(line);
 				exit(0);
 			}
-			if (line[0] == '$')
-			{
-				tmp = get_expanded(ft_substr(line, 1, ft_strlen(line) - 1));
-				if (tmp)
-					write(temp_fd, tmp, ft_strlen(tmp));
-			}
-			else
-				write(temp_fd, line, ft_strlen(line));
+			expansion_inside_hrdc(temp_fd, line, tmp);
 			write(temp_fd, "\n", 1);
 			free(line);
 		}

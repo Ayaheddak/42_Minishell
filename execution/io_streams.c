@@ -6,13 +6,13 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:00:58 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 08:51:44 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 04:07:46 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	file_utils(int *d, t_execute *exec, t_exec *exec_list, char *name)
+int	if_here_doc(int *d, t_execute *exec, t_exec *exec_list)
 {
 	if (exec_list->redir->type == TOKEN_DELIMITER)
 	{
@@ -23,9 +23,16 @@ int	file_utils(int *d, t_execute *exec, t_exec *exec_list, char *name)
 			return (1);
 		}
 	}
+	return (0);
+}
+
+int	file_utils(int *d, t_execute *exec, t_exec *exec_list, char *name)
+{
+	if (if_here_doc(d, exec, exec_list))
+		return (1);
 	else if (exec_list->redir->type == AMBIGUOUS_REDIR)
 	{
-		ft_putstr_fd(": ambiguous redirect\n", 2);
+		ft_putstr_fd("Error: ambiguous redirect\n", 2);
 		return (1);
 	}
 	else if (exec_list->redir->type == TOKEN_IN)

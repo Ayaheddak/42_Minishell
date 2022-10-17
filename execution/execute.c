@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:03:31 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 02:56:47 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 07:31:01 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ void	execute_command(t_execute *exec, t_exec *exec_list, t_env *env)
 	str_env = get_env_array(env);
 	if (!right_path)
 	{
-		ft_putstr_fd("Error: ", 2);
-		ft_putstr_fd(exec_list->args[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
+		ft_putstr_fd("Error: command not found\n", 2);
 		exit(127);
 	}
 	execve(right_path, exec_list->args, str_env);
