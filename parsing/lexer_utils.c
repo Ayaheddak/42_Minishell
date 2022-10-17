@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 22:59:16 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/14 00:04:50 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/17 04:32:38 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	*ft_errer(int i)
 
 int	is_redir(t_token *token)
 {
-	if (token->type == TOKEN_APPEND || token->type == TOKEN_DELIMITER
-		|| token->type == TOKEN_IN || token->type == TOKEN_OUT)
-		return (token->type);
+	if (token->e_type == TOKEN_APPEND || token->e_type == TOKEN_DELIMITER
+		|| token->e_type == TOKEN_IN || token->e_type == TOKEN_OUT)
+		return (token->e_type);
 	return (0);
 }

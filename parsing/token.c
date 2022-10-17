@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 08:28:32 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/17 04:35:15 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*init_token(int type, char *value, int split)
 
 	token = malloc (sizeof(t_token));
 	leaks_removal(&g_global.g, token);
-	token->type = type;
+	token->e_type = type;
 	token->value = value;
 	token->split = split;
 	return (token);
@@ -57,30 +57,15 @@ t_token	*tokenizer(lexer_t *lexer)
 
 	head = NULL;
 	g_global.last_token = 0;
-	// token = lexer_get_next_token(lexer);
+	//token = lexer_get_next_token(lexer);
 	while ((token = lexer_get_next_token(lexer)) != (void *)0)
 	{
-		addback(&head, token->value, &token->type, token->split);
+		addback(&head, token->value, &token->e_type, token->split);
 		g_global.last_token = token;
 	}
 	free(g_global.last_token);
 	free(token);
 	return (head);
-}
-
-void	print_tokenizer(t_token *token)//just for test
-{
-	int		i;
-
-	i = 0;
-	while (token != NULL)
-	{
-		printf("------------- Node numbre %d  = -------------\n", i);
-		printf("ur value = %s\n", (char *)token->value);
-		printf("ur type = %d\n", token->type);
-		token = token->next;
-		i++;
-	}
 }
 
 void	free_tokenizer(t_token *token)

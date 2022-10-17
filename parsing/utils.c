@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 08:13:38 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 05:25:48 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 04:34:02 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*freejoin(char *s1, char *s2)
 	char	*rest;
 
 	i = 0;
-	j = 0;
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
@@ -51,7 +50,7 @@ void	addback(t_token **head, void *value, void *type, int split)
 	leaks_removal(&g_global.g, new);
 	new->value = value;
 	new->split = split;
-	new->type = *(int *)type;
+	new->e_type = *(int *)type;
 	new->next = NULL;
 	if (*head == NULL)
 	{
