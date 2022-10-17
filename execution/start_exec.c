@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:41:04 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/16 04:23:36 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 03:30:20 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	ft_close_inside(t_execute *exec)
 	exec->input = -2;
 	exec->output = -2;
 }
+
+void	
 
 void	start_execution(t_exec *exec_list, t_env *env)
 {
