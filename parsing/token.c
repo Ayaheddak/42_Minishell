@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/17 03:50:34 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 03:59:57 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,21 @@ t_token	*tokenizer(t_lexer *lexer)
 
 	head = NULL;
 	g_global.last_token = 0;
-	// token = lexer_get_next_token(lexer);
-	while ((token = lexer_get_next_token(lexer)) != (void *)0)
+	token = lexer_get_next_token(lexer);
+	while (token != (void *)0)
 	{
 		addback(&head, token->value, &token->e_type, token->split);
 		g_global.last_token = token;
+		token = lexer_get_next_token(lexer);
 	}
 	free(g_global.last_token);
 	free(token);
 	return (head);
 }
 
-void	print_tokenizer(t_token *token)//just for test
+//TODO remove this
+
+void	print_tokenizer(t_token *token)
 {
 	int		i;
 
