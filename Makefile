@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
+#    By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/10/16 09:43:54 by het-tale         ###   ########.fr        #
+#    Updated: 2022/10/17 04:20:33 by aheddak          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,15 +23,15 @@ UTILS	=	parsing/lexer_1.c parsing/main.c parsing/token.c parsing/utils.c parsing
 			env_variables/env_list.c env_variables/env_list_utils.c parsing/parsing_utils.c parsing/lexer_utils.c \
 			execution/execute.c execution/start_exec.c execution/close.c execution/io_streams.c execution/io_utils.c \
 			builtins/echo.c builtins/call_builtins.c builtins/change_dir.c builtins/env.c builtins/pwd.c builtins/unset.c builtins/export.c \
-			builtins/exit.c builtins/export_utils.c parsing/expansion.c\
+			builtins/exit.c builtins/export_utils.c parsing/expansion.c parsing/quotes_handler.c\
 			signals/ctrlc.c signals/ctrld.c signals/ctrlback.c signals/signals.c
 
-INDE =  -I /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/include/
-#INDE = -I /Users/aheddak/goinfre/homebrew/Cellar/readline/8.2.1/include
+# INDE =  -I /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/include/
+INDE = -I /Users/aheddak/goinfre/homebrew/Cellar/readline/8.2.1/include
 
 
-LIB = -L /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/lib
-#LIB = -L /Users/aheddak/goinfre/homebrew/Cellar/readline/8.2.1/lib
+# LIB = -L /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/lib
+LIB = -L /Users/aheddak/goinfre/homebrew/Cellar/readline/8.2.1/lib
 CFLAGS	=	 -Wall -Wextra -Werror #-fsanitize=address
 
 

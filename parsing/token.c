@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:49 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/17 03:59:57 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 05:30:34 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,6 @@ t_token	*tokenizer(t_lexer *lexer)
 	free(g_global.last_token);
 	free(token);
 	return (head);
-}
-
-//TODO remove this
-
-void	print_tokenizer(t_token *token)
-{
-	int		i;
-
-	i = 0;
-	while (token != NULL)
-	{
-		printf("------------- Node numbre %d  = -------------\n", i);
-		printf("ur value = %s\n", (char *)token->value);
-		printf("ur type = %d\n", token->e_type);
-		token = token->next;
-		i++;
-	}
 }
 
 void	free_tokenizer(t_token *token)

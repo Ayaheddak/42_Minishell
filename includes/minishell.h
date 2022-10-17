@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:09:37 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/17 03:48:28 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/17 05:34:58 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ char	*get_path(char	**env);
 char	*freejoin(char *s1, char *s2);
 char	*get_expanded(char *value);
 t_token	*expanding_before_heredoc(t_lexer *lexer);
+void	conditions(t_lexer *lexer, t_token *token, char **value);
 /*
 	========================== Utils ==========================
 */
