@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 04:35:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/17 23:06:40 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/18 01:54:15 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,6 @@ int	lexer_condition(t_lexer *lexer, t_token *token, char *inpt)
 	return (0);
 }
 
-void	remove_env(t_env **env_list)
-{
-	t_env	*env;
-
-	env = *env_list;
-	while (env)
-	{
-		remove_list(env_list, env);
-		env = env->next;
-	}
-}
-
 void	leaks_removal(t_leaks **leaks, void *ptr)
 {
 	t_leaks	*garbage;
@@ -58,6 +46,19 @@ void	leaks_removal(t_leaks **leaks, void *ptr)
 	garbage->leak = ptr;
 	garbage->next = *(leaks);
 	*leaks = garbage;
+}
+
+void	free_leaks(t_leaks **env_list)
+{
+	t_leaks	*env;
+
+	env = *env_list;
+	while (env)
+	{
+		free(*env_list);
+		env = env->next;
+		*env_list = env;
+	}
 }
 
 int	main(int argc, char *argv[], char *env[])
@@ -83,5 +84,6 @@ int	main(int argc, char *argv[], char *env[])
 		ctrl_d(inpt);
 		start_execution(g_global.exec, g_global.env_list);
 	}
+	free_leaks(&g_global.g);
 	return (0);
 }

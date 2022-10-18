@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:56:10 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/17 23:06:33 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/18 04:33:09 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_env	*get_env_list(char *env[])
 		add_back_env(&head, create_node(split[0], split[1]));
 		i++;
 	}
-	add_back_env(&head, create_node("0", "minishell"));
 	return (head);
 }
 

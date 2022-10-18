@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 01:42:03 by het-tale          #+#    #+#             */
-/*   Updated: 2022/10/17 23:36:21 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/18 04:20:00 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,26 @@ int	ft_is_equal_utils(char **split, char *join, int *i, t_env *env_list)
 
 char	**ft_is_contain_equal(t_env *env_list, char **args, int *d, int *i)
 {
-	char	**split;
 	char	*join;
 
-	split = ft_split(args[*i], '=');
-	if (!split[1])
-		split[1] = "";
-	if (!split[0])
+	if (!ft_strcmp(args[0], ""))
 	{
 		ft_putstr_fd("`=': not a valid identifier\n", 2);
 		*d = 1;
 		(*i)++;
 		return (NULL);
 	}
-	join = ft_join_vars(split, env_list);
-	if (join && !ft_is_equal_utils(split, join, i, env_list))
+	join = ft_join_vars(args, env_list);
+	if (join && !ft_is_equal_utils(args, join, i, env_list))
 		return (NULL);
-	if (is_replaced(env_list, split[0], split[1]))
+	if (is_replaced(env_list, args[0], args[1]))
 	{
 		(*i)++;
 		return (NULL);
 	}
-	if (ft_if_valid(split[0], d, i))
+	if (ft_if_valid(args[0], d, i))
 		return (NULL);
-	return (split);
+	return (args);
 }
 
 int	ft_isnt_contain_equal(char *args, int *d, int *i)
@@ -86,30 +82,15 @@ int	ft_isnt_contain_equal(char *args, int *d, int *i)
 	return (1);
 }
 
-void	loop_through_export(t_env *env_list, char **args, int *d, int i)
+int	is_exist(t_env *env, char *key)
 {
-	char	**split;
-
-	while (args[i])
+	if (!key)
+		return (0);
+	while (env)
 	{
-		if (ft_strchr(args[i], '='))
-		{
-			split = ft_is_contain_equal(env_list, args, d, &i);
-			if (!split)
-			{
-				continue ;
-				i++;
-			}
-			add_back_env(&env_list, create_node(split[0], split[1]));
-		}
-		else
-		{
-			if (get_env_value(env_list, args[i++]))
-				continue ;
-			if (!ft_isnt_contain_equal(args[--i], d, &i))
-				continue ;
-			add_back_env(&env_list, create_node(args[i], NULL));
-		}
-		i++;
+		if (!ft_strcmp(env->key, key))
+			return (1);
+		env = env->next;
 	}
+	return (0);
 }

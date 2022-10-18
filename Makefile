@@ -6,7 +6,7 @@
 #    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:22:45 by aheddak           #+#    #+#              #
-#    Updated: 2022/10/17 07:40:40 by het-tale         ###   ########.fr        #
+#    Updated: 2022/10/18 04:33:58 by het-tale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ UTILS	=	parsing/lexer_1.c parsing/main.c parsing/token.c parsing/utils.c parsing
 			env_variables/env_list.c env_variables/env_list_utils.c parsing/parsing_utils.c parsing/lexer_utils.c \
 			execution/execute.c execution/start_exec.c execution/close.c execution/io_streams.c execution/io_utils.c \
 			builtins/echo.c builtins/call_builtins.c builtins/change_dir.c builtins/env.c builtins/pwd.c builtins/unset.c builtins/export.c \
-			builtins/exit.c builtins/export_utils.c parsing/expansion.c parsing/quotes_handler.c\
+			builtins/exit.c builtins/export_utils.c parsing/expansion.c parsing/quotes_handler.c builtins/export_utils2.c\
 			signals/ctrlc.c signals/ctrld.c signals/ctrlback.c signals/signals.c
 
 INDE =  -I /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/include/
@@ -32,7 +32,7 @@ INDE =  -I /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/include/
 
 LIB = -L /Users/het-tale/goinfre/.brew/Cellar/readline/8.2.1/lib
 #LIB = -L /Users/aheddak/goinfre/homebrew/Cellar/readline/8.2.1/lib
-CFLAGS	=	 -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS	=	 -Wall -Wextra -Werror
 
 
 # OBJCT	=	${UTILS:.c=.o}
@@ -44,7 +44,7 @@ CC		=	gcc
 all		:	$(NAME)
 
 $(NAME)	:	$(UTILS)	
-	@$(CC) $(CFLAGS) $(UTILS) -o $(NAME) -lreadline $(INDE) $(LIB) -g
+	@$(CC) $(CFLAGS) $(UTILS) -o $(NAME) -lreadline $(INDE) $(LIB)
 	
 clean :
 	@${RM} $(OBJCT)

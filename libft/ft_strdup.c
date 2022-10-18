@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 21:43:39 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/16 04:23:36 by het-tale         ###   ########.fr       */
+/*   Updated: 2022/10/18 01:04:11 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strdup(char *s1)
 	char			*p;
 
 	i = 0;
+	if (!s1)
+		return (NULL);
 	len = ft_strlen(s1);
 	p = (char *)malloc((len + 1) * sizeof(char));
 	leaks_removal(&g_global.g, p);
