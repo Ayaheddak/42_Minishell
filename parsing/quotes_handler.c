@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 04:18:12 by aheddak           #+#    #+#             */
-/*   Updated: 2022/10/17 05:34:13 by aheddak          ###   ########.fr       */
+/*   Updated: 2022/10/18 09:02:13 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*after_quote(t_lexer *lexer, char *s, char **value)
 					free(token);
 				}
 			}
+			if (is_whitespace(lexer->c))
+				break ;
 			s = lexer_get_current_char_as_string(lexer);
 			*value = freejoin(*value, s);
 			lexer_advance(lexer);
